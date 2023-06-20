@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\assets",
+    "\\_includes",
+    "\\_layouts",
+    "\\_posts",
+    "\\_sass",
+    "\\_sass\\base"
+  ],
+  "SelectedNode": "\\index.md",
+  "PreviewInSolutionExplorer": false
+}
