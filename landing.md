@@ -4,6 +4,7 @@ layout: landing
 description: 'A curated collection of my favorite projects.'
 image: assets/images/pic12.jpg
 nav-menu: true
+show_tile: false
 ---
 
 <!-- Main -->

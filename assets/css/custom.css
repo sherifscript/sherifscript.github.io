@@ -2,7 +2,7 @@
     margin: 0 auto;
     max-width: 700px; /* Adjust to your preferred maximum width */
     width: 100%;
-    padding: 0 20px; /* Adds padding on smaller screens */
+    padding: 0 15px; /* Adds padding on smaller screens */
     text-align: left;
 }
 
@@ -10,4 +10,29 @@
     .content-container {
         padding: 0 15px;
     }
+}
+
+/* For addding descriptions to tile in normal looking paragraphs */
+.normal-paragraph {
+    font-size: 1em !important; /* Reset font size */
+    font-weight: bold !important; /* Reset font weight */
+    letter-spacing: normal !important; /* Reset letter spacing */
+    margin-bottom: 1em !important; /* Add some space below the paragraph */
+    text-transform: none !important; /* Ensure text is not uppercase */
+  }
+
+  .your-image-class {
+    margin-bottom: 0;
+}
+
+.your-caption-class {
+    font-size: 14px; /* adjust as per your requirement */
+    /* color: #777;    this gives a grey color, adjust as needed */
+    font-weight: normal;
+    color: $palette[accent1];
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-between; /* This will space the images evenly */
 }

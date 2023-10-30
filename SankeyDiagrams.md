@@ -1,22 +1,66 @@
 ---
 layout: post
-tiletitle: A 3D Look at Egypt & Germany
-title: "Visual Journeys Across Egypt and Germany: A 3D Perspective"
-subtitle: "Tools used: R, Adobe Illustrator"
-description: R, Adobe Illustrator
-image: assets/images/egyptR.png
-nav-menu: true
+tiletitle: Sankey Diagrams
+title: "Sankey Diagrams: Trading Trends, P&L Charts, National Budgets and more"
+toolsused: Python, Excel, Figma
+description: A most vertaile yet rare visualization, Trading Trends, P&L Charts, National Budgets and more
+image: assets/images/Germany-2022-Imports-Exports.png
+nav-menu: false
 ---
-
 <p>
-    As the capital city and the largest city in Egypt, Cairo's dense population is distinctly represented by a tall and concentrated spike in the map. The Nile Delta region, especially areas around cities like Alexandria and Port Said, show significant population density. The visualization distinctly highlights the historic concentration of the Egypt state along the Nile River, a lifeline for the nation, with most of its population residing along its banks. 
-    
-</p>
-<p>
-    Other notable spikes are observed in coastal areas like Marsa Matruh and Hurghada, which are popular cities and tourist destinations. Locations such as Siwa Oasis and Kharga Oasis, although smaller, are distinct and histroical; Alexander the Great was crowned Pharoah of Egypt in Siwa. These oases have historically been vital habitats in the desert landscape. Desert Regions: The map uses a muted beige color as the base, reminiscent of Egypt's vast desert landscapes, as well as the Riq'ah scricpt to refelct the most commnly used script in everyday Egyptian life.
+    Sankey diagrams stand out as a unique and fascinating approach to data visualization, capturing the attention of enthusiasts and professionals alike. Their distinct style and ability to illustrate flow and distribution set them apart from other visualization tools. In this blog post, we will delve into the world of Sankey diagrams, exploring their construction, popular sources, and creative applications.
 </p>
 
-<span class="image main"><img src="/assets/images/germanyR.png" alt="3D Population Density Map of Germany"></span>
+<div class="image-wrapper">
+    <img src="/assets/images/Germany-2022-Imports-Exports.png" class="your-image-class" alt="Description">
+    <p class="your-caption-class">Germany's Imports & Exports in 2022 made with Excel, Figma.</p>
+</div>
+
+<p>
+    At their core, Sankey diagrams are flow diagrams where the width of the arrows or lines is proportional to the flow quantity they represent. They are incredibly efficient at showcasing the distribution of resources, energy, or information, providing a clear and concise view of complex systems.
+</p>
+
+<header class="major">
+    <h3>Building Sankey Diagrams: A Platform Overview</h3>
+</header>
+
+<p>
+    The construction of Sankey diagrams varies significantly across different platforms, each bringing its unique approach to the table. In R, the 'ggsankey' library, available on GitHub, is a popular choice. It embraces the simplicity of R’s grammar of graphics, providing users with a straightforward and user-friendly experience. On the other hand, Python enthusiasts often turn to Plotly, renowned for its relative ease of use and robust functionality.
+</p>
+<p>
+    Tableau, despite its prowess in the visualization arena, has been slow to adopt Sankey diagrams on its desktop platform. Instead, they are tucked away in the beta visualizations section of the web version. This choice reflects Tableau's primary focus as a GUI visualization tool, with less emphasis on data manipulation, a critical component for crafting Sankey diagrams. 
+</p>
+
+<p>
+Unlike other visualizations, Sankey diagrams often trace back to specific sources. One of the most notable is sankeymatic.com, a platform celebrated for its user-friendly interface and near real-time rendering capabilities. While it offers simplicity and ease, it does limit aesthetic customization, unless users are willing to involve an external graphic editor.
+</p>
+
+<div class="image-wrapper">
+    <img src="/assets/images/umg-income-2022.png" class="your-image-class" alt="Description">
+    <p class="your-caption-class">Income Statement for Universal Music Group in the FY 2022 made with Excel, Figma.</p>
+</div>
+
+<!-- <div class="image-container">
+    <div class="image-wrapper">
+        <img src="/assets/images/umg-income-2022.png" class="your-image-class" alt="Description for first image">
+        <p class="your-caption-class">Income Statement for Universal Music Group in the FY 2022 made with Excel, Figma.</p>
+    </div>
+    <div class="image-wrapper">
+        <img src="/assets/images/warner-income-2022.png" class="your-image-class" alt="Description for second image">
+        <p class="your-caption-class">Income Statement for Warner Music in the FY 2022 made with Excel, Figma.</p>
+    </div>
+    <div class="image-wrapper">
+        <img src="/assets/images/sony-income-2022.png" class="your-image-class" alt="Description for second image">
+        <p class="your-caption-class">Income Statement for Warner Music in the FY 2022 made with Excel, Figma.</p>
+    </div>
+</div> -->
+
+
+<p>
+For those in pursuit of visual excellence, Figma emerges as an unexpected yet potent tool for creating Sankey diagrams. Primarily a canvas-based design platform, Figma is a favorite among web and mobile application developers. Its emphasis on aesthetic appeal, user-friendly UI, and the ability to incorporate community-contributed plugins make it a versatile choice for stunning data visualizations. A noteworthy mention is the Sankey plugin by Giotteam, offering a reliable and visually appealing method to create Sankey diagrams.
+</p>
+
+
 <p>
     In Germany, the 3D visualization showcases dense population centers in cities like Berlin, Munich, and Hamburg. The varying heights give a sense of urban concentration while valleys hint at less populated rural regions. This visualization reiterates Germany's status as a major European hub with a spread-out urban landscape.
 </p>
