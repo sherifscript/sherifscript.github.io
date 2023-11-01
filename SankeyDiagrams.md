@@ -17,6 +17,9 @@ nav-menu: false
 </div>
 
 <p>
+The German economy produced a positive net trade surplus in 2022 totaling over 82 billionn euros. The United States were Germany's largest trading partner in 2022 with a nearly 64 billion euros in trade surplus with Germany. France was Germany's second largest trading partner that year, with exports to the country amounting to 116 billion euros. The visualization clearly shows that Europe remained the region where most of GErmany's imports and exports are traded.
+
+<p>
     At their core, Sankey diagrams are flow diagrams where the width of the arrows or lines is proportional to the flow quantity they represent. They are incredibly efficient at showcasing the distribution of resources, energy, or information, providing a clear and concise view of complex systems.
 </p>
 

@@ -29,10 +29,15 @@
     font-size: 14px; /* adjust as per your requirement */
     /* color: #777;    this gives a grey color, adjust as needed */
     font-weight: normal;
-    color: $palette[accent1];
+    /* color: $palette[accent1]; */
 }
 
 .image-container {
     display: flex;
     justify-content: space-between; /* This will space the images evenly */
+}
+
+@font-face {
+    font-family: 'avris';
+    src: url('/fonts/avris.otf') format('opentype');
 }

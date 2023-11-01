@@ -8,11 +8,11 @@ image: assets/images/egyptR.png
 nav-menu: false
 ---
 <p>
-    The initial spark for this project came from a desire to make data more tangible and relatable. Population density figures are often sterile and hard to grasp. By rendering them in 3D, I hoped to provide a fresh perspective on the living patterns across two diverse geographical and cultural landscapes.
+    The initial spark for this project came about from my love of visualization and maps. Population density figures are often sterile and hard to grasp. By rendering them in 3D, I hoped to provide a simple yet aesthetically-pleasing perspective on the living patterns across two diverse geographical and cultural landscapes, both of which were important to me on a personal level.
 </p>
 
 <p>
-    The end result is a set of interactive 3D maps that invite exploration and offer a novel way to appreciate population distribution in these two countries (Try yhr copdfce). This project was a fulfilling blend of analysis, creativity, and technical learning. It also opened up ideas for future projects that can further bridge the gap between data analysis and visual storytelling. A little codepeak is included in the next section.
+    The end result is a set of interactive 3D maps that invite exploration and offer a novel way to appreciate population distribution in these two countries (try it yourself!). This project was a fulfilling blend of analysis and technical learning. A little codepeak is included in the next section.
 </p>
 
 <div class="image-wrapper">
@@ -34,7 +34,7 @@ nav-menu: false
 </div>
 
 <p>
-    In Germany, the 3D visualization showcases dense population centers in cities like Berlin, Munich, and Hamburg. The varying heights give a sense of urban concentration while valleys hint at less populated rural regions. This visualization reiterates Germany's status as a major European hub with a spread-out urban landscape.
+    In Germany, the 3D visualization showcases dense population centers in cities like Berlin, Munich, and Hamburg. The varying heights give a sense of urban concentration while valleys hint at less populated rural regions. This visualization reiterates Germany's status as a major European hub with a spread-out urban landscape. An interestring observation is seemingly empty semi-circle region of lands surrounding Berlin. There is no single main reason for this phenemnon but there are multiple theories aiming to explain it. The first being that Berlin naturally lies in a swamp
 </p>
 
 <p>

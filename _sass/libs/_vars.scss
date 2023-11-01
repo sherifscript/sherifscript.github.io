@@ -37,7 +37,7 @@
 		fg-light:           rgba(255, 255, 255, 0.5), // Light White Text
 		border:             rgba(255, 255, 255, 0.1), // Border Color
 		border-bg:          rgba(255, 255, 255, 0.035), // Border Background Color
-		highlight:          #42aaff, // Bright Blue Highlight
+		highlight:          #b89f91, // Soft Terracotta Highlight
 		accent1:            #7198b1, // Cool Blue Accent
 		accent2:            #a1a6b4, // Cool Grey Accent
 		accent3:            #666f7f, // Dark Grey Accent
@@ -45,3 +45,93 @@
 		accent5:            #2d3748, // Even Darker Grey Accent
 		accent6:            #1c1f2b  // Almost Black Accent
 	);
+
+// Palette 1: Earthy Tones
+
+// 	$palette: (
+//     bg:                 #272727, // Charcoal Background
+//     bg-alt:             #3d3d3d, // Slightly Lighter Charcoal Background
+//     fg:                 #f7e8d7, // Soft Cream Text
+//     fg-bold:            #f2d3b5, // Cream Bold Text
+//     fg-light:           rgba(247, 232, 215, 0.6), // Light Cream Text
+//     border:             rgba(247, 232, 215, 0.2), // Border Color
+//     border-bg:          rgba(247, 232, 215, 0.05), // Border Background Color
+//     highlight:          #b89f91, // Soft Terracotta Highlight
+//     accent1:            #94877f, // Earthy Mauve Accent
+//     accent2:            #a3a092, // Sage Green Accent
+//     accent3:            #7c6f68, // Dark Mauve Accent
+//     accent4:            #5d5048, // Darker Brown Accent
+//     accent5:            #4b3e37, // Deep Brown Accent
+//     accent6:            #312926  // Almost Black Accent
+// );
+
+// Palette 2: Cool Modern
+
+// $palette: (
+//     bg:                 #232839, // Deep Navy Background
+//     bg-alt:             #343b4d, // Lighter Navy Background
+//     fg:                 #d7dae0, // Light Grey Text
+//     fg-bold:            #c5ccd3, // Light Grey Bold Text
+//     fg-light:           rgba(215, 218, 224, 0.6), // Lighter Grey Text
+//     border:             rgba(215, 218, 224, 0.2), // Border Color
+//     border-bg:          rgba(215, 218, 224, 0.05), // Border Background Color
+//     highlight:          #62a8ac, // Aqua Highlight
+//     accent1:            #7d9ca8, // Cool Ocean Blue Accent
+//     accent2:            #a6afb8, // Sky Grey Accent
+//     accent3:            #606772, // Stormy Grey Accent
+//     accent4:            #434a57, // Thunder Grey Accent
+//     accent5:            #353c47, // Night Grey Accent
+//     accent6:            #1f252f  // Pitch Black Accent
+// );
+// 
+// Palette 2: Earthy Tones 2
+// 	$palette: (
+//     bg:                 #272727, // Charcoal Background
+//     bg-alt:             #3d3d3d, // Slightly Lighter Charcoal Background
+//     fg:                 #d7dae0, // Soft Cream Text
+//     fg-bold:            #c5ccd3, // Cream Bold Text
+//     fg-light:           rgba(247, 232, 215, 0.6), // Light Cream Text
+//     border:             rgba(247, 232, 215, 0.2), // Border Color
+//     border-bg:          rgba(247, 232, 215, 0.05), // Border Background Color
+//     highlight:          #b89f91, // Soft Terracotta Highlight
+//     accent1:            #94877f, // Earthy Mauve Accent
+//     accent2:            #a3a092, // Sage Green Accent
+//     accent3:            #7c6f68, // Dark Mauve Accent
+//     accent4:            #5d5048, // Darker Brown Accent
+//     accent5:            #4b3e37, // Deep Brown Accent
+//     accent6:            #312926  // Almost Black Accent
+// );
+// Palette 2: Warmer colors
+// $palette: (
+//     bg:                 #28231d, // Dark Olive Background
+//     bg-alt:             #3c3f2b, // Olive Green Background
+//     fg:                 #fbf1dc, // Cream Text
+//     fg-bold:            #f9e2b8, // Light Orange Text
+//     fg-light:           rgba(251, 241, 220, 0.6), // Light Cream Text
+//     border:             rgba(251, 241, 220, 0.2), // Border Color
+//     border-bg:          rgba(251, 241, 220, 0.05), // Border Background Color
+//     highlight:          #f4a261, // Tangerine Highlight
+//     accent1:            #e76f51, // Coral Red Accent
+//     accent2:            #e9c46a, // Golden Accent
+//     accent3:            #8e7f69, // Mocha Grey Accent
+//     accent4:            #6b5f4c, // Earth Brown Accent
+//     accent5:            #564a38, // Deep Earth Brown Accent
+//     accent6:            #3f3224  // Very Dark Brown Accent
+// );
+// Palette 2: Minimal
+// $palette: (
+//     bg:                 #f7f7f7, // Soft White Background
+//     bg-alt:             #ffffff, // Pure White Background
+//     fg:                 #333333, // Charcoal Text
+//     fg-bold:            #222222, // Deep Charcoal Bold Text
+//     fg-light:           rgba(51, 51, 51, 0.6), // Light Charcoal Text
+//     border:             rgba(51, 51, 51, 0.1), // Border Color
+//     border-bg:          rgba(51, 51, 51, 0.025), // Border Background Color
+//     highlight:          #167df0, // Vibrant Blue Highlight
+//     accent1:            #5c6f7c, // Neutral Blue Accent
+//     accent2:            #acb5be, // Soft Grey Accent
+//     accent3:            #929aa2, // Medium Grey Accent
+//     accent4:            #787e87, // Neutral Grey Accent
+//     accent5:            #60666d, // Dark Grey Accent
+//     accent6:            #444b52  // Darker Grey Accent
+// );
