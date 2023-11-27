@@ -22,11 +22,11 @@ tiles-count: 6
 # Icons are not shown if value is empty
 # You need to restart jekyll for changes to have an effect
 socials:
-  GitHub-alt: https://github.com/sherifscript
+  GitHub: https://github.com/sherifscript
   GitLab:
   Google-Plus: 
   Instagram:
-  Reddit-alien: https://www.reddit.com/user/sherifscript
+  Reddit-alien: https://www.reddit.com/user/sherifscript/submitted/
   Linkedin: https://www.linkedin.com/in/asheriif
   Twitter: 
   Facebook:

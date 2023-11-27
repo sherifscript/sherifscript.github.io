@@ -3,7 +3,7 @@ layout: post
 tiletitle: Intraday Trading Algorithm for Energy Storage Systems
 title: "Intraday Trading Algorithm for Energy Storage Systems"
 toolsused: Python
-description: Contrained optimization approaches and rolling horizions. A dynamic algorithm for intraday energy trading.
+description: Constrained optimization approaches and rolling horizions. A dynamic algorithm for intraday energy trading.
 image: assets/images/rolling-horizon-intraday-trading-energy.png
 nav-menu: false
 show_tile: true
