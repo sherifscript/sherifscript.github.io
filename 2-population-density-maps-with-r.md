@@ -3,7 +3,7 @@ layout: post
 tiletitle: A 3D Look at Egypt & Germany
 title: "Exploring Population Landscapes: 3D Maps of Egypt and Germany"
 toolsused: R, Adobe Illustrator
-description: Egypt's visualization distinctly highlights the historic concentration of the Egypt state along the Nile River, a lifeline for the nation, with most of its population residing along its banks. 
+description: Egypt's visualization distinctly highlights the historic concentration of the Egyptian state along the Nile River, a lifeline for the nation, with most of its population residing along its banks. 
 image: assets/images/egyptR.png
 nav-menu: false
 show_tile: True
