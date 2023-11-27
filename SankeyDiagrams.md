@@ -6,10 +6,69 @@ toolsused: Python, Excel, Figma
 description: A most vertaile yet rare visualization, Trading Trends, P&L Charts, National Budgets and more
 image: assets/images/Germany-2022-Imports-Exports.png
 nav-menu: false
+show_tile: false
 ---
-<p>
-    Sankey diagrams stand out as a unique and fascinating approach to data visualization, capturing the attention of enthusiasts and professionals alike. Their distinct style and ability to illustrate flow and distribution set them apart from other visualization tools. In this blog post, we will delve into the world of Sankey diagrams, exploring their construction, popular sources, and creative applications.
-</p>
+Sankey diagrams are unique among popular visualizations due to their varied construction across different platforms. For instance, in R, the open-source library ggsankey, available on GitHub, adopts the widely appreciated 'grammar of graphics' concept for its simplicity. Conversely, in Python, Plotly is often preferred for creating Sankey diagrams. Tableau, as mighty as it is, seems to have never had the option available on their desktop platform, instead, it is neatly hidden in their beta visualizations section only on the web version. This limitation makes sense considering Tableau's primary focus as a GUI-based visualization tool, rather than a tool for data manipulation, which is crucial for fitting data into the unique format of Sankey diagrams."
+
+"When it comes to online Sankey diagrams, most seem to originate from specific sources, with sankeymatic.com being the most popular. This site offers a user-friendly and straightforward interface for constructing Sankey diagrams and provides near-real-time rendering. However, this convenience comes at the cost of limited aesthetic customization unless an external graphic editor is used. In my experience, the most visually appealing method for creating Sankey diagrams is through Figma. 
+
+<h4>Figma</h4>
+Figma, a canvas-based design platform popular more popular among web and mobile app developers than data analyists , is renowned for its aesthetic, user-friendly interface. Its ability to allow community-contributed plugins, akin to Python libraries, makes it a versatile tool for beautiful data visualizations. One notable Sankey plugin on Figma, simply named '<a href ="https://www.figma.com/community/plugin/1159893716343028026">Sankey</a>' by the Giotteam, is a reliable source for creating data visualizations."
+
+<div class="image-wrapper">
+    <img src="/assets/images/Germany-2022-Imports-Exports.png" class="your-image-class" alt="Description">
+    <p class="your-caption-class">Germany's Imports & Exports in 2022 made with Excel, Figma.</p>
+</div>
+
+<div class="image-wrapper">
+    <img src="/assets/images/umg-income-2022.png" class="your-image-class" alt="Description">
+    <p class="your-caption-class">Income Statement for Universal Music Group in the FY 2022 made with Excel, Figma.</p>
+</div>
+
+<h4>Python</h4>
+Python, a staple in data analysis and science, also supports the creation of Sankey diagrams, though it might not be the primary choice for these types of visualizations. Python's rich ecosystem includes numerous visualization packages like Seaborn, Altair, Plotly, and Matplotlib, catering to a wide array of needs for data professionals. With just a few lines of code, one can produce stunning and thought-provoking visualizations, each package offering its unique approach and capabilities. However, when it comes to Sankey diagrams, like any coding solution to this visualization, using Python is inherenrtly complicarted
+
+
+<pre><code class="language-python">
+import plotly.graph_objects as go
+
+# Define node labels (each category in the financial statement)
+labels = [
+    "Digital", "Physical", "Licensing & Other",  # Revenue sources
+    "Recorded Music", "Music Publishing",  # Revenue classifications
+    "Digital publishing", "Performance", "Synchronization", "Mechanical", "Other",  # Publishing details
+    "Total Revenue",  # Total Revenue
+    "Operating expenses", "Cost of revenue", "Selling, general and administrative expenses", 
+    "Amortization and impairment losses on intangible assets", "Loss from equity affiliates",  # Expenses
+    "Operating income", "Other income", "Financial Expenses",  # Income calculations
+    "Pre-tax income", "Income tax", "Net profit",  # Profit calculations
+    "Merchandising & Other", "Intersegment eliminations"  # Other income details
+]
+
+# Define source and target indices for the nodes
+source = [0, 1, 2, 0, 3, 4, 4, 4, 4, 4, 3, 3, 7, 8, 8, 8, 8, 8, 13, 14, 15, 16, 18, 18, 19]
+target = [3, 3, 3, 4, 7, 7, 7, 7, 7, 7, 12, 13, 13, 13, 13, 13, 13, 13, 14, 15, 16, 17, 19, 20, 20]
+value  = [5.7, 1.2, 1.1, 1.0, 1.79, 1.0, 0.371, 0.236, 0.097, 0.055, 10.3, 8.74, 5.75, 2.7, 0.258, 0.002, 1.6, 0.915, 0.735, 0.9, 0.115, 0.785, 0.618, 0.014, 0.785]
+
+# Define the figure
+fig = go.Figure(data=[go.Sankey(
+    node=dict(
+      pad=15,
+      thickness=20,
+      line=dict(color="black", width=0.5),
+      label=labels
+    ),
+    link=dict(
+      source=source,
+      target=target,
+      value=value
+    ))])
+
+fig.update_layout(title_text="Universal Music Group FY22 Income Statement", font_size=10)
+fig.show()
+
+</code></pre>
+
 
 <div class="image-wrapper">
     <img src="/assets/images/Germany-2022-Imports-Exports.png" class="your-image-class" alt="Description">
@@ -43,106 +102,49 @@ Unlike other visualizations, Sankey diagrams often trace back to specific source
     <p class="your-caption-class">Income Statement for Universal Music Group in the FY 2022 made with Excel, Figma.</p>
 </div>
 
-<!-- <div class="image-container">
-    <div class="image-wrapper">
-        <img src="/assets/images/umg-income-2022.png" class="your-image-class" alt="Description for first image">
-        <p class="your-caption-class">Income Statement for Universal Music Group in the FY 2022 made with Excel, Figma.</p>
-    </div>
-    <div class="image-wrapper">
-        <img src="/assets/images/warner-income-2022.png" class="your-image-class" alt="Description for second image">
-        <p class="your-caption-class">Income Statement for Warner Music in the FY 2022 made with Excel, Figma.</p>
-    </div>
-    <div class="image-wrapper">
-        <img src="/assets/images/sony-income-2022.png" class="your-image-class" alt="Description for second image">
-        <p class="your-caption-class">Income Statement for Warner Music in the FY 2022 made with Excel, Figma.</p>
-    </div>
-</div> -->
-
 
 <p>
 For those in pursuit of visual excellence, Figma emerges as an unexpected yet potent tool for creating Sankey diagrams. Primarily a canvas-based design platform, Figma is a favorite among web and mobile application developers. Its emphasis on aesthetic appeal, user-friendly UI, and the ability to incorporate community-contributed plugins make it a versatile choice for stunning data visualizations. A noteworthy mention is the Sankey plugin by Giotteam, offering a reliable and visually appealing method to create Sankey diagrams.
 </p>
 
 
-<p>
-    In Germany, the 3D visualization showcases dense population centers in cities like Berlin, Munich, and Hamburg. The varying heights give a sense of urban concentration while valleys hint at less populated rural regions. This visualization reiterates Germany's status as a major European hub with a spread-out urban landscape.
-</p>
 
-<p>
-    I made this in R using the Rayshader package for mapping and Adobe Illustrator for texts and labels. <a href="https://data.humdata.org/dataset/kontur-population-egypt">Data</a> was sourced from the Kontur Population Dataset 2022. This dataset estimates the worldwide population in 400m hexagonal geometries using a combination of "GHSL, Facebook, Microsoft Buildings, Copernicus Global Land Service Land Cover, Land Information New Zealand, and OpenStreetMap data." The map is presented at an angle to better illustrate heights.
-</p>
+<pre><code class="language-python">
+import plotly.graph_objects as go
 
-<!-- New Section: Discussing the Code -->
-<section>
-    <header class="major">
-        <h3>Behind the Scenes: Crafting the 3D Maps</h3>
-    </header>
-    <p>
-        The journey from raw data to interactive 3D maps is a fascinating process, involving a blend of data manipulation, artistic flair, and technical prowess. Let’s delve into the code and methodologies that brought these visualizations to life.
-    </p>
-    <p>
-        The process begins with loading the necessary libraries and the Kontur Population data. The data is then transformed into a matrix, which serves as the foundation for the 3D rendering. A color palette is generated to enhance the visual appeal and provide additional depth to the visualization.
-    </p>
-    <!-- Preformatted Code: R Code Snippet -->
-    <!-- <h3>Preformatted</h3> -->
-    <pre><code class="language-r">
-# Load Required Libraries
-library(sf)
-library(tidyverse)
-library(stars)
-library(rayshader)
-library(MetBrewer)
-library(colorspace)
+# Define node labels (each category in the financial statement)
+labels = [
+    "Digital", "Physical", "Licensing & Other",  # Revenue sources
+    "Recorded Music", "Music Publishing",  # Revenue classifications
+    "Digital publishing", "Performance", "Synchronization", "Mechanical", "Other",  # Publishing details
+    "Total Revenue",  # Total Revenue
+    "Operating expenses", "Cost of revenue", "Selling, general and administrative expenses", 
+    "Amortization and impairment losses on intangible assets", "Loss from equity affiliates",  # Expenses
+    "Operating income", "Other income", "Financial Expenses",  # Income calculations
+    "Pre-tax income", "Income tax", "Net profit",  # Profit calculations
+    "Merchandising & Other", "Intersegment eliminations"  # Other income details
+]
 
-# Load Kontur Data
-data <- st_read("kontur_population_EG_20220630.gpkg")
+# Define source and target indices for the nodes
+source = [0, 1, 2, 0, 3, 4, 4, 4, 4, 4, 3, 3, 7, 8, 8, 8, 8, 8, 13, 14, 15, 16, 18, 18, 19]
+target = [3, 3, 3, 4, 7, 7, 7, 7, 7, 7, 12, 13, 13, 13, 13, 13, 13, 13, 14, 15, 16, 17, 19, 20, 20]
+value  = [5.7, 1.2, 1.1, 1.0, 1.79, 1.0, 0.371, 0.236, 0.097, 0.055, 10.3, 8.74, 5.75, 2.7, 0.258, 0.002, 1.6, 0.915, 0.735, 0.9, 0.115, 0.785, 0.618, 0.014, 0.785]
 
-# Data Conversion: Spatial Data to Matrix
-size = 5000
-rast <- st_rasterize(data, nx=floor(size*w_ratio), 
-ny=floor(size*h_ratio))
-mat <- matrix(data=rast$population, nrow =floor(size*w_ratio), 
-ncol =floor(size*h_ratio))
+# Define the figure
+fig = go.Figure(data=[go.Sankey(
+    node=dict(
+      pad=15,
+      thickness=20,
+      line=dict(color="black", width=0.5),
+      label=labels
+    ),
+    link=dict(
+      source=source,
+      target=target,
+      value=value
+    ))])
 
-# Generate Color Palette using MetBrewer
-c1 <- met.brewer('Greek')
-texture <- grDevices::colorRampPalette(c1, bias=2)(256)
-        </code></pre>					
-    <p>
-        With the data prepared, Rayshader takes the stage, turning our matrix into a stunning 3D model. Camera angles are adjusted to provide the best view, and the final render is saved as a PNG image.
-    </p>
-    <!-- Preformatted Code: R Code Snippet -->
-    <!-- <h3>Preformatted</h3> -->
-    <pre><code class="language-r">
-# Create 3D Plot using Rayshader
-mat |> height_shade(texture = texture) |> 
-plot_3d(heightmap = mat, zscale = 200/5, solid = F, 
-shadowdepth = 0)
+fig.update_layout(title_text="Universal Music Group FY22 Income Statement", font_size=10)
+fig.show()
 
-# Adjust Camera Angles and Render Plot
-render_camera(theta = -20, phi = 45, zoom = 0.8)
-render_highquality(filename = 'images\\final_plot.png', ...)
 </code></pre>
-</section>
-
-<p>
-    The initial spark for this project came from a desire to make data more tangible and relatable. Population density figures are often sterile and hard to grasp. By rendering them in 3D, I hoped to provide a fresh perspective on the living patterns across two diverse geographical and cultural landscapes.
-</p>
-
-<p>
-    The end result is a set of interactive 3D maps that invite exploration and offer a novel way to appreciate population distribution in these two countries. This project was a fulfilling blend of analysis, creativity, and technical learning. It also opened up ideas for future projects that can further bridge the gap between data analysis and visual storytelling.
-</p>
-
-<p>
-    The journey from raw data to interactive visuals was both challenging and exhilarating. It underscored the potential of modern tools to turn numbers into narratives. In the future, I plan to extend this approach to other types of geographic and demographic data, and to explore additional tools and platforms for 3D visualization.
-</p>
-
-<p>
-    I invite you to explore the 3D maps and would love to hear your feedback and ideas. This project is a reminder of the boundless possibilities at the intersection of data, technology, and art.
-</p>
-
-<p>
-    This project was a venture into the visual realm of data, a reminder that behind every data point, there's a story waiting to be told. I'm excited about the road ahead, as every project is a stepping stone to new learning, new insights, and new stories to share. 
-    <br><br>
-    The full project can be found on <a href="https://github.com/sherifscript/RayshaderMaps">GitHub</a> with some other graphics.
-</p>

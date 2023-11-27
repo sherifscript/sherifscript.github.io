@@ -127,7 +127,7 @@
 //     fg-light:           rgba(51, 51, 51, 0.6), // Light Charcoal Text
 //     border:             rgba(51, 51, 51, 0.1), // Border Color
 //     border-bg:          rgba(51, 51, 51, 0.025), // Border Background Color
-//     highlight:          #167df0, // Vibrant Blue Highlight
+//     highlight:          #b89f91 , // Vibrant Blue Highlight 167df0
 //     accent1:            #5c6f7c, // Neutral Blue Accent
 //     accent2:            #acb5be, // Soft Grey Accent
 //     accent3:            #929aa2, // Medium Grey Accent
@@ -135,3 +135,25 @@
 //     accent5:            #60666d, // Dark Grey Accent
 //     accent6:            #444b52  // Darker Grey Accent
 // );
+
+	/* Total scrollbar styling */
+	::-webkit-scrollbar {
+		width: 12px; /* width of the entire scrollbar */
+		border-radius: 6px;
+	  }
+	  
+	  ::-webkit-scrollbar-track {
+		background: #f1f1f1; /* color of the tracking area */
+	  }
+	  
+	  ::-webkit-scrollbar-thumb {
+		background-color: #888; /* color of the scroll thumb */
+		border-radius: 6px; /* roundness of the scroll thumb */
+		border: 3px solid #f1f1f1; /* creates padding around scroll thumb */
+	  }
+	  
+	  /* Scrollbar styling on hover */
+	  ::-webkit-scrollbar-thumb:hover {
+		background: #b89f91; /* color of the scroll thumb when hovered */
+	  }
+	  
