@@ -3,7 +3,7 @@ layout: post
 tiletitle: Intraday Trading Algorithm for Energy Storage Systems
 title: "Intraday Trading Algorithm for Energy Storage Systems"
 toolsused: Python
-description: Constrained optimization approaches and rolling horizions. A dynamic algorithm for intraday energy trading.
+description: Linear programming approaches and rolling horizions. A dynamic algorithm for intraday energy trading.
 image: assets/images/rolling-horizon-intraday-trading-energy.png
 nav-menu: false
 show_tile: true
@@ -84,7 +84,7 @@ max_cycles_per_day = 2.5
 
 Developing the initial version of the algorithm will rely on two components, cycle calculation and cost estimation. The first will be a function to identify daily buying and selling opportunities based on price signals, and calculating the energy charged and discharged during each cycle considering the efficiency and storage limitations. The second will be function to estimate the cycle costs based on the cycle data generated, calculating the total cost of energy purchased, the total revenue from energy sold, and estimating the cycle cost in EUR/MWh.
 
-<b>1. Determining best trading cycles in the day</b>
+<i><b>1. Determining best trading cycles in the day</b></i>
 
 In the `calculate_daily_cycles` function, the core idea is to identify the most profitable transactions for each day, taking into account the operational constraints of the storage unit. The function first calculates the potential profit, or 'spread', for every possible buy and sell time combination within a single day, based on the provided electricity price data. This spread is determined by the difference between the selling price and the buying price, adjusted for the efficiency losses during charging and discharging. 
 
@@ -145,7 +145,7 @@ test_day_data = daily_price_data['EUR/MWh'].iloc[1]
 calculate_daily_cycles(test_day_data)
 </code></pre>
 
-<b>2. Estimate the cost of cycles
+<i><b>2. Estimate the cost of cycles</b></i>
 
 The `estimate_cycle_costs` function is an essential component of the overall solution, designed to quantify the economics of the energy trading strategy. Its primary purpose is to calculate the net cost per unit of energy cycled through the storage system, providing a clear metric to evaluate the efficiency of the trading strategy.
 
@@ -174,7 +174,7 @@ The total purchase cost is calculated by multiplying the amount of energy bought
 
 Visualizing the buy and sell times, we can observe that the function so far has been able to select profitable cycles throughout the day. This visualization demonstrates how the algorithm strategically selects points in time to buy and sell energy based on price fluctuations, aiming to optimize profitability.
 
-<b>3. Visualizing results</b>
+<i><b>3. Visualizing results</b></i>
 
 <div class="image-wrapper">
     <img src="/assets/images/Price Curve and Identified Cycles for Day 2.png" class="your-image-class" alt="Price Curve and Identified Cycles for Day 2">
@@ -211,7 +211,7 @@ Building upon the calculate_daily_cycles function, the rolling horizon approach 
 
 The horizon length determines the size of the "window" of data that we are looking at during each step of the rolling horizon approach. The step size determines how much we move the horizon forward at each step. For example, with a step size of 4 intervals (representing 1 hour), after analyzing the first 3-hour window of data or horizon length (from time 0 to time 3 hours), we would move the window forward by 1 hour to analyze the next 3-hour window of data (from time 1 hour to time 4 hours). This means there would be a 2-hour overlap between consecutive windows.
 
-
+<i><b>1. Constructing the rolling horizon</b></i>
 <pre><code class="language-python">
 def calculate_daily_cycles_rolling_horizonv2(price_data, current_avg_cycles, horizon_length=8, step_size=1):
     num_intervals = len(price_data)
@@ -249,7 +249,7 @@ for i in range(num_days):
 
 The code begins  by initializing current_avg_cycles at zero to represent the initial cycle count, and num_days determines the total days to iterate through. In each iteration of the loop, the daily price data is extracted and  the calculate_daily_cycles_rolling_horizonv2 function computes the day's cycles, taking into account the current average number of cycles. It then estimates the cycle cost using estimate_cycle_costs and updates this cost to the dataset. After each day's calculation, the current average number of cycles is recalculated to include the latest data, ensuring that each new cycle count is informed by the most up-to-date average. In this way, the rolling horizon approach offers a significant enhancement over the static combinatory approach. 
 
-<b>2. Identifying the best parameters</b><br>
+<i><b>2. Identifying the best parameters</b></i>
 
 To improve the current strategy further, we embarked on a systematic exploration of different horizon lengths and step sizes. This experimentation involved running the rolling horizon function with various combinations of these two parameters to identify which horizon lengths and step sizes would yield the highest number of days with cycle costs within the benchmark.
 <pre><code class="language-python">#Trying out different parameters 
@@ -312,7 +312,7 @@ results_df.sort_values(by='days_within_benchmark',ascending=False).head()
 
 The code iterates over a predefined set of horizon lengths and step sizes, applying each combination to the daily price data. For each set of parameters, it calculates the cycle costs for each day and then aggregates the number of days where the cycle cost falls within the benchmark range. With the horizon length of two hours and step sizes of 1 and 2 yileding the highest results, respectively.
 
-<b>3. 89 new observations within benchmarks</b>
+<i><b>3. 89 new observations within benchmarks</b></i>
 
 Upon visualizing the results, we get very favorable outcomes
 <pre><code class="language-python">plt.figure(figsize=(12, 6))
@@ -354,7 +354,7 @@ This approach contrasts with a rolling horizon, which would have looked at the d
 Therefore, I chartered out to use a solver that makes use of SciPy, the famous Python package for mathematical computations among other uses.
 
 
-<b>1. Defining decision variables</b>
+<i><b>1. Defining decision variables</b></i>
 
 This part of the code introduces the `generate_possible_cycles` function, which is designed to enumerate all possible buying and selling cycles for a single day's worth of price data, called which will be used as the decision variables. This function is a critical component in constructing a constrained optimization approach, as it lays the groundwork for defining the decision variables. The function operates identically to the original function `calculate_daily_cycles` used in the combinatory approach, without the need to calculate and sort the best spreads separately, or break the function when it reaches the maximum number of cycles allowed.
 
@@ -434,7 +434,7 @@ memory usage: 127.0 MB
 
 The results show over 1.66 million possible cycles, validating the success of this step.
 
-<b>2. Using linear programming</b>
+<i><b>2. Using linear programming</b></i>
 
 Linear programming is a powerful tool used in operations research to find the best outcome in a mathematical model whose requirements are represented by linear relationships. In the context of our project, LP will help us identify the most profitable set of cycles that can be executed within the operational constraints of the energy storage system.
 
@@ -481,7 +481,7 @@ The bounds ensure that our decision variables, which represent whether or not to
 Finally, we print the shapes of A_eq and b_eq to verify that our constraints are correctly dimensioned for the LP solver.
 <pre><b><i>Output</i></b><br><code class="language-command-line">(367, 1664033) (367,)</code></pre>
 
-<b>2.1 Using the solver</b>
+<i><b>2.1 Using the solver</b></i>
 
 <pre><code class = "language-python">res_option_b = linprog(c_extended, A_eq=A_eq, b_eq=b_eq, bounds=bounds, method='highs')
 print(res_option_b)
@@ -532,7 +532,7 @@ The DataFrame suggested_cycles_df is then created by filtering all_possible_cycl
 
 The suggested_cycles_df was restructured using the groupby method to aggregate cycles by day. The apply method was then used with a lambda function to convert each group into a dictionary of records. This transformation was necessary to align the data with the input requirements of the estimate_cycle_costs function, which we defined earlier in the project. This function calculates the net cost or profit of executing a series of cycles throughout a day.
 
-<b>3. Visualizing the suggested cycles</b>
+<i><b>3. Visualizing the suggested cycles</b></i>
 
 <pre><code class="language-python">#Plotting out final cycle cost estimations using the suggest cycles of the linear programming method.
 daily_price_data['cycle_cost'] = suggested_df.apply(estimate_cycle_costs)
