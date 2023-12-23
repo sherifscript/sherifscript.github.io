@@ -43,11 +43,12 @@
 }
 
 /* Minimap */
-
 .minimap__container{
     position: fixed;
     top: 10px;
-    left: 10px;
+    bottom: 10px;
+    right: 10px;
+    width: 15%;
     min-width: 20px;
     z-index: 100;
 

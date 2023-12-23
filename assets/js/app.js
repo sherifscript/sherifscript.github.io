@@ -1,4 +1,3 @@
-
 let minimap = document.createElement('div');
 let minimapSize = document.createElement('div');
 let viewer = document.createElement('div');
@@ -14,36 +13,54 @@ minimapContent.className = 'minimap__content';
 minimap.append(minimapSize, viewer, minimapContent);
 document.body.appendChild(minimap);
 
-let html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+function setIframeContent() {
+    let html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+    minimapContent.contentDocument.open();
+    minimapContent.contentDocument.write(html);
+    minimapContent.contentDocument.close();
+}
 
-let iframeDoc = minimapContent.contentWindow.document;
-
-iframeDoc.open();
-iframeDoc.write(html);
-iframeDoc.close();
-
-
-function getDimensions(){
-    let bodyWidth = document.body.clientWidth;
-    let bodyRatio = document.body.clientHeight / bodyWidth;
+function getDimensions() {
+    let bodyWidth = document.documentElement.scrollWidth;
+    let bodyHeight = document.documentElement.scrollHeight;
+    let bodyRatio = bodyHeight / bodyWidth;
     let winRatio = window.innerHeight / window.innerWidth;
 
     minimap.style.width = '15%';
 
-    realScale = minimap.clientWidth / bodyWidth;
+    let minimapWidthScale = minimap.clientWidth / bodyWidth;
+    let minimapHeightScale = minimap.clientHeight / bodyHeight;
 
-    minimapSize.style.paddingTop = `${bodyRatio * 100}%`
+    realScale = Math.min(minimapWidthScale, minimapHeightScale);
+
+    minimapSize.style.paddingTop = `${bodyRatio * 100}%`;
     viewer.style.paddingTop = `${winRatio * 100}%`;
 
+    minimapContent.style.transformOrigin = 'top left';
     minimapContent.style.transform = `scale(${realScale})`;
-    minimapContent.style.width = `${(100 / realScale)}%`
-    minimapContent.style.height = `${(100 / realScale)}%`
+    // minimapContent.style.width = `${bodyWidth}px`;
+    minimapContent.style.width = '175pc';
+    minimapContent.style.height = `${bodyHeight}px`;
+
+    if (bodyHeight > window.innerHeight) {
+        viewer.style.display = 'block';
+    } else {
+        minimapContent.style.transform = 'scale(1)';
+        minimapContent.style.width = '100%';
+        minimapContent.style.height = '100%';
+        viewer.style.display = 'none';
+    }
 }
 
-function trackScroll(){
-    viewer.style.transform = `translateY(${window.scrollY * realScale}px)`
+
+function trackScroll() {
+    if (minimapContent.style.transform !== 'scale(1)') {
+        let scaledScrollY = window.scrollY * realScale;
+        viewer.style.transform = `translateY(${scaledScrollY}px)`;
+    }
 }
 
-getDimensions()
-window.addEventListener('scroll', trackScroll)
-window.addEventListener('resize', getDimensions)
+setIframeContent();
+getDimensions();
+window.addEventListener('scroll', trackScroll);
+window.addEventListener('resize', getDimensions);
