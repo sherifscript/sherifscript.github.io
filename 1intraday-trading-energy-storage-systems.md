@@ -584,16 +584,16 @@ Total costs of selected cycles with the Constrained Optimization Approach:
 </code></pre>
 
 
-The results indicate that
+The results indicate that for the:
 <ol>
 <li><b>Combinatory Approach:</b> The negative sum suggests that this approach, overall, has resulted in a significant profit when considering all selected cycles across the dataset.</li>
 
 <li><b>Rolling Horizon Approach:</b> The positive sum here is unexpected, as we're looking to maximize profit. This might indicate that the selected cycles did not perform as well, or perhaps there is a need to revisit the implementation of this approach, as typically we would expect this to be a negative value denoting profit.</li>
 
-<li><b>Constrained Optimization Approach:</b> This approach appears to have yielded the highest profit as indicated by the most negative sum, suggesting that when it comes to total profit across all cycles, this approach was the most effective.</li>
+<li><b>Constrained Optimization Approach:</b> The approach appears to have yielded the highest profit as indicated by the most negative sum, suggesting that when it comes to total profit across all cycles, this approach was the most effective.</li>
 </ol>
 
 
-In summary, my exploration into algorithmic trading through the lens of energy storage systems revealed the constrained optimization approach as the standout strategy for maximizing profits. This venture, my first foray into a real-world data science challenge, has been both illuminating and challenging, broadening my perspective on the practical applications of data science problems. While the results are promising, they also pave the way for further refinement. Understanding the benchmark costs in greater depth and investigating the potential of Mixed-Integer Linear Programming to manage overlapping cycles are immediate next steps.
+In summary, my exploration into algorithmic trading through the lens of energy storage systems revealed the constrained optimization approach as the standout strategy for maximizing profits. While the results are promising, they also pave the way for further refinement. Understanding the benchmark costs in greater depth and investigating the potential of Mixed-Integer Linear Programming to manage overlapping cycles are immediate next steps.
 
-The project so far represents Version 1 of my solution and is bound to be revisited again in the coming weeks. The full project and data will be available soon on my <a href="https://github.com/sherifscript/RayshaderMaps">GitHub</a>.
+The project so far represents Version 1 of my solution and is bound to be revisited again. The full project and data will be available soon on my <a href="https://github.com/sherifscript">GitHub</a>.

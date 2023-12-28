@@ -3,7 +3,7 @@ title: Ahmed Sherif
 subtitle: Data Analyst
 email: 
 description: Exploratory Data Analysis | Inferential Statistics<br /> Econometrics | Market Research | Data Visualization
-baseurl: # "/forty-jekyll-theme" # the subpath of your site, e.g. /blog
+baseurl: ""
 url: 
 author:
 street_address: 

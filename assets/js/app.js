@@ -13,12 +13,14 @@ minimapContent.className = 'minimap__content';
 minimap.append(minimapSize, viewer, minimapContent);
 document.body.appendChild(minimap);
 
-function setIframeContent() {
-    let html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-    minimapContent.contentDocument.open();
-    minimapContent.contentDocument.write(html);
-    minimapContent.contentDocument.close();
-}
+let html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+
+let iframeDoc = minimapContent.contentWindow.document;
+
+iframeDoc.open();
+iframeDoc.write(html);
+iframeDoc.close();
+
 
 function getDimensions() {
     let bodyWidth = document.documentElement.scrollWidth;
@@ -38,8 +40,7 @@ function getDimensions() {
 
     minimapContent.style.transformOrigin = 'top left';
     minimapContent.style.transform = `scale(${realScale})`;
-    // minimapContent.style.width = `${bodyWidth}px`;
-    minimapContent.style.width = '175pc';
+    minimapContent.style.width = `${bodyWidth}px`;
     minimapContent.style.height = `${bodyHeight}px`;
 
     if (bodyHeight > window.innerHeight) {
@@ -53,14 +54,10 @@ function getDimensions() {
 }
 
 
-function trackScroll() {
-    if (minimapContent.style.transform !== 'scale(1)') {
-        let scaledScrollY = window.scrollY * realScale;
-        viewer.style.transform = `translateY(${scaledScrollY}px)`;
-    }
+function trackScroll(){
+    viewer.style.transform = `translateY(${window.scrollY * realScale}px)`
 }
 
-setIframeContent();
-getDimensions();
-window.addEventListener('scroll', trackScroll);
-window.addEventListener('resize', getDimensions);
+getDimensions()
+window.addEventListener('scroll', trackScroll)
+window.addEventListener('resize', getDimensions)
