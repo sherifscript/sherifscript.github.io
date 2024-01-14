@@ -9,7 +9,9 @@ nav-menu: false
 show_tile: true
 ---
 
-Stepping into the realm of data science, I recently took on an exciting challenge from a friend: exploring the world of algorithmic trading in energy storage systems. This blog post documents my journey, where I applied my foundational data science skills, previously only delved into through academic research with tools like scikit-learn, to a practical, real-world scenario. The task is to develop a simplified algorithm that estimates the cycle costs required to achieve a specific average daily cycle count for an energy storage system while not breaching the maximum daily number of cycles. The algorithm should account for a list of things, namely:
+Recently, I ventured into the exciting field of data science to tackle a challenge posed by a friend: exploring the complex world of algorithmic trading in energy storage systems. This post documents my journey of applying foundational data science skills, previously explored only in academic settings, to a practical, real-world scenario.
+
+The task goal is simple; to develop an algorithm that estimates the cycle costs required to achieve a specific average daily cycle count for an energy storage system while not breaching the maximum daily number of cycles. The algorithm should account for a list of things, namely:
 
 <ol>
     <li>The nominal power of the storage (2 MW)</li>
@@ -32,12 +34,13 @@ import seaborn as sns
 from itertools import combinations
 from scipy.optimize import linprog
 </code></pre>
-
  
 <pre><code class="language-python"># Import data
 market_prices_df = pd.read_csv(r"market_prices.csv", sep=';', parse_dates=['timestamp_UTC'])
 market_prices_df.info()
 </code></pre>
+
+
 
 <pre><code class="language-command-line"><class 'pandas.core.frame.DataFrame'>
 RangeIndex: 35040 entries, 0 to 35039
