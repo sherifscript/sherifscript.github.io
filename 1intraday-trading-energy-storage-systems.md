@@ -11,7 +11,7 @@ show_tile: true
 
 Recently, I ventured into the exciting field of data science to tackle a challenge posed by a friend: exploring the complex world of algorithmic trading in energy storage systems. This post documents my journey of applying foundational data science skills, previously explored only in academic settings, to a practical, real-world scenario.
 
-The task goal is simple; to develop an algorithm that estimates the cycle costs required to achieve a specific average daily cycle count for an energy storage system while not breaching the maximum daily number of cycles. The algorithm should account for a list of things, namely:
+The task goal is simple; to develop an algorithm for an energy storage system that estimates the cycle costs required to achieve a specific average daily cycle count  while not breaching the maximum daily number of cycles. The project uses different approaches in attempting to maximize the potential profits while remaining within the constraints by identifying the best cycles within a day to buy and sell energy. The algorithm should account for a list of things, namely:
 
 <ol>
     <li>The nominal power of the storage (2 MW)</li>
@@ -21,7 +21,7 @@ The task goal is simple; to develop an algorithm that estimates the cycle costs 
     <li>The maximum number of cycles per 24-hour time horizon (2.5)</li>
 </ol>
 
-With that out of the way, let's get to it!
+The [theoretical background of the project](https://github.com/sherifscript/EnergyStorageIntradayTrading/blob/main/Energy%20Markets%20Challenge.pdf) explains the each of the basic constraints and the dynnamics of energy storage systems. With that out of the way, let's get to it!
 
 <h3>Solution</h3>
 First things first!
@@ -599,4 +599,4 @@ The results indicate that for the:
 
 In summary, my exploration into algorithmic trading through the lens of energy storage systems revealed the constrained optimization approach as the standout strategy for maximizing profits. While the results are promising, they also pave the way for further refinement. Understanding the benchmark costs in greater depth and investigating the potential of Mixed-Integer Linear Programming to manage overlapping cycles are immediate next steps.
 
-The project so far represents Version 1 of my solution and is bound to be revisited again. The full project and data will be available soon on my <a href="https://github.com/sherifscript">GitHub</a>.
+The project so far represents Version 1 of my solution and is bound to be revisited again. The full project and data <a href="https://github.com/sherifscript/EnergyStorageIntradayTrading">are available on my Github</a>.
