@@ -11,17 +11,19 @@ show_tile: true
 
 Recently, I ventured into the exciting field of data science to tackle a challenge posed by a friend: exploring the complex world of algorithmic trading in energy storage systems. This post documents my journey of applying foundational data science skills, previously explored only in academic settings, to a practical, real-world scenario.
 
-The task goal is simple; to develop an algorithm for an energy storage system that estimates the cycle costs required to achieve a specific average daily cycle count  while not breaching the maximum daily number of cycles. The project uses different approaches in attempting to maximize the potential profits while remaining within the constraints by identifying the best cycles within a day to buy and sell energy. The algorithm should account for a list of things, namely:
+The task goal is simple; to develop an algorithm for an energy storage system that estimates the cycle costs required to achieve a specific average daily cycle count while not breaching the maximum daily number of cycles. To break the idea further down, the algorithm should identify strategic opportunities to purchase energy during periods of low market prices and sell it back to the grid at peak price times by dynamically analyzing energy market data, thereby maximizing profit within the predetermined cycle and storage limitations. The algorithm should account for a list of things, namely:
 
 <ol>
-    <li>The nominal power of the storage (2 MW)</li>
-    <li>The usable capacity of the storage (4 MWh)</li>
-    <li>The efficiency of the energy storage (90%)</li>
-    <li>The target average cycles per 24-hour time horizon (1.5)</li>
-    <li>The maximum number of cycles per 24-hour time horizon (2.5)</li>
+    <li>The nominal power of the storage at 2 MW</li>
+    <li>The usable capacity of the storage at 4 MWh</li>
+    <li>The efficiency of the energy storage at 90%</li>
+    <li>The target average cycles per 24-hour time horizon is 1.5 cycles</li>
+    <li>The maximum number of cycles per 24-hour time horizon is 2.5 cycles</li>
 </ol>
 
-The [theoretical background of the project](https://github.com/sherifscript/EnergyStorageIntradayTrading/blob/main/Energy%20Markets%20Challenge.pdf) explains the each of the basic constraints and the dynnamics of energy storage systems. With that out of the way, let's get to it!
+The [theoretical background of the project is available of my GitHub](https://github.com/sherifscript/EnergyStorageIntradayTrading/blob/main/Energy%20Markets%20Challenge.pdf) and explains each of the basic constraints and the dynamics of energy storage systems. 
+
+With that out of the way, let's get to it!
 
 <h3>Solution</h3>
 First things first!
