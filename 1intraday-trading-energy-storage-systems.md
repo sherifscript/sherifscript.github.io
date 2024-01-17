@@ -55,7 +55,7 @@ dtypes: datetime64[ns](1), float64(1)
 memory usage: 547.6 KB
 </code></pre>
 
-With an intial look at the data, it is clear that the data consists of 35,040 observations of the price of MWh in euros and the corresponding time, in 15-minute intervals. This required a little bit of transforming and grouping the data to make it easier for our analysis.
+With an initial look at the data, it is clear that the data consists of 35,040 observations of the price of MWh in euros and the corresponding time, in 15-minute intervals. This required a little bit of transforming and grouping the data to make it easier for our analysis.
 
 <pre><code class="language-python">market_prices_df = market_prices_df.rename(columns={market_prices_df.columns[1]: 'EUR/MWh'})
 market_prices_df['date'] = market_prices_df['timestamp_UTC'].dt.date
@@ -74,7 +74,7 @@ dtypes: float64(1), object(2)
 memory usage: 8.7+ KB
 </code></pre>
 
-After transforming the data into neat 366 days with 96 observations aggrgated into a list for each day, the data becomes much easier to work with. 
+After transforming the data into neat 366 days with 96 observations aggregated into a list for each day, the data becomes much easier to work with. 
 Before going on to our solution, we set the constraints early on in the project
 
 <pre><code class="language-python">#Constraints:
@@ -199,12 +199,11 @@ The second visualization is a bar chart that represents the cycle costs for the 
     <p class="your-caption-class">Cycle Costs for the entire dataset.</p>
 </div>
 
-Upon examining the bar chart, we notice that the cycle costs vary across the days, with some days showing negative cycle costs, indicating profit, and others potentially indicating a loss if the costs were above zero. Although the vast majority of the cycle costs lie well below zero demonstrating that the algorithm is  profitable, it is well below the benchmark range set by this challenge.
-
 <pre><code class="language-python">print(f"{((daily_price_data['cycle_cost'] >= 20) & (daily_price_data['cycle_cost'] <= 36)).sum()} day(s) within benchmark.")
 </code></pre>
 
-<i>Output</i><br><code class="language-command-line">1 day(s) within benchmark.</code>
+<i>Output</i><br>
+<pre><code class="language-command-line">1 day(s) within benchmark.</code></pre>
 
 
 The first day showed cost results that within our benchmark. After examining the first day, there were only four data observations for the day. This reinforces the notion that a rolling horizon approach as the challenge also mentioned, might be a better method at identifying cycles within our benchmark
@@ -252,7 +251,7 @@ for i in range(num_days):
 
 </code></pre>
 
-The code begins  by initializing current_avg_cycles at zero to represent the initial cycle count, and num_days determines the total days to iterate through. In each iteration of the loop, the daily price data is extracted and  the calculate_daily_cycles_rolling_horizonv2 function computes the day's cycles, taking into account the current average number of cycles. It then estimates the cycle cost using estimate_cycle_costs and updates this cost to the dataset. After each day's calculation, the current average number of cycles is recalculated to include the latest data, ensuring that each new cycle count is informed by the most up-to-date average. In this way, the rolling horizon approach offers a significant enhancement over the static combinatory approach. 
+The code begins  by initializing current_avg_cycles at zero to represent the initial cycle count, and num_days determines the total days to iterate through. In each iteration of the loop, the daily price data is extracted and the calculate_daily_cycles_rolling_horizonv2 function computes the day's cycles, taking into account the current average number of cycles. It then estimates the cycle cost using estimate_cycle_costs and updates this cost to the dataset. After each day's calculation, the current average number of cycles is recalculated to include the latest data, ensuring that each new cycle count is informed by the most up-to-date average. In this way, the rolling horizon approach offers a significant enhancement over the static combinatory approach. 
 
 <i><b>2. Identifying the best parameters</b></i>
 
@@ -315,7 +314,7 @@ results_df.sort_values(by='days_within_benchmark',ascending=False).head()
     </table>
 </div>
 
-The code iterates over a predefined set of horizon lengths and step sizes, applying each combination to the daily price data. For each set of parameters, it calculates the cycle costs for each day and then aggregates the number of days where the cycle cost falls within the benchmark range. With the horizon length of two hours and step sizes of 1 and 2 yileding the highest results, respectively.
+The code iterates over a predefined set of horizon lengths and step sizes, applying each combination to the daily price data. For each set of parameters, it calculates the cycle costs for each day and then aggregates the number of days where the cycle cost falls within the benchmark range. With the horizon length of two hours and step sizes of 1 and 2 yielding the highest results, respectively.
 
 <i><b>3. 89 new observations within benchmarks</b></i>
 
@@ -346,7 +345,7 @@ Current Average Number of cycles: 1.997</code></pre>
 
 The number of observations where the daily average cycle cost increased to 90 observations using the rolling horizon approach, indicating a significant improvement in the algorithm so far to meet benchmark criteria.
 
-Upon examining the bar chart, we notice that the cycle costs vary across the days, with some days showing negative cycle costs, indicating profit, and others potentially indicating a loss if the costs were above zero. Although the vast majority of the cycle costs lie well below zero demonstrating that the algorithm is  profitable, it is well below the benchmark range set by this challenge.
+Upon examining the bar chart, we notice that the cycle costs vary across the days, with some days showing negative cycle costs, indicating profit, and others potentially indicating a loss if the costs were above zero. Although the vast majority of the cycle costs lie well below zero demonstrating that the algorithm is profitable, it is well below the benchmark range set by this challenge.
 
 <h4>3. The Constrained Optimization Approach</h4>
 
@@ -484,7 +483,10 @@ To account for this penalty in our constraints, we expand A_eq to include an add
 The bounds ensure that our decision variables, which represent whether or not to execute a given cycle, are either 0 or 1, effectively making this a binary decision. We also allow the penalty variable, delta, to be greater than or equal to zero, indicating that it can adjust freely to reflect any deviation from the target average.
 
 Finally, we print the shapes of A_eq and b_eq to verify that our constraints are correctly dimensioned for the LP solver.
-<pre><b><i>Output</i></b><br><code class="language-command-line">(367, 1664033) (367,)</code></pre>
+
+<b><i>Output</i></b><br> 
+<pre><code class="language-command-line">(367, 1664033) (367,)
+</code></pre>
 
 <i><b>2.1 Using the solver</b></i>
 
