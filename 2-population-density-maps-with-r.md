@@ -3,7 +3,7 @@ layout: post
 tiletitle: A 3D Look at Egypt & Germany
 title: "Exploring Population Landscapes: 3D Maps of Egypt and Germany"
 toolsused: R, Adobe Illustrator
-description: Egypt's visualization distinctly highlights the historic concentration of the Egyptian state along the Nile River, a lifeline for the nation, with most of its population residing along its banks. 
+description: Egypt's visualization distinctly highlights the historic concentration of the Egyptian state along the Nile River, a lifeline for the nation, with most of its population residing along its banks.
 image: assets/images/egyptR.png
 nav-menu: false
 show_tile: True
@@ -12,7 +12,7 @@ show_tile: True
 
 The initial spark for this project came about from my love of visualization, especially maps, which led me to discover Rayshader 3D maps. Their ability to distinctly showcase population distribution immediately caught my attention. Determined to delve into this technique, I aimed to create 3D visualizations that would straightforwardly present population densities within Egypt and Germany, both of which are important to me on a personal level. 
 
-The result was a set of interactive 3D maps that invite exploration and offer a novel way to appreciate population distribution in these two countries (an interactive version with three.js and React coming soon! 😉). The project was really fun. I learned to use geospatial and work with raster format. First, we'll take a detailed look at the Egyptian landscape, revealing the historical interplay of its people with the environment through my 3D rendering. Following that, I'll share an insider's view of the coding journey that transformed raw numbers into the peaks and valleys of population density. Finally, we'll voyage to Germany, applying the same methods to illustrate how population is spread across urban centers and rural landscapes.
+The result was a set of interactive 3D maps that invite exploration and offer a novel way to appreciate population distribution in these two countries (an interactive version with three.js and React coming soon! 😉). The project was really fun. I learned to use geospatial data and work with raster format. First, we'll take a detailed look at the Egyptian landscape, revealing the historical interplay of its people with the environment through my 3D rendering. Following that, I'll share an insider's view of the coding journey that transformed raw numbers into the peaks and valleys. Finally, we'll voyage to Germany, applying the same methods to illustrate how population is spread across urban centers and rural landscapes.
 
 <h3>Nile Reigns King</h3>
 

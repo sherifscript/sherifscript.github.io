@@ -5,55 +5,55 @@
 {% include head.html %}
 
 <body>
+    <div class="home-page-class">
+        {% include header.html %}
 
-    {% include header.html %}
-
-    <!-- Banner -->
-    <section id="banner" class="major">
-        <div class="inner">
-            <header class="major">
-                <h1>{{ page.landing-title }}</h1>
-            </header>
-            <div class="content">
-                <p style="text-transform: uppercase;">{{ site.description }}</p>
-                <ul class="actions">
-                    <li><a href="#one" class="button next scrolly">Get Started</a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main -->
-    <div id="main">
-
-        <!-- One -->
-        {% include tiles.html %}
-        
-        <!-- Two -->
-        <section id="two">
+        <!-- Banner -->
+        <section id="banner" class="major">
             <div class="inner">
-                <ul class="actions">
-                    <li><a href="about.html" class="button special">About Me</a></li>
-                </ul>
+                <header class="major">
+                    <h1>{{ page.landing-title }}</h1>
+                </header>
+                <div class="content">
+                    <b><p style="text-transform: uppercase;">{{ site.description }}</p></b>
+                    <ul class="actions">
+                        <li><a href="#one" class="button next scrolly">Learn More</a></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <!-- Two original -->
-        <!-- <section id="two">
-            <div class="inner">
-                <header class="major">
-                    <h2>Massa libero</h2>
-                </header>
-                <p>{{ content }}</p>
-                <ul class="actions">
-                    <li><a href="landing.html" class="button next">Get Started</a></li>
-                </ul>
-            </div>
-        </section> -->
+        <!-- Main -->
+        <div id="main">
+
+            <!-- One -->
+            {% include tiles.html %}
+            
+            <!-- Two -->
+            <section id="two">
+                <div class="inner">
+                    <ul class="actions">
+                        <li><a href="about.html" class="button special">About Me</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Two original -->
+            <!-- <section id="two">
+                <div class="inner">
+                    <header class="major">
+                        <h2>Massa libero</h2>
+                    </header>
+                    <p>{{ content }}</p>
+                    <ul class="actions">
+                        <li><a href="landing.html" class="button next">Get Started</a></li>
+                    </ul>
+                </div>
+            </section> -->
+        </div>
+
+        {% include footer.html %}
     </div>
-
-    {% include footer.html %}
-
 </body>
 
 </html>

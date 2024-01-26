@@ -3,7 +3,7 @@ layout: post
 tiletitle: Intraday Trading Algorithm for Energy Storage Systems
 title: "Intraday Trading Algorithm for Energy Storage Systems"
 toolsused: Python
-description: Linear programming approaches and rolling horizions. A dynamic algorithm for intraday energy trading.
+description: Linear programming approaches and rolling horizons. A dynamic algorithm for intraday energy trading.
 image: assets/images/rolling-horizon-intraday-trading-energy.png
 nav-menu: false
 show_tile: true
@@ -251,7 +251,7 @@ for i in range(num_days):
 
 </code></pre>
 
-The code begins  by initializing current_avg_cycles at zero to represent the initial cycle count, and num_days determines the total days to iterate through. In each iteration of the loop, the daily price data is extracted and the calculate_daily_cycles_rolling_horizonv2 function computes the day's cycles, taking into account the current average number of cycles. It then estimates the cycle cost using estimate_cycle_costs and updates this cost to the dataset. After each day's calculation, the current average number of cycles is recalculated to include the latest data, ensuring that each new cycle count is informed by the most up-to-date average. In this way, the rolling horizon approach offers a significant enhancement over the static combinatory approach. 
+The code begins by initializing current_avg_cycles at zero to represent the initial cycle count, and num_days determines the total days to iterate through. In each iteration of the loop, the daily price data is extracted and the calculate_daily_cycles_rolling_horizonv2 function computes the day's cycles, taking into account the current average number of cycles. It then estimates the cycle cost using estimate_cycle_costs and updates this cost to the dataset. After each day's calculation, the current average number of cycles is recalculated to include the latest data, ensuring that each new cycle count is informed by the most up-to-date average. In this way, the rolling horizon approach offers a significant enhancement over the static combinatory approach. 
 
 <i><b>2. Identifying the best parameters</b></i>
 
@@ -603,4 +603,4 @@ The results indicate that for the:
 
 In summary, my exploration into algorithmic trading through the lens of energy storage systems revealed the constrained optimization approach as the standout strategy for maximizing profits. While the results are promising, they also pave the way for further refinement. Understanding the benchmark costs in greater depth and investigating the potential of Mixed-Integer Linear Programming to manage overlapping cycles are immediate next steps.
 
-The project so far represents Version 1 of my solution and is bound to be revisited again. The full project and data <a href="https://github.com/sherifscript/EnergyStorageIntradayTrading">are available on my Github</a>.
+The project so far represents Version 1 of my solution and is bound to be revisited again. The full project and data <a href="https://github.com/sherifscript/EnergyStorageIntradayTrading">are available on my GitHub</a>.

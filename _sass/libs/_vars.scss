@@ -29,22 +29,22 @@
 	);
 
 // Palette.
-	$palette: (
-		bg:                 #1a1a1a, // Dark Background
-		bg-alt:             #2c2c2c, // Slightly Lighter Dark Background
-		fg:                 #ffffff, // White Text
-		fg-bold:            #ffffff, // White Bold Text
-		fg-light:           rgba(255, 255, 255, 0.5), // Light White Text
-		border:             rgba(255, 255, 255, 0.1), // Border Color
-		border-bg:          rgba(255, 255, 255, 0.035), // Border Background Color
-		highlight:          #b89f91, // Soft Terracotta Highlight
-		accent1:            #7198b1, // Cool Blue Accent
-		accent2:            #a1a6b4, // Cool Grey Accent
-		accent3:            #666f7f, // Dark Grey Accent
-		accent4:            #3b444b, // Darker Grey Accent
-		accent5:            #2d3748, // Even Darker Grey Accent
-		accent6:            #1c1f2b  // Almost Black Accent
-	);
+	// $palette: (
+	// 	bg:                 #1a1a1a, // Dark Background
+	// 	bg-alt:             #2c2c2c, // Slightly Lighter Dark Background
+	// 	fg:                 #ffffff, // White Text
+	// 	fg-bold:            #ffffff, // White Bold Text
+	// 	fg-light:           rgba(255, 255, 255, 0.5), // Light White Text
+	// 	border:             rgba(255, 255, 255, 0.1), // Border Color
+	// 	border-bg:          rgba(255, 255, 255, 0.035), // Border Background Color
+	// 	highlight:          #b89f91, // Soft Terracotta Highlight
+	// 	accent1:            #7198b1, // Cool Blue Accent
+	// 	accent2:            #a1a6b4, // Cool Grey Accent
+	// 	accent3:            #666f7f, // Dark Grey Accent
+	// 	accent4:            #3b444b, // Darker Grey Accent
+	// 	accent5:            #2d3748, // Even Darker Grey Accent
+	// 	accent6:            #1c1f2b  // Almost Black Accent
+	// );
 
 // Palette 1: Earthy Tones
 
@@ -135,6 +135,25 @@
 //     accent5:            #60666d, // Dark Grey Accent
 //     accent6:            #444b52  // Darker Grey Accent
 // );
+
+// Palette 2: Minimal edited
+$palette: (
+    bg:                 #f7f7f7, // Soft White Background
+    bg-alt:             #ffffff, // Pure White Background
+    fg:                 #333333, // Charcoal Text
+    fg-bold:            #222222, // Deep Charcoal Bold Text
+    fg-light:           rgba(51, 51, 51, 0.6), // Light Charcoal Text
+    border:             rgba(51, 51, 51, 0.1), // Border Color
+    border-bg:          rgba(51, 51, 51, 0.025), // Border Background Color
+    highlight:          #b89f91 , // Vibrant Blue Highlight 167df0
+    accent1:            #5c6f7c, // Neutral Blue Accent
+    accent2:            #acb5be, // Soft Grey Accent
+    accent3:            #929aa2, // Medium Grey Accent
+    accent4:            #787e87, // Neutral Grey Accent
+    accent5:            #60666d, // Dark Grey Accent
+    accent6:            #444b52  // Darker Grey Accent
+);
+
 
 	/* Total scrollbar styling */
 	::-webkit-scrollbar {
