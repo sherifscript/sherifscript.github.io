@@ -3,7 +3,7 @@ layout: post
 tiletitle: Sankey Diagrams
 title: "Sankey Diagrams: Trading balances, income statements, national budgets and more"
 toolsused: Python, Excel, Figma, Power BI
-description: A most versatile yet rare visualization. This post documents a deep dive into the world of Sankey diagrams showcasing multiple tools and different use cases!
+description: A most versatile yet rare visualization. This project documents a deep dive into the world of Sankey diagrams showcasing multiple tools and different use cases!
 image: assets/images/Germany-2022-Imports-Exports.png
 nav-menu: false
 show_tile: true
