@@ -5,6 +5,26 @@
 {% include head.html %}
 
 <body>
+	<style>
+		#scroll-progress-container {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 4px;
+			background: transparent;
+			z-index: 99999;
+		}
+		#scroll-progress-bar {
+			height: 100%;
+			background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+			width: 0%;
+			transition: width 0.1s ease-out;
+		}
+	</style>
+	<div id="scroll-progress-container">
+		<div id="scroll-progress-bar"></div>
+	</div>
 
 	{% include header.html %} 
    
@@ -31,8 +51,55 @@
 		<div class="minimap__size"></div>
 		<div class="minimap__viewer"></div>
 		<iframe class="minimap__content"></iframe>
-	</div>
-	<script src="/assets/js/app.js"></script> -->
+	</div> -->
+	<script>
+		function updateProgress(element) {
+			var scrollTop = element.scrollTop || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+			var docHeight = element.scrollHeight || document.documentElement.scrollHeight;
+			var winHeight = element.clientHeight || document.documentElement.clientHeight;
+			var scrollHeight = docHeight - winHeight;
+			
+			if (scrollHeight <= 0) return;
+			var scrollPercentage = (scrollTop / scrollHeight) * 100;
+			// Constrain between 0 and 100
+			scrollPercentage = Math.max(0, Math.min(100, scrollPercentage));
+			document.getElementById('scroll-progress-bar').style.width = scrollPercentage + '%';
+		}
+
+		window.addEventListener('scroll', function() {
+			updateProgress(document.documentElement);
+		}, { passive: true });
+
+		document.addEventListener("DOMContentLoaded", function() {
+			var progressContainer = document.getElementById('scroll-progress-container');
+			var header = document.getElementById('header');
+			
+			function adjustPosition() {
+				if (header && progressContainer) {
+					// Add position fixed to header height to place progress bar exactly under
+					var headerRect = header.getBoundingClientRect();
+					progressContainer.style.top = headerRect.bottom + 'px';
+				}
+			}
+			adjustPosition();
+			window.addEventListener('resize', adjustPosition, { passive: true });
+			// Also re-adjust on scroll in case the header shrinks or grows on scroll
+			window.addEventListener('scroll', adjustPosition, { passive: true });
+
+			var wrapper = document.getElementById('wrapper');
+			if (wrapper) {
+				wrapper.addEventListener('scroll', function() {
+					updateProgress(wrapper);
+				}, { passive: true });
+			}
+			var main = document.getElementById('main');
+			if (main) {
+				main.addEventListener('scroll', function() {
+					updateProgress(main);
+				}, { passive: true });
+			}
+		});
+	</script>
 </body>
 
 </html>
