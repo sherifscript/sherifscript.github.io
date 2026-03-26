@@ -9,24 +9,24 @@ nav-menu: false
 show_tile: true
 ---
 
-Recently, I tried my hand at algorithmic trading in energy storage systems. This post documents my journey of applying foundational data science skills, previously explored only in academic settings, to a practical, real-world scenario.
+This post documents my experience applying data science to algorithmic trading in energy storage systems. 
 
-The task goal is simple; to develop an algorithm for an energy storage system that estimates the cycle costs required to achieve a specific average daily cycle count while not breaching the maximum daily number of cycles. To break the idea further down, the algorithm should identify strategic opportunities to purchase energy during periods of low market prices and sell it back to the grid at peak price times by dynamically analyzing energy market data, thereby maximizing profit within the predetermined cycle and storage limitations. The algorithm should account for a list of things, namely:
+The goal is to develop an algorithm that maximizes profit by strategically buying energy during low market prices and selling at peak times. It must estimate cycle costs while adhering to the following constraints:
 
 <ol>
-    <li>The nominal power of the storage at 2 MW</li>
-    <li>The usable capacity of the storage at 4 MWh</li>
-    <li>The efficiency of the energy storage at 90%</li>
-    <li>The target average cycles per 24-hour time horizon is 1.5 cycles</li>
-    <li>The maximum number of cycles per 24-hour time horizon is 2.5 cycles</li>
+    <li>Nominal power: 2 MW</li>
+    <li>Usable capacity: 4 MWh</li>
+    <li>Storage efficiency: 90%</li>
+    <li>Target average cycles per 24-hour horizon: 1.5</li>
+    <li>Maximum cycles per 24-hour horizon: 2.5</li>
 </ol>
 
-The [theoretical background of the project is available of my GitHub](https://github.com/sherifscript/EnergyStorageIntradayTrading/blob/main/Energy%20Markets%20Challenge.pdf) and explains each of the basic constraints and the dynamics of energy storage systems. 
+The [theoretical background is available of my GitHub](https://github.com/sherifscript/EnergyStorageIntradayTrading/blob/main/Energy%20Markets%20Challenge.pdf) and explains each of the basic constraints and the dynamics of energy storage systems. 
 
 With that out of the way, let's get to it!
 
 <h3>Solution</h3>
-First things first!
+First things first, importing the necessary libraries:
 <pre><code class="language-python"># Importing necessary libraries for this project
 
 import numpy as np
@@ -42,8 +42,6 @@ market_prices_df = pd.read_csv(r"market_prices.csv", sep=';', parse_dates=['time
 market_prices_df.info()
 </code></pre>
 
-
-
 <pre><code class="language-command-line"><class 'pandas.core.frame.DataFrame'>
 RangeIndex: 35040 entries, 0 to 35039
 Data columns (total 2 columns):
@@ -55,7 +53,7 @@ dtypes: datetime64[ns](1), float64(1)
 memory usage: 547.6 KB
 </code></pre>
 
-With an initial look at the data, it is clear that the data consists of 35,040 observations of the price of MWh in euros and the corresponding time, in 15-minute intervals. This required a little bit of transforming and grouping the data to make it easier for our analysis.
+The raw data contains 35,040 observations (15-minute intervals) of MWh prices in euros. We transform and group this into 366 days with 96 observations each to simplify analysis. We also define our system constraints.
 
 <pre><code class="language-python">market_prices_df = market_prices_df.rename(columns={market_prices_df.columns[1]: 'EUR/MWh'})
 market_prices_df['date'] = market_prices_df['timestamp_UTC'].dt.date
@@ -87,14 +85,11 @@ max_cycles_per_day = 2.5
 
 <h4>1. The Combinatory Approach</h4>
 
-Developing the initial version of the algorithm will rely on two components, cycle calculation and cost estimation. The first will be a function to identify daily buying and selling opportunities based on price signals, and calculating the energy charged and discharged during each cycle considering the efficiency and storage limitations. The second will be function to estimate the cycle costs based on the cycle data generated, calculating the total cost of energy purchased, the total revenue from energy sold, and estimating the cycle cost in EUR/MWh.
+The initial algorithm consists of two components: cycle calculation and cost estimation. 
 
 <i><b>1. Determining best trading cycles in the day</b></i>
 
-In the `calculate_daily_cycles` function, the core idea is to identify the most profitable transactions for each day, taking into account the operational constraints of the storage unit. The function first calculates the potential profit, or 'spread', for every possible buy and sell time combination within a single day, based on the provided electricity price data. This spread is determined by the difference between the selling price and the buying price, adjusted for the efficiency losses during charging and discharging. 
-
-After identifying these potential spreads, the function prioritizes the transactions with the highest profits. It sorts these opportunities in descending order of profitability. The function then iterates through this sorted list to build a set of daily cycles that maximize the profit while ensuring that the storage unit does not exceed its operational limits.
-
+`calculate_daily_cycles` identifies the most profitable daily transactions based on the expected spread (selling price minus buying price, adjusted for efficiency). It calculates all possible spreads, sorts them by descending profitability, and limits them within operational bounds.
 
 <pre><code class="language-python">#Define a function to calculate the daily cycles with most the spread, while considering storage limitations and efficiency.
 
@@ -110,11 +105,7 @@ def calculate_daily_cycles(price_data):
     best_spreads.sort(reverse=True)
 </code></pre>
 
-To enforce these constraints, the function tracks the intervals already used for buying or selling energy, preventing the same interval from being used in multiple transactions. This step is crucial to adhere to the maximum daily cycle limit and to respect the physical constraints of the storage unit, such as its nominal power and capacity.
-
-For each selected transaction, the function calculates the amount of energy to be bought, considering the storage capacity and the time available between the buying and selling points. It then computes the energy that can be effectively stored (accounting for charging efficiency) and subsequently discharged (again considering discharge efficiency). The profit for each transaction is calculated based on these energy quantities and the prices at the buying and selling times.
-
-The function returns a list of the optimal daily cycles, each entry containing detailed information about the transaction, including the buy and sell times, energy amounts at each stage (bought, charged, discharged), prices, calculated spread, and the profit. This output offers a comprehensive view of how to optimally operate the storage unit for each day, based on the given price signals and operational constraints.
+The function tracks used intervals to avoid overlaps, computes the exact energy amounts (bought, charged, discharged), calculates profit, and halting once the maximum daily cycles limit is reached.
 
 <pre><code class="language-python">cycles = []
 used_intervals = set() #used instead of empty list for faster lookup time of if statment
@@ -152,9 +143,7 @@ calculate_daily_cycles(test_day_data)
 
 <i><b>2. Estimate the cost of cycles</b></i>
 
-The `estimate_cycle_costs` function is an essential component of the overall solution, designed to quantify the economics of the energy trading strategy. Its primary purpose is to calculate the net cost per unit of energy cycled through the storage system, providing a clear metric to evaluate the efficiency of the trading strategy.
-
-The function operates by iterating over a list of cycles, each representing a completed buy and sell transaction. For each cycle, the function accumulates the total cost of energy purchased and the total revenue generated from selling the energy. It is important to note that the function uses the 'bought energy' as the basis for these calculations, as it represents the initial input energy for each cycle, taking into account the losses due to inefficiencies in the storage process.
+`estimate_cycle_costs` computes the net cost per unit of energy cycled based on the purchased input energy. By tallying total purchase cost minus total sales revenue, a negative net cost signifies profit.
 
 <pre><code class="language-python">def estimate_cycle_costs(cycles):
     total_purchase_cost = 0
@@ -175,9 +164,7 @@ test_day_cycles = calculate_daily_cycles(daily_price_data['EUR/MWh'].iloc[1])
 estimate_cycle_costs(test_day_cycles)
 </code></pre>
 
-The total purchase cost is calculated by multiplying the amount of energy bought in each cycle by its corresponding buying price. Similarly, the total sales revenue is derived by multiplying the amount of discharged energy (energy available for sale after accounting for inefficiencies) by its selling price. By summing up these values across all cycles, the function captures the overall cost and revenue associated with the day's trading activities. Once the total purchase cost and total sales revenue are calculated, the function computes the net cost of the day's operations. This net cost is indicative of the overall profitability of the trading strategy: a negative net cost implies profitability, while a positive net cost suggests a loss.
-
-Visualizing the buy and sell times, we can observe that the function so far has been able to select profitable cycles throughout the day. This visualization demonstrates how the algorithm strategically selects points in time to buy and sell energy based on price fluctuations, aiming to optimize profitability.
+Visualizing the buy and sell times, we confirm the algorithm correctly selects profitable cycles.
 
 <i><b>3. Visualizing results</b></i>
 
@@ -186,7 +173,7 @@ Visualizing the buy and sell times, we can observe that the function so far has 
     <p class="your-caption-class">Price Curve and Identified Cycles for Day 2.</p>
 </div>
 
-The second visualization is a bar chart that represents the cycle costs for the first 10 days of the dataset. Each bar corresponds to the net cost of cycling energy for a given day. The cycle costs are calculated by applying the estimate_cycle_costs function to the cycles identified by the calculate_daily_cycles function for each day's price data. 
+Comparing the cycle costs applied to the first 10 days arrayed below: 
 
 <div class="image-wrapper">
     <img src="/assets/images/Cycle Costs for the First 10 Days.png" class="your-image-class" alt="Price Curve and Identified Cycles for Day 2">
@@ -206,14 +193,11 @@ The second visualization is a bar chart that represents the cycle costs for the 
 <pre><code class="language-command-line">1 day(s) within benchmark.</code></pre>
 
 
-The first day showed cost results that within our benchmark. After examining the first day, there were only four data observations for the day. This reinforces the notion that a rolling horizon approach as the challenge also mentioned, might be a better method at identifying cycles within our benchmark
-
+The first day yielded costs within our benchmark, but analyzing just four data points suggests a rolling horizon approach—as recommended by the challenge—might be more effective.
 
 <h4>2. The Rolling Horizon Approach</h4>
 
-Building upon the calculate_daily_cycles function, the rolling horizon approach introduces a more dynamic and responsive strategy. In the rolling horizon approach, instead of looking at the entire day's data all at once, we analyze a smaller portion of data (a "window" of a few hours) and make decisions based on this smaller dataset. As we move through the day, this "window" rolls forward, giving us a new set of data to analyze.
-
-The horizon length determines the size of the "window" of data that we are looking at during each step of the rolling horizon approach. The step size determines how much we move the horizon forward at each step. For example, with a step size of 4 intervals (representing 1 hour), after analyzing the first 3-hour window of data or horizon length (from time 0 to time 3 hours), we would move the window forward by 1 hour to analyze the next 3-hour window of data (from time 1 hour to time 4 hours). This means there would be a 2-hour overlap between consecutive windows.
+Instead of processing an entire day at once, a rolling horizon analyzes a smaller time window and continuously shifts forward by a defined step size, allowing the algorithm to dynamically adapt to recent market prices.
 
 <i><b>1. Constructing the rolling horizon</b></i>
 <pre><code class="language-python">
@@ -225,7 +209,7 @@ def calculate_daily_cycles_rolling_horizonv2(price_data, current_avg_cycles, hor
     max_cycles_per_day = min(2.5, max(1, target_average_cycles + (target_average_cycles - current_avg_cycles)))
 </code></pre>
 
-The code then dynamically adjusts the maximum number of cycles allowed each day. It calculates the difference between the target average cycles and the current average, using this information to modulate the daily cycle limit. This adjustment ensures that the algorithm progressively aligns with the target average, a crucial factor for long-term strategy implementation in fluctuating market conditions.
+I dynamically adjust the maximum daily cycles based on the gap between the target and current average, helping the algorithm align with long-term goals.
 
 <pre><code class="language-python"> # Loop over data with the rolling horizon
     for start_time in range(0, num_intervals, step_size):
@@ -234,9 +218,7 @@ The code then dynamically adjusts the maximum number of cycles allowed each day.
     return best_cycles
 </code></pre>
 
-A new for loop iterates over the data in increments defined by 'step_size'. For each iteration, it defines a 'rolling horizon' window, marked by 'start_time' and 'end_time'. This window is where the algorithm searches for the most profitable trading cycles. By continuously moving this window across the dataset, the algorithm stays responsive to changing market conditions, ensuring that it captures the most advantageous trade opportunities as they arise. The code continues using the same combinatory logic of the previous approach.
-
-The key component of optimizing the algorithm with the target average is creating a loop to dynamically adjust the maximum number of cycles per day based on the current average number of cycles and calculating the cycle cost for each day accordingly.
+A loop shifts the rolling window forward by `step_size`. For each window, it searches for profitable cycles using the same combinatory logic but calculates against the modulated cycle allowance max.
 
 <pre><code class="language-python">
 current_avg_cycles = 0
@@ -251,11 +233,11 @@ for i in range(num_days):
 
 </code></pre>
 
-The code begins by initializing current_avg_cycles at zero to represent the initial cycle count, and num_days determines the total days to iterate through. In each iteration of the loop, the daily price data is extracted and the calculate_daily_cycles_rolling_horizonv2 function computes the day's cycles, taking into account the current average number of cycles. It then estimates the cycle cost using estimate_cycle_costs and updates this cost to the dataset. After each day's calculation, the current average number of cycles is recalculated to include the latest data, ensuring that each new cycle count is informed by the most up-to-date average. In this way, the rolling horizon approach offers a significant enhancement over the static combinatory approach. 
+Iterating through the entire dataset, we update the rolling average cycle count continuously, ensuring each cycle assessment remains responsive to up-to-date data.
 
 <i><b>2. Identifying the best parameters</b></i>
 
-To improve the current strategy further, we embarked on a systematic exploration of different horizon lengths and step sizes. This experimentation involved running the rolling horizon function with various combinations of these two parameters to identify which horizon lengths and step sizes would yield the highest number of days with cycle costs within the benchmark.
+To optimize the strategy, we tested various horizon lengths and step sizes to maximize the number of days meeting our benchmark cycle costs.
 <pre><code class="language-python">#Trying out different parameters 
 results = []
 
@@ -318,7 +300,6 @@ The code iterates over a predefined set of horizon lengths and step sizes, apply
 
 <i><b>3. 89 new observations within benchmarks</b></i>
 
-Upon visualizing the results, we get very favorable outcomes
 <pre><code class="language-python">plt.figure(figsize=(12, 6))
 
 plt.plot(daily_price_data.index, daily_price_data['cycle_cost'], color='skyblue', label='Cycle Cost')
@@ -343,9 +324,7 @@ print(f"{((daily_price_data['cycle_cost'] >= 20) & (daily_price_data['cycle_cost
 <pre><code class="language-command-line">90 day(s) within benchmark. 
 Current Average Number of cycles: 1.997</code></pre>
 
-The number of observations where the daily average cycle cost increased to 90 observations using the rolling horizon approach, indicating a significant improvement in the algorithm so far to meet benchmark criteria.
-
-Upon examining the bar chart, we notice that the cycle costs vary across the days, with some days showing negative cycle costs, indicating profit, and others potentially indicating a loss if the costs were above zero. Although the vast majority of the cycle costs lie well below zero demonstrating that the algorithm is profitable, it is well below the benchmark range set by this challenge.
+We raised our benchmark-compliant days to 90. However, while the vast majority of our daily cycle costs are strongly negative (demonstrating solid absolute profit), establishing a robust algorithm that cleanly sits within the specific arbitrary positive benchmark range set by this challenge will require a heavier-handed tool.
 
 <h4>3. The Constrained Optimization Approach</h4>
 
@@ -355,12 +334,12 @@ It uses linear programming to maximize our energy trading strategy’s profitabi
 
 This approach contrasts with a rolling horizon, which would have looked at the data in chunks—optimizing over a short window and then rolling that window forward through the dataset, iteratively recalculating the optimal cycles as new price data becomes available.
 
-Therefore, I chartered out to use a solver that makes use of SciPy, the famous Python package for mathematical computations among other uses.
+Therefore, I chartered out to use a solver that makes use of `SciPy`, the famous Python package for mathematical computations among other uses.
 
 
 <i><b>1. Defining decision variables</b></i>
 
-This part of the code introduces the `generate_possible_cycles` function, which is designed to enumerate all possible buying and selling cycles for a single day's worth of price data, called which will be used as the decision variables. This function is a critical component in constructing a constrained optimization approach, as it lays the groundwork for defining the decision variables. The function operates identically to the original function `calculate_daily_cycles` used in the combinatory approach, without the need to calculate and sort the best spreads separately, or break the function when it reaches the maximum number of cycles allowed.
+First, `generate_possible_cycles` enumerates all possible daily buying and selling cycles to serve as decision variables. It works identically to our initial combinatory approach but omits sorting or halting at maximum limits.
 
 <pre><code class="language-python">#Create function to generate all possible cycles for one day, important for defining decision variable.
 def generate_possible_cycles(price_data, min_length=1):
@@ -436,15 +415,13 @@ dtypes: float64(7), int64(3)
 memory usage: 127.0 MB
 </code></pre>
 
-The results show over 1.66 million possible cycles, validating the success of this step.
+The results show over 1.66 million possible cycles, ready for constraint filtering.
 
 <i><b>2. Using linear programming</b></i>
 
 Linear programming is a powerful tool used in operations research to find the best outcome in a mathematical model whose requirements are represented by linear relationships. In the context of our project, LP will help us identify the most profitable set of cycles that can be executed within the operational constraints of the energy storage system.
 
-The days_number variable represents the total number of days in our dataset. We then extract the profits from all possible cycles and create an objective function, c, which is the negation of the profits because LP minimizes the objective function by default, and we are aiming to maximize profits.
-
-To ensure that our solution adheres to the operational constraints, we introduce A_eq_daily, a matrix that creates equality constraints to limit the number of cycles executed each day to a maximum of max_cycles_per_day. Additionally, we enforce the target average number of cycles across all days by setting up A_eq_average.
+We establish our objective function, `c`, as the negation of the cycle profits (since LP minimizes functions by default). We enforce our cycle limits using matrix `A_eq_daily` for the daily maximum and `A_eq_average` for the overall target average.
 
 <pre><code class="language-python">#Using linear programming
 days_number = daily_price_data.shape[0]
@@ -474,15 +451,8 @@ A_eq[-1, :] = A_eq_delta  # Update the last row with A_eq_delta
 bounds = [(0, 1) for _ in profits] + [(0, None)]
 print(A_eq.shape, b_eq.shape)
 </code></pre>
-We stack these constraints together in A_eq and combine them with b_eq, which is the array of values that our equality constraints must equal. We include the target average multiplied by the number of days as part of b_eq to enforce our average cycling target over the entire period.
 
-The problem complexity increases as we introduce lambda_penalty, a large penalty for deviation from our target average cycle count. This is a common approach in LP to strongly discourage the solution from straying from this target. We extend our cost vector c to include this penalty factor.
-
-To account for this penalty in our constraints, we expand A_eq to include an additional column for the penalty variable, delta, which represents the deviation from the average cycle target. This ensures that any deviation is heavily penalized in the objective function, pushing the LP solution towards our desired average.
-
-The bounds ensure that our decision variables, which represent whether or not to execute a given cycle, are either 0 or 1, effectively making this a binary decision. We also allow the penalty variable, delta, to be greater than or equal to zero, indicating that it can adjust freely to reflect any deviation from the target average.
-
-Finally, we print the shapes of A_eq and b_eq to verify that our constraints are correctly dimensioned for the LP solver.
+We stack constraints into `A_eq` and `b_eq`, imposing a high `lambda_penalty` on deviations from the target average. The decision bounds are binary (0, 1) to indicate whether a given cycle should be executed, while the penalty deviation variable can adjust freely above zero.
 
 <b><i>Output</i></b><br> 
 <pre><code class="language-command-line">(367, 1664033) (367,)
@@ -519,9 +489,7 @@ ineqlin:  residual: []
         mip_gap: 0.0
 </code></pre>
 
-By implementing the linear programming solver with our defined objective function and constraints, we have calculated the most profitable set of energy trades while respecting the operational constraints of our system. The solver's output provides several pieces of crucial information:
-
-The objective function value (fun) represents the total profit from the selected cycles under the optimal solution. This figure is the maximized profit, considering the costs and constraints in our model. The variable X includes the decision variables for each potential cycle, indicating which cycles are to be executed to achieve the optimal profit. The mip_gap shows that the solution is optimal since its value is 0. This means there is no gap between the best-known solution and the worst-case bound on the objective function, underscoring that the optimal solution is indeed the best possible under the given model.
+The solver outputs the optimal objective function value (`fun`), representing maximized profit, and returns binary execution choices `X` for each potential cycle. The `mip_gap` of 0 confirms an optimal solution.
 
 <pre><code class="language-python">x_values = res_option_b['x'][:-1]
 suggested_cycle_indexes = np.where(x_values == 1)[0]
@@ -529,15 +497,11 @@ suggested_cycles_df = all_possible_cycles_df.iloc[suggested_cycle_indexes]
 suggested_cycles_df
 </code></pre>
 
-We construct a Dataframe with the selected cycles. The 'x_values' extracted from the res_option_b output represent the binary decisions for each possible cycle—whether a cycle should be executed (1) or not (0). By isolating these decision variables, we can pinpoint exactly which cycles the optimization model has determined to be the most profitable within the constraints.
-
-Using a simple condition to locate where x_values equals 1, we identify the indices of the suggested cycles. These indices correspond to the rows in our all_possible_cycles_df DataFrame that the optimization model has selected.
-
-The DataFrame suggested_cycles_df is then created by filtering all_possible_cycles_df with the suggested cycle indices. This DataFrame is a subset of the original and contains only the cycles that our LP model recommends for execution. It provides all the necessary details of each recommended cycle, such as the buy and sell times, energy amounts at each stage, and the expected profit.
+We reconstruct the selected cycles into `suggested_cycles_df` by filtering `all_possible_cycles_df` for rows where the `x_values` binary decision is 1, leaving us with the exact operations suggested by the LP model.
 
 <pre><code class="language-python">suggested_df = suggested_cycles_df.groupby('day_index').apply(lambda x: x.to_dict('records'))</code></pre>
 
-The suggested_cycles_df was restructured using the groupby method to aggregate cycles by day. The apply method was then used with a lambda function to convert each group into a dictionary of records. This transformation was necessary to align the data with the input requirements of the estimate_cycle_costs function, which we defined earlier in the project. This function calculates the net cost or profit of executing a series of cycles throughout a day.
+Cycles are grouped by day to format seamlessly into our `estimate_cycle_costs` reporting function.
 
 <i><b>3. Visualizing the suggested cycles</b></i>
 
@@ -570,9 +534,9 @@ print(f"{((daily_price_data['cycle_cost'] >= 20) & (daily_price_data['cycle_cost
 
 <h4>Conclusion</h4>
 
-The results from the constrained optimization approach showed the cycle costs of the suggested cycles per day yielded no days within the benchmark. The benchmark costs are still unexplained from my side as it relates to this challenge; why are they in the positive range if the purpose of every cycle is to generate a profit i.e. a figure within the negative range.
+Our LP optimization yielded purely zero days within the challenge benchmark limits. However, those specific positive benchmarks remain oddly counterintuitive when the ultimate purpose in trading evaluation is profit generation (a strongly negative net cost). 
 
-Putting the benchmarks aside for a second and focusing solely on profit maximization, we proceed to compare the total cycle costs—or in this context, the total profits—generated by each approach.
+If we strictly evaluate total profit maximization instead of the benchmark limits, the LP model performs distinctly better:
 
 <pre><code class="language-python">print(f"Total costs of selected cycles with the Combinatory ArpprApproachoach:\n{daily_price_data['EUR/MWh'].apply(lambda x:estimate_cycle_costs(calculate_daily_cycles(x))).sum()}\n")
 print(f"Total costs of selected cycles with the Rolling Horizon Approach:\n{daily_price_data['EUR/MWh'].apply(lambda x:estimate_cycle_costs(calculate_daily_cycles_rolling_horizonv2(x, 0))).sum()}\n")
@@ -591,7 +555,7 @@ Total costs of selected cycles with the Constrained Optimization Approach:
 </code></pre>
 
 
-The results indicate that for the:
+The results summarize as follows:
 <ol>
 <li><b>Combinatory Approach:</b> The negative sum suggests that this approach, overall, has resulted in a significant profit when considering all selected cycles across the dataset.</li>
 
@@ -600,7 +564,65 @@ The results indicate that for the:
 <li><b>Constrained Optimization Approach:</b> The approach appears to have yielded the highest profit as indicated by the most negative sum, suggesting that when it comes to total profit across all cycles, this approach was the most effective.</li>
 </ol>
 
-
-In summary, my exploration into algorithmic trading through the lens of energy storage systems revealed the constrained optimization approach as the standout strategy for maximizing profits. While the results are promising, they also pave the way for further refinement. Understanding the benchmark costs in greater depth and investigating the potential of Mixed-Integer Linear Programming to manage overlapping cycles are immediate next steps.
+Ultimately, linear programming stands out as the most reliable profit maximizer. These version 1 findings provide clear next steps: investigating the odd challenge benchmarks to understand their relevance, and utilizing Mixed-Integer Linear Programming to better govern parameters like overlapping cycles. 
 
 The project so far represents Version 1 of my solution and is bound to be revisited again. The full project and data <a href="https://github.com/sherifscript/EnergyStorageIntradayTrading">are available on my GitHub</a>.
+
+<h3>Version Two</h3>
+
+In my previous post, I documented my initial attempt at developing an algorithm to estimate the cycle costs for an energy storage system. That approach relied heavily on a <i>combinatory (greedy) algorithm</i>. While it was a great learning experience and an intuitive starting point, it ultimately failed to meet all the constraints robustly and optimally. 
+
+Here is a deeper dive into why that first approach didn't work out as planned and how I rebuilt the solution using <b>Linear Programming (LP)</b> to successfully complete this algorithm.
+
+<h4>Why the Combinatory Approach Failed</h4>
+
+The initial heuristic calculated spreads for all possible pairs of buy and sell intervals within a 24-hour horizon, prioritized the most profitable, and greedily selected them. However, energy storage is fundamentally an intertemporal optimization problem. The greedy approach ran into a few critical flaws:
+
+<ol>
+    <li><b>Local vs. Global Optima:</b> By greedily picking the highest spreads first, the algorithm trapped itself in local optima. It failed to recognize that sacrificing a slightly better spread now could unlock substantially better compounding opportunities later in the day.</li>
+    <li><b>Cycle Constraints Mismanagement:</b> The problem requires hitting a strict average of 1.5 cycles per day across the trading horizon while ensuring no single day breaches 2.5 cycles. A greedy combinatory check limited cycles strictly on a daily basis (often breaching limits due to overlapping conditions) and completely ignored the global average requirement.</li>
+    <li><b>Imperfect State of Charge (SoC) Tracking:</b> Checking overlapping intervals with a `used_intervals` set completely bypassed the continuous nature of battery charging. You don't have to fully charge and fully discharge in independent blocks; you can partially charge, wait, and charge some more.</li>
+</ol>
+
+<h4>The True Solution: Linear Programming</h4>
+
+To properly solve this, the problem must be modeled mathematically. By transitioning to a Linear Programming (LP) framework, we can explicitly define our physics, capacities, and business goals as linear constraints, and let an optimization solver (like the Highs solver in `scipy.optimize`) find the absolute maximum profit.
+
+<i><b>1. Defining the Optimization Model</b></i>
+
+We divide the trading horizon into 15-minute intervals. For each interval, we define three continuous variables representing the power charged in MW, the power discharged in MW, and the state of charge or energy in the battery in MWh.
+
+<b>Objective Function:</b><br>
+The goal is to maximize the total profit over the entire grid period, which is calculated by multiplying the price per interval by the net energy discharged during that interval.
+
+<b>Constraints:</b>
+<ol>
+    <li><b>Power Bounds:</b> Both charging and discharging power are strictly bounded between 0 and the nominal power of 2 MW.</li>
+    <li><b>Capacity Bounds:</b> The energy state of the battery is strictly bounded between 0 and the usable capacity of 4 MWh.</li>
+    <li><b>Energy Balance:</b> The energy in the battery at any given time depends on the previous state of charge, accounting for the 90% charging and discharging efficiency.</li>
+    <li><b>Daily Maximum Cycles:</b> For each day, the total discharged energy cannot exceed the equivalent of 2.5 cycles, which is 10 MWh.</li>
+    <li><b>Average Target Cycles:</b> Over the entire data horizon, the average cycles must be precisely 1.5 per day.</li>
+</ol>
+
+<i><b>2. Results</b></i>
+
+By defining strict matrix representations for `A_eq` and `A_ub` and executing the solver across the massive year-long dataset (over 105,000 variables using `scipy.sparse` to manage memory!), the solver achieves a mathematically proven global optimum.
+
+<ul>
+    <li><b>Average Daily Cycles:</b> Exactly 1.5</li>
+    <li><b>Total Cycles Over 1 Year:</b> 547.5</li>
+    <li><b>Constraint Breaches:</b> 0 (Compared to multiple capacity and cycle breaches in the greedy approach).</li>
+</ul>
+
+<pre><code class="language-python">Starting Highs Linear Programming Solver...
+
+ Global Optimization Successful!
+--------------------------------------
+Optimal Profit Over 365 Days: €336,831.15
+Cycle Cost (Net / MWh Charged): €-124.38
+Total Energy Discharged: 2,190.00 MWh
+Total Full Equivalent Cycles: 547.50
+Average Daily Cycles Confirmed: 1.5000
+</code></pre>
+
+You can find the updated LP solver script directly on the <a href="https://github.com/sherifscript/EnergyStorageIntradayTrading">GitHub Repository</a>!
