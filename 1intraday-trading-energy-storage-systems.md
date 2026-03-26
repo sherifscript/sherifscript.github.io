@@ -9,7 +9,7 @@ nav-menu: false
 show_tile: true
 ---
 
-Recently, I ventured into the exciting field of data science to tackle a challenge posed by a friend: exploring the complex world of algorithmic trading in energy storage systems. This post documents my journey of applying foundational data science skills, previously explored only in academic settings, to a practical, real-world scenario.
+Recently, I tried my hand at algorithmic trading in energy storage systems. This post documents my journey of applying foundational data science skills, previously explored only in academic settings, to a practical, real-world scenario.
 
 The task goal is simple; to develop an algorithm for an energy storage system that estimates the cycle costs required to achieve a specific average daily cycle count while not breaching the maximum daily number of cycles. To break the idea further down, the algorithm should identify strategic opportunities to purchase energy during periods of low market prices and sell it back to the grid at peak price times by dynamically analyzing energy market data, thereby maximizing profit within the predetermined cycle and storage limitations. The algorithm should account for a list of things, namely:
 
