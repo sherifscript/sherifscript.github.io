@@ -83,22 +83,10 @@
     
 }
 
-/* Landing Page Tile Hover Text Effect */
-.tiles article header.major {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%);
-    transition: all 0.4s ease-out;
-    text-align: center;
-    padding: 0 2em;
+/* Social Media Icons Hover Color */
+#footer .icons a.icon.alt:hover:before {
+    background-color: #b89f91 !important; /* Gold */
 }
-
-.tiles article:hover header.major {
-    top: 100%;
-    left: 0;
-    transform: translateY(calc(-100% - 1em)) scale(0.85);
-    transform-origin: bottom left;
-    text-align: left;
+#footer .icons a.icon.alt:active:before {
+    background-color: #a38d81 !important; /* Darker Gold */
 }
