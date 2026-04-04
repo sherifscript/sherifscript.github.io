@@ -5,6 +5,7 @@ email: ""
 description: >-
   Portfolio of Ahmed Sherif — Economist, Data Strategist, and AI practitioner.
   Writing about algorithmic trading, geospatial data, information design, and more.
+footer_desc: "Economics & Analysis | Insights & Strategy"
 baseurl: ""
 url: "https://asherif.github.io"
 author:

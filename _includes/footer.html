@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="wrapper footer-content flex-between">
     <div class="footer-col" style="flex: 1;">
-      <p class="footer-desc">{{ site.description | escape }}</p>
+      <p class="footer-desc">{{ site.footer_desc | default: site.description | escape }}</p>
     </div>
     <div class="footer-col social-links" style="display: flex; gap: 1.5rem; justify-content: flex-end;">
       {%- if site.socials.GitHub -%}

@@ -8,6 +8,25 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // --- Mobile Hamburger Nav ---
+  const navToggle = document.getElementById('nav-toggle');
+  const siteNav = document.getElementById('site-nav');
+  if (navToggle && siteNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+    // Close nav when a link is tapped
+    siteNav.querySelectorAll('.page-link').forEach(link => {
+      link.addEventListener('click', () => {
+        siteNav.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', false);
+      });
+    });
+  }
+
   // --- Scroll Progress Bar + Reading Ring + Pill Fade ---
   const bar = document.getElementById("myBar");
   const ringCircle = document.getElementById("ring-progress-circle");
