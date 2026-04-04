@@ -1,13 +1,10 @@
 ---
 layout: post
-tiletitle: A 3D Look at Egypt & Germany
 title: "Exploring Population Landscapes: 3D Maps of Egypt and Germany"
 toolsused: R, Adobe Illustrator
 description: Egypt's visualization distinctly highlights the historic concentration of the Egyptian state along the Nile River, a lifeline for the nation, with most of its population residing along its banks.
 image: assets/images/egyptR.png
-nav-menu: false
-show_tile: True
-
+action: LOCATE_110M_EGYPTIANS
 ---
 
 The initial spark for this project came about from my love of visualization, especially maps, which led me to discover Rayshader 3D maps. Their ability to distinctly showcase population distribution immediately caught my attention. Determined to delve into this technique, I aimed to create 3D visualizations that would straightforwardly present population densities within Egypt and Germany, both of which are important to me on a personal level. 
@@ -16,10 +13,10 @@ The result was a set of high-resolution 3D maps that invite exploration and offe
 
 <h3>Nile Reigns King</h3>
 
-<div class="image-wrapper">
-    <img src="/assets/images/egyptR.png" class="your-image-class" alt="3D Population Density Map of Egypt">
-    <p class="your-caption-class">3D Population Density Map of Egypt in 2022 using the Rayshader package in R.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/egyptR.png" alt="3D Population Density Map of Egypt">
+    <figcaption class="post-figcaption">3D Population Density Map of Egypt in 2022 using the Rayshader package in R.</figcaption>
+</figure>
 
 
 As the capital city and the largest city in Egypt, Cairo's dense population is distinctly represented by a tall and concentrated spike in the map. The Nile Delta region, especially areas around cities like Alexandria and Port Said, show significant population density. The visualization distinctly highlights the historic concentration of the Egyptian state along the Nile River, a lifeline for the nation, with most of its population residing along its banks. 
@@ -86,10 +83,11 @@ render_highquality(
 
 <h4><i>Final Output</i></h4>
 
-<div class="image-wrapper">
-    <img src="/assets/images/egy_final_plot.png" class="your-image-class" alt="3D Population Density Map of Egypt">
-    <p class="your-caption-class">Final output of R project, before adding labels with Adobe Illustrator.</p>
-</div>
+<figure class="post-figure">
+   <img src="/assets/images/egy_final_plot.png" class="your-image-class" alt="3D Population Density Map of Egypt">
+    <figcaption class="post-figcaption">Final output of R project, before adding labels with Adobe Illustrator.</figcaption>
+</figure>
+
 
 I chose the color palette provided by <a href="https://github.com/BlakeRMills/MetBrewer">MetBrewer</a> due to my love of renaissance art and the package's ability to encapsulate all sorts of palettes from different artistic movements. For Egypt, the "Greek" palette presented a beautiful choice to reflect Egypt's vast beige deserts and intense density reds. The colors were further enhanced by <code class="language-r">colorRampPalette</code> to give it more depth. The colors not only make the visualization appealing but also help in distinguishing population density variations.
 
@@ -99,10 +97,11 @@ texture <- grDevices::colorRampPalette(c1, bias=2)(256)
 </code></pre>			
 
 <h3>A look at Germany</h3>
-<div class="image-wrapper">
+
+<figure class="post-figure">
     <img src="/assets/images/germanyR.png" class="your-image-class" alt="3D Population Density Map of Germany">
-    <p class="your-caption-class">Population Density Map of Germany in 2022.</p>
-</div>
+    <figcaption class="post-figcaption">Population Density Map of Germany in 2022.</figcaption>
+</figure>
 
 Transitioning from the Nile-focused population of Egypt to Germany's diverse distribution, the same 3D mapping techniques take on a different journey. This map illustrates the contrast between Germany's bustling urban centers and its serene rural areas. The stark spikes of Berlin, Munich, and Hamburg rise prominently, each peak representing the dense hubs of activity and culture these cities are known for. Less densely populated areas, like those surrounding Dresden and Nuremberg, create a textured landscape of valleys amidst the high urban peaks. 
 

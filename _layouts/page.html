@@ -1,14 +1,28 @@
-<!DOCTYPE html>
+---
+layout: default
+---
 
-<html>
+<!-- Sonar background rings -->
+<div class="sonar-bg" aria-hidden="true">
+  <div class="sonar-ring sonar-ring-1"></div>
+  <div class="sonar-ring sonar-ring-2"></div>
+  <div class="sonar-ring sonar-ring-3"></div>
+</div>
 
-{% include head.html %}
+<article class="page-wrapper wrapper">
 
-<body>
-    <script type="text/javascript">document.body.classList.add("is-loading");</script>
+  <div class="about-card glass-panel">
+    <!-- Pill header instead of giant "About Me" -->
+    <div class="about-pill">ID // AHMED_SHERIF</div>
 
-    {% include header.html %} {{ content }} {% include footer.html %}
+    <div class="page-content">
+      {{ content }}
+    </div>
 
-</body>
+    <!-- Monospaced metadata footer -->
+    <div class="about-meta-bar">
+      BUILD: 2026.04 &nbsp;// &nbsp;STATUS: OPTIMIZING &nbsp;// &nbsp;LOC: CAIRO, HAMBURG, COPENHAGEN
+    </div>
+  </div>
 
-</html>
+</article>

@@ -1,12 +1,10 @@
 ---
 layout: post
-tiletitle: Sankey Diagrams
 title: "Sankey Diagrams: Trading balances, income statements, national budgets and more"
 toolsused: Python, Excel, Figma, Power BI
 description: A most versatile yet rare visualization. This project documents a deep dive into the world of Sankey diagrams showcasing multiple tools and different use cases.
 image: assets/images/Germany-2022-Imports-Exports.png
-nav-menu: false
-show_tile: true
+action: TRACE_THE_FLOWS
 ---
 
 In an era where data is king, the ability to effectively visualize complex information is a skill of paramount importance. The Sankey Diagram, a specific type of flow diagram, has emerged as a vital tool in this realm, offering a unique way to illustrate the flow of resources, finances, or information. In this project, I delve into the creation of Sankey Diagrams, exploring various methods and tools ranging from GUI-based applications like Power BI and Figma to coding-based solutions in Python, and even online Sankey builders.
@@ -25,10 +23,10 @@ If you have experience with Figma, you’d know that it's a web-based design pla
 
 A notable mention is the '<a href ="https://www.figma.com/community/plugin/1159893716343028026">Sankey</a>' plugin by the Genuine Impact Team, a gem I stumbled upon while searching for an uncomplicated Sankey diagram solution. My project involved visualizing Germany's 2022 trade balance, with data sourced from the <a href = "https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/order-rank-germany-trading-partners.pdf?__blob=publicationFile">German Federal Statistical Office</a>. By following the quick tutorial of the plugin, anyone could start building up great Sankey diagrams in Figma with unlimited aesthetical options in under 10 minutes.
 
-<div class="image-wrapper">
-    <img src="/assets/images/Germany-2022-Imports-Exports.png" class="your-image-class" alt="Description">
-    <p class="your-caption-class">Germany's Imports & Exports in 2022 made with Excel & Figma.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/Germany-2022-Imports-Exports.png" alt="Germany Imports Exports Sankey">
+    <figcaption class="post-figcaption">Germany's Imports & Exports in 2022 made with Excel & Figma.</figcaption>
+</figure>
 
 This Sankey, although time-consuming due to the data's volume, was remarkably straightforward thanks to Figma. The platform's UI-centric design allowed for immense customization, enabling me to enrich the visualization with graphics and flags, all within the same workspace!
 
@@ -40,10 +38,10 @@ At first, the UI seemed pretty intuitive to me after years using MS Office produ
 After downloading the plugin, the process was extremely easy; just add in the start and end points of each flow and their values, and et voila! A diagram is ready. 
 I thought it’d be interesting to visualize the aid that Ukraine had received so far since the Russian invasion of 2022. Luckily, this Council on Foreign Relations article provided detailed information on the aid to Ukraine as of October 2023.
 
-<div class="image-wrapper">
-    <img src="/assets\images\Ukraine Aid 2023.jpg" class="your-image-class" alt="Description">
-    <p class="your-caption-class">Ukraine Aid Visualized in Power BI, as of October 2023. <a href ="https://www.cfr.org/article/how-much-aid-has-us-sent-ukraine-here-are-six-charts">Data accessed January 2024</a>.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/Ukraine Aid 2023.jpg" alt="Ukraine Aid Visualized in Power BI">
+    <figcaption class="post-figcaption">Ukraine Aid Visualized in Power BI, as of October 2023. <a href="https://www.cfr.org/article/how-much-aid-has-us-sent-ukraine-here-are-six-charts">Data accessed January 2024</a>.</figcaption>
+</figure>
 
 My only issue was that I found Microsoft's Sankey plugin to be lacking in features. The scale settings in particular were not providing the results I wanted. Eventually, I used the scaling option to fit in all the nodes on the canvas, however, the side effect was that the flow sizes coming out of the nodes was not representative of the actual input values. This does not affect the comprehension a lot since the main insights regarding distribution are still readable from the current graph, but it is something to take note of. Also, other Sankey plugins in the Microsoft store seem to feature more customization. Embedding the diagram interactively in this post was not possible as my university account didn’t have the necessary permissions 😔 Alas, I was glad with the final outcome and looking forward to using Power BI more in the future!
 
@@ -65,10 +63,10 @@ hv.extension("bokeh")
 Holoviews' required input format is fairly simple and is identical to how Power BI's required data format was. It takes three columns; source, target, and value. 
 
 The only issue that I have with this method is some kind of error that will pop up if you attempt to insert a period (.) in the label of the diagram. For example, using "U.S." instead of "US" will immediately throw an error. Will have to circle back to that. 
-<div class="image-wrapper" style="text-align: center;">
-    <img src="/assets/images/warner_holoviews_data.png" class="your-image-class" alt="Description" style="margin: 0 auto; display: block;">
-    <p class="your-caption-class">Warner Music FY22 dataset.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/warner_holoviews_data.png" alt="Warner Music FY22 dataset">
+    <figcaption class="post-figcaption">Warner Music FY22 dataset.</figcaption>
+</figure>
 
 <!-- <div id="spreadsheet"></div>
 <script>
@@ -117,10 +115,10 @@ sankey = hv.Sankey(holo_data, label=r"Warner Music FY 22 (in million US dollars)
 sankey.opts(label_position='left', edge_color='target', node_color='index', cmap='tab20', width=750, height=600)
 </code></pre>
 
-<div class="image-wrapper">
-      <iframe src="/assets/sankey_diagram.html" width="100%" height="610" position =absolute></iframe>
-      <p class="your-caption-class">Warner Music FY22 Income Statement using Holoviews.</p> 
-</div>
+<figure class="post-figure">
+    <iframe src="/assets/sankey_diagram.html" width="100%" height="610" style="border:none;"></iframe>
+    <figcaption class="post-figcaption">Warner Music FY22 Income Statement using Holoviews.</figcaption>
+</figure>
 
 <i><b>Plotly</b></i><br>
 The same can be achieved with Plotly, a much more common visualization library than Holoviews, at the cost of things getting a little bit tricky. Unlike Holoview's required input, there is no neat way to fit this into an excel file or DataFrame. The main method of achieving this in Plotly is to pass the node names as indexed numbers and maintain the node list separately.
@@ -199,10 +197,10 @@ fig.update_layout(title_text="<b>Warner Music FY22 Income Statement (in million 
 fig.show()
 </code></pre>
 
-<div class="image-wrapper">
-      <iframe src="/assets/plotly_sankey.html" width="100%" height="700" position =absolute></iframe>
-      <p class="your-caption-class">Warner Music FY22 Income Statement using Plotly.</p> 
-</div>
+<figure class="post-figure">
+    <iframe src="/assets/plotly_sankey.html" width="100%" height="700" style="border:none;"></iframe>
+    <figcaption class="post-figcaption">Warner Music FY22 Income Statement using Plotly.</figcaption>
+</figure>
 
 Overall, coding a Sankey diagram in Python can be more time consuming than creating other types of visualizations. Nonetheless, the complexity of the process doesn’t detract from the enjoyment of the journey! Similarly, you can use R to create Sankey diagrams. The open-source library ggsankey, available on GitHub, leverages the "grammar of graphics" concept, which is widely appreciated for its simplicity.
 

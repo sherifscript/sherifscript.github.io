@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  {% include head.html %}
+  <body class="theme-dark">
+    <!-- Ambient glowing backgrounds -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    
+    <!-- Grain overlay for texture -->
+    <div class="noise-overlay"></div>
+
+    <div class="site-wrapper">
+      {% include header.html %}
+      
+      <main class="page-content" aria-label="Content">
+        {{ content }}
+      </main>
+
+      {% include footer.html %}
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  </body>
+</html>

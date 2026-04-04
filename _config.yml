@@ -1,49 +1,27 @@
-# site settings
+# Site Settings
 title: Ahmed Sherif
-subtitle: Playground
-email: 
-description: Economics & Analysis | Insights & Strategy<br /> Automation & Analytics | AI Orchestration
+tagline: "Economics, Data Strategy & AI Orchestration"
+email: ""
+description: >-
+  Portfolio of Ahmed Sherif — Economist, Data Strategist, and AI practitioner.
+  Writing about algorithmic trading, geospatial data, information design, and more.
 baseurl: ""
-url: 
+url: "https://asherif.github.io"
 author:
-street_address: 
-city: 
-state: 
-zip_code: 
-country: 
-phone: 
+  name: Ahmed Sherif
 
-# homepage tiles
-tiles-source: pages # accepts "posts" or "pages"
-tiles-count: 6
-
-# social settings (key must match name of font awesome icon)
-# see https://fontawesome.com/icons?d=gallery&p=2&s=brands
-# Icons are not shown if value is empty
-# You need to restart jekyll for changes to have an effect
 socials:
   GitHub: https://github.com/sherifscript
-  GitLab:
-  Google-Plus: 
-  Instagram:
-  Reddit-alien:
   Linkedin: https://www.linkedin.com/in/asheriif
-  Twitter: 
-  Facebook:
-  Slack:
-  
 
-# build settings
+# Build Settings
 markdown: kramdown
-
-sass:
-  style: compressed
-
-exclude:
-- "*.gemspec"
-- LICENSE.md
-- CONTRIBUTING.md
-- README.md 
 
 plugins:
   - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE.md

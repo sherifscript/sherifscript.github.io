@@ -1,12 +1,10 @@
 ---
 layout: post
-tiletitle: Intraday Trading Algorithm for Energy Storage Systems
 title: "Intraday Trading Algorithm for Energy Storage Systems"
 toolsused: Python
 description: Linear programming approaches and rolling horizons. A dynamic algorithm for intraday energy trading.
 image: assets/images/rolling-horizon-intraday-trading-energy.png
-nav-menu: false
-show_tile: true
+action: RUN_TRADING_MODEL.py
 ---
 
 This post documents my experience applying data science to algorithmic trading in energy storage systems. 
@@ -168,23 +166,23 @@ Visualizing the buy and sell times, we confirm the algorithm correctly selects p
 
 <i><b>3. Visualizing results</b></i>
 
-<div class="image-wrapper">
-    <img src="/assets/images/Price Curve and Identified Cycles for Day 2.png" class="your-image-class" alt="Price Curve and Identified Cycles for Day 2">
-    <p class="your-caption-class">Price Curve and Identified Cycles for Day 2.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/Price Curve and Identified Cycles for Day 2.png" alt="Price Curve and Identified Cycles for Day 2">
+    <figcaption class="post-figcaption">Price Curve and Identified Cycles for Day 2.</figcaption>
+</figure>
 
 Comparing the cycle costs applied to the first 10 days arrayed below: 
 
-<div class="image-wrapper">
-    <img src="/assets/images/Cycle Costs for the First 10 Days.png" class="your-image-class" alt="Price Curve and Identified Cycles for Day 2">
-    <p class="your-caption-class">Cycle Costs for the First 10 Days.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/Cycle Costs for the First 10 Days.png" alt="Cycle Costs for the First 10 Days">
+    <figcaption class="post-figcaption">Cycle Costs for the First 10 Days.</figcaption>
+</figure>
 
 
-<div class="image-wrapper">
-    <img src="/assets/images/cycle costs.png" class="your-image-class" alt="Cycle Costs for the entire dataset">
-    <p class="your-caption-class">Cycle Costs for the entire dataset.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/cycle costs.png" alt="Cycle Costs for the entire dataset">
+    <figcaption class="post-figcaption">Cycle Costs for the entire dataset.</figcaption>
+</figure>
 
 <pre><code class="language-python">print(f"{((daily_price_data['cycle_cost'] >= 20) & (daily_price_data['cycle_cost'] <= 36)).sum()} day(s) within benchmark.")
 </code></pre>
@@ -316,10 +314,10 @@ plt.show()
 print(f"{((daily_price_data['cycle_cost'] >= 20) & (daily_price_data['cycle_cost'] <= 36)).sum()} day(s) within benchmark. \nCurrent Average Number of cycles: {round(current_avg_cycles, 3)}")
 </code></pre>
 
-<div class="image-wrapper">
-    <img src="/assets/images/cycle costs rolling horizon.png" class="your-image-class" alt="Cycle Costs for thje enrtire dataset">
-    <p class="your-caption-class">Cycle costs with rolling horizon approach.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/cycle costs rolling horizon.png" alt="Cycle Costs with rolling horizon approach">
+    <figcaption class="post-figcaption">Cycle costs with rolling horizon approach.</figcaption>
+</figure>
 <i>Output</i>
 <pre><code class="language-command-line">90 day(s) within benchmark. 
 Current Average Number of cycles: 1.997</code></pre>
@@ -525,10 +523,10 @@ plt.show()
 print(f"{((daily_price_data['cycle_cost'] >= 20) & (daily_price_data['cycle_cost'] <= 36)).sum()} day(s) within benchmark.")
 </code></pre>
 
-<div class="image-wrapper">
-    <img src="/assets/images/optimization approach.png" class="your-image-class" alt="Cycle costs of the suggested cycles by the linear programming solver">
-    <p class="your-caption-class">Cycle costs per day of the suggested cycles by the linear programming solver.</p>
-</div>
+<figure class="post-figure">
+    <img src="/assets/images/optimization approach.png" alt="Cycle costs of the suggested cycles by the linear programming solver">
+    <figcaption class="post-figcaption">Cycle costs per day of the suggested cycles by the linear programming solver.</figcaption>
+</figure>
 <i>Output</i>
 <pre><code class="language-command-line">0 day(s) within benchmark.</code></pre>
 
