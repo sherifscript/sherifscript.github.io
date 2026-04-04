@@ -2,10 +2,16 @@
 layout: default
 ---
 <!-- Circular reading progress ring (post pages) -->
-<svg class="reading-ring" viewBox="0 0 36 36" id="reading-ring">
-  <circle class="ring-bg" cx="18" cy="18" r="15.9" fill="none" stroke-width="2"/>
-  <circle class="ring-progress" cx="18" cy="18" r="15.9" fill="none" stroke-width="2"
-    stroke-dasharray="100, 100" stroke-dashoffset="100" id="ring-progress-circle"/>
+<svg class="reading-ring" viewBox="0 0 36 36" id="reading-ring" aria-hidden="true">
+  <defs>
+    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffc8"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <circle class="ring-bg" cx="18" cy="18" r="15.9" fill="none" stroke-width="2.5"/>
+  <circle class="ring-progress" cx="18" cy="18" r="15.9" fill="none" stroke-width="2.5"
+    stroke-dasharray="99.9 99.9" stroke-dashoffset="99.9" id="ring-progress-circle"/>
 </svg>
 <article class="post-wrapper">
   

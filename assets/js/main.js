@@ -43,9 +43,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Circular reading ring (post pages)
     if (ringCircle && readingRing) {
-      const offset = 100 - pct;
+      const circumference = 99.9;
+      const scrolled = winScroll;
+      const totalH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = totalH > 0 ? Math.min(scrolled / totalH, 1) : 0;
+      const offset = circumference - progress * circumference;
       ringCircle.style.strokeDashoffset = offset;
-      readingRing.classList.toggle('visible', winScroll > 200);
+      // Show ring after scrolling past 5% of the page
+      readingRing.classList.toggle('visible', progress > 0.03);
     }
 
     // Hero pill fades out as you scroll toward header
