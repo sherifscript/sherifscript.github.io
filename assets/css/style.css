@@ -83,7 +83,7 @@ a:hover { color: var(--accent-color); }
 
 /* Site Header */
 .scroll-progress-container {
-  width: 100%; height: 4px; background: rgba(255,255,255,0.05); position: absolute; top: 0; left: 0; z-index: 200;
+  width: 100%; height: 4px; background: rgba(255,255,255,0.05); position: absolute; bottom: 0; left: 0; z-index: 200;
 }
 .scroll-progress-bar {
   height: 100%; background: var(--accent-gradient); width: 0%; border-radius: 0 2px 2px 0; transition: width 0.1s;
@@ -201,7 +201,7 @@ a:hover { color: var(--accent-color); }
 .project-tag { display: inline-block; padding: 0.4rem 0.8rem; background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border-radius: 20px; font-size: 0.85rem; font-weight: 600; align-self: flex-start;}
 
 /* Cinematic Post Layout */
-.post-wrapper { width: 100%; padding-bottom: 5rem; overflow-x: hidden; }
+.post-wrapper { width: 100%; padding-bottom: 5rem; }
 .post-hero {
   position: relative; width: 100%; height: 75vh; min-height: 500px;
   background-size: cover; background-position: center; background-attachment: fixed;
@@ -455,69 +455,104 @@ a:hover { color: var(--accent-color); }
 
   /* --- Post Layout --- */
   .post-hero {
-    height: 45vh;
-    min-height: 260px;
+    /* Taller hero so long titles won't climb into the fixed nav */
+    height: auto;
+    min-height: 55vw;
+    min-height: max(320px, 42vh);
     background-attachment: scroll;
-    padding-top: 4rem; /* clear the fixed header */
+    padding-top: 5rem;   /* always clear the fixed header */
+    padding-bottom: 0;
   }
-  .post-title { font-size: clamp(1.8rem, 7vw, 2.8rem); letter-spacing: -1px; }
-  .post-subtitle { font-size: 1rem; }
+  /* Aggressively scale post titles so they never overflow the hero area */
+  .post-title {
+    font-size: clamp(1.4rem, 5.5vw, 2.2rem);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  .post-subtitle { font-size: 0.95rem; }
   .hero-content-inner {
     padding-bottom: 2rem;
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* Fix: post-container sits inside .wrapper which already adds 16px.
-     Remove the double-padding and let wrapper handle horizontal spacing. */
   .post-container {
     grid-template-columns: 1fr;
     gap: 0;
     min-height: unset;
-    padding: 2rem 20px 0;  /* top gap + side padding for everything inside */
+    padding: 2rem 20px 0;
   }
   .post-meta-sidebar {
     position: static;
+    min-width: 0;
     margin-bottom: 1.5rem;
   }
   .meta-card { padding: 1.25rem; }
 
-  /* Fix the editorial content overflowing the viewport */
+  /* THE fix: CSS Grid cells default to min-width:auto, which lets a wide
+     <pre> block expand the entire column. Setting min-width:0 forces the
+     cell to stay within its 1fr allocation. Everything else flows from this. */
   .post-content.editorial-content {
+    min-width: 0;
     width: 100%;
-    max-width: 100%;
     font-size: 1rem;
     line-height: 1.75;
-    overflow-x: hidden;
+    overflow-x: hidden; /* clip anything that still slips out */
   }
   .editorial-content p:first-of-type { font-size: 1.1rem; }
+
+  /* Images always constrain to their container */
   .editorial-content img {
     margin: 1.5rem 0;
     border-radius: 8px;
     max-width: 100%;
+    height: auto;
+    display: block;
   }
   .editorial-content iframe {
     margin: 1.5rem 0;
     border-radius: 8px;
   }
-  /* Scrollable code blocks — don't clip them */
+
+  /* Code blocks: fixed width = container width, scroll horizontally inside.
+     No negative margins — min-width:0 on parent already keeps them in bounds. */
   .editorial-content pre,
   .editorial-content pre[class*="language-"] {
-    margin: 1.5rem -20px !important;  /* bleed to edges for breathing room */
-    border-radius: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
     padding-top: 2.5rem !important;
     font-size: 0.82rem !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
+    border-radius: 8px !important;
+    margin: 1.5rem 0 !important;
+    box-sizing: border-box !important;
   }
-  /* iframes (Plotly, embeds) — full width on mobile */
+  /* Inline code snippets */
+  .editorial-content code:not([class]) {
+    font-size: 0.85em;
+    word-break: break-word;
+  }
+
+  /* iframes (Plotly, embeds) */
   .editorial-content iframe,
   .post-figure iframe {
     width: 100% !important;
     min-height: 280px;
   }
-  /* Fix any inline elements overflowing */
-  .editorial-content * { max-width: 100%; }
+
+  /* Only constrain non-code children */
+  .editorial-content p,
+  .editorial-content h2,
+  .editorial-content h3,
+  .editorial-content h4,
+  .editorial-content ul,
+  .editorial-content ol,
+  .editorial-content blockquote {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
 
   /* --- About Page --- */
   .page-wrapper {
@@ -552,9 +587,6 @@ a:hover { color: var(--accent-color); }
   .footer-col.social-links { justify-content: flex-start !important; }
   .footer-bottom { margin-top: 2rem; }
 
-  /* --- Reading ring — move to not overlap content --- */
-  .reading-ring { bottom: 1rem; right: 1rem; width: 40px; height: 40px; }
-
   /* --- Glass panel --- */
   .glass-panel { padding: 1.5rem; border-radius: 12px; }
 }
@@ -563,9 +595,9 @@ a:hover { color: var(--accent-color); }
 @media (max-width: 480px) {
   .logo-text { font-size: 1.1rem; }
   .hero-title { letter-spacing: -1.5px; }
-  .post-title { font-size: clamp(1.75rem, 9vw, 2.5rem); }
+  /* post-title is already clamped at 768px — let it keep scaling down naturally */
   .project-card-image { height: 200px; }
-  .about-meta-bar { display: none; } /* too cramped on tiny screens */
+  .about-meta-bar { display: none; }
 }
 
 
@@ -577,13 +609,45 @@ a:hover { color: var(--accent-color); }
   font-size: 0.9rem; font-style: italic; color: #94a3b8; max-width: 80%; margin: 0.75rem auto 0; line-height: 1.5; display: block;
 }
 
-/* Circular Reading Progress Ring */
-.reading-ring {
-  position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
-  width: 48px; height: 48px;
-  transform: rotate(-90deg);
-  opacity: 0; transition: opacity 0.4s;
+
+
+/* ============================================
+   CUSTOM CURSOR (desktop only — pointer: fine)
+   ============================================ */
+.custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    width 0.25s cubic-bezier(0.16,1,0.3,1),
+    height 0.25s cubic-bezier(0.16,1,0.3,1),
+    background 0.25s ease,
+    opacity 0.3s ease,
+    transform 0.12s ease;
+  mix-blend-mode: difference; /* inverts against backgrounds for visibility */
 }
-.reading-ring.visible { opacity: 1; }
-.ring-bg { stroke: rgba(255,255,255,0.08); }
-.ring-progress { stroke: url(#ringGradient); stroke-linecap: round; transition: stroke-dashoffset 0.1s linear; }
+
+/* Expand + outline on hover */
+.custom-cursor.is-hovering {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1.5px solid var(--accent-color);
+  mix-blend-mode: normal;
+  opacity: 0.85;
+}
+
+/* Squish on click */
+.custom-cursor.is-clicking {
+  transform: translate(-50%, -50%) scale(0.7);
+  background: var(--accent-violet);
+}
+
+/* Hide the system cursor site-wide when custom cursor is active */
+body.custom-cursor-active * { cursor: none !important; }

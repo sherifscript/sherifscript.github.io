@@ -1,7 +1,13 @@
 <header class="site-header glass-header" role="banner">
+  {%- assign show_scroll = true -%}
+  {%- if page.url contains 'about' or page.url == '/' or page.url == '/index.html' -%}
+    {%- assign show_scroll = false -%}
+  {%- endif -%}
+  {%- if show_scroll -%}
   <div class="scroll-progress-container">
     <div class="scroll-progress-bar" id="myBar"></div>
   </div>
+  {%- endif -%}
   <div class="wrapper flex-between">
     <a class="site-title" rel="author" href="{{ '/' | relative_url }}">
       <span class="logo-text">AhmedSherif <span class="text-gradient">/ Playground</span></span>

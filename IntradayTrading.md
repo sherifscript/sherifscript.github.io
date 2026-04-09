@@ -7,9 +7,9 @@ image: assets/images/rolling-horizon-intraday-trading-energy.png
 action: RUN_TRADING_MODEL.py
 ---
 
-This post documents my experience applying data science to algorithmic trading in energy storage systems. 
+This post documents my experience applying some data science techniques to intraday energy trading. 
 
-The goal is to develop an algorithm that maximizes profit by strategically buying energy during low market prices and selling at peak times. It must estimate cycle costs while adhering to the following constraints:
+My goal going in was to develop an algorithm that maximizes profit by buying energy during low market prices and selling at peak times. It must estimate cycle costs while adhering to the following constraints:
 
 <ol>
     <li>Nominal power: 2 MW</li>

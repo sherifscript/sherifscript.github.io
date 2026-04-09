@@ -27,10 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // --- Scroll Progress Bar + Reading Ring + Pill Fade ---
+  // --- Scroll Progress Bar + Pill Fade ---
   const bar = document.getElementById("myBar");
-  const ringCircle = document.getElementById("ring-progress-circle");
-  const readingRing = document.getElementById("reading-ring");
   const heroPill = document.getElementById("hero-pill");
 
   window.addEventListener('scroll', () => {
@@ -40,18 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Top progress bar
     if (bar) bar.style.width = pct + "%";
-
-    // Circular reading ring (post pages)
-    if (ringCircle && readingRing) {
-      const circumference = 99.9;
-      const scrolled = winScroll;
-      const totalH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = totalH > 0 ? Math.min(scrolled / totalH, 1) : 0;
-      const offset = circumference - progress * circumference;
-      ringCircle.style.strokeDashoffset = offset;
-      // Show ring after scrolling past 5% of the page
-      readingRing.classList.toggle('visible', progress > 0.03);
-    }
 
     // Hero pill fades out as you scroll toward header
     if (heroPill) {
@@ -289,6 +275,32 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ----------------------------------------------------------------
+  // Custom Cursor (desktop / pointer devices only)
+  // ----------------------------------------------------------------
+  const isPointer = window.matchMedia('(pointer: fine)').matches;
+  if (isPointer) {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+    document.body.classList.add('custom-cursor-active');
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+      cursor.style.opacity = '1';
+    });
+
+    document.addEventListener('mousedown', () => cursor.classList.add('is-clicking'));
+    document.addEventListener('mouseup',   () => cursor.classList.remove('is-clicking'));
+
+    const hoverTargets = 'a, button, .project-card, .glitch-btn, [role="button"]';
+    document.querySelectorAll(hoverTargets).forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
+    });
+  }
+
+  // ----------------------------------------------------------------
   // Terminal Glitch Effect on project card hover buttons
   // ----------------------------------------------------------------
   const GLITCH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$#@!%&*_=+<>';
@@ -329,3 +341,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
