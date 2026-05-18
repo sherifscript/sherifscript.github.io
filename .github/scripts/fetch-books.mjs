@@ -79,12 +79,20 @@ function isNSFW(book, excluded) {
   if (!book || typeof book !== 'object') return true;
   if (excluded.has(String(book.id))) return true;
 
-  // Check genre/tag fields under several plausible names.
-  const tags = [
-    ...(book.cached_tags ?? []),
-    ...(book.taggings?.map(t => t.tag?.tag) ?? []),
-    ...(book.genres ?? []),
-  ].filter(Boolean).map(t => String(t).toLowerCase());
+  // Be defensive: API shapes vary. Ensure each source is an array before
+  // using array methods so we don't crash when a field is an object/string.
+  const cachedTags = Array.isArray(book.cached_tags) ? book.cached_tags : [];
+
+  const taggingsRaw = pickField(book, 'taggings');
+  const taggings = Array.isArray(taggingsRaw)
+    ? taggingsRaw.map(t => (t && t.tag ? t.tag.tag : null)).filter(Boolean)
+    : [];
+
+  const genres = Array.isArray(book.genres) ? book.genres : [];
+
+  const tags = [...cachedTags, ...taggings, ...genres]
+    .filter(Boolean)
+    .map(t => String(t).toLowerCase());
 
   return tags.some(t => NSFW_GENRES.has(t));
 }
