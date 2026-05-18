@@ -1,4 +1,189 @@
 ---
-layout: home
-title: Home
+layout: default
+title: "Ahmed Sherif — Economics, Data Strategy & AI Orchestration"
+description: "Portfolio of Ahmed Sherif, strategic consultant with an extreme data bias. Economics, data strategy, and
+AI orchestration."
+ticker: true
+contact_blurb: "Tell me about a decision you can’t make because the data is noisy. I’ll bring a solver, a map, or a
+spreadsheet, depending on what the problem asks for."
 ---
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="lede">
+    <div class="tag">ISSUE 01 · CASE FILES 2022&ndash;2026</div>
+    <h1>Stripping away noise to find the <em>signal.</em></h1>
+    <p class="deck">Strategic consulting with an extreme data bias. I build systems that make the right decisions
+      inevitable.</p>
+    <div class="actions">
+      <a class="btn primary" href="#work">View selected work</a>
+      <a class="btn" href="#about">About the practice</a>
+    </div>
+  </div>
+  <aside class="datasheet" aria-label="Practitioner datasheet">
+    <h4><span>PRACTITIONER / 01</span><span>AS-2026</span></h4>
+    <dl>
+      <dt>Name</dt>
+      <dd>Ahmed Sherif</dd>
+      <dt>Role</dt>
+      <dd>Strategy &amp; Data</dd>
+      <dt>Sectors</dt>
+      <dd>Tech · Telecom · Music · AI · Energy</dd>
+      <dt>Status</dt>
+      <dd class="accent">Open to selective engagements</dd>
+      <dt>Contact</dt>
+      <dd><a href="#contact">hello@asherif.me</a></dd>
+    </dl>
+  </aside>
+</section>
+
+<!-- ============ SELECTED WORK INDEX ============ -->
+<section class="section" id="work">
+  <div class="section-head">
+    <div class="kicker">§ 01 &nbsp;/&nbsp; Selected work</div>
+    <h2>Case files where <em>data</em> did the arguing.</h2>
+  </div>
+
+  <div class="work-index">
+    <a class="work-row" href="{{ '/projects/intraday-trading.html' | relative_url }}">
+      <span class="num">N°01</span>
+      <span class="title">A linear program that trades a battery</span>
+      <span class="desc">Maximising arbitrage profit on 15-minute power prices under strict cycle and capacity
+        constraints.</span>
+      <span class="tools">Python · LP · SciPy</span>
+      <span class="year">2024</span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="work-row" href="{{ '/projects/population-maps.html' | relative_url }}">
+      <span class="num">N°02</span>
+      <span class="title">110 million Egyptians, rendered in relief</span>
+      <span class="desc">3D rayshaded population maps of Egypt and Germany. Geospatial rasters turned into
+        topography.</span>
+      <span class="tools">R · Rayshader · Illustrator</span>
+      <span class="year">2023</span>
+      <span class="arrow">→</span>
+    </a>
+    <a class="work-row" href="{{ '/projects/sankey-diagrams.html' | relative_url }}">
+      <span class="num">N°03</span>
+      <span class="title">Tracing money and matter with Sankey</span>
+      <span class="desc">A survey of a rare visualisation, from Figma plugins to Plotly and Holoviews, applied to
+        trade, aid, and income statements.</span>
+      <span class="tools">Python · Figma · Power BI</span>
+      <span class="year">2023</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FEATURED SPREAD 01 ============ -->
+<section class="feature">
+  <div class="page" style="padding:0;">
+    <div class="kicker-row">
+      <span><span class="idx">01 —</span> FEATURED CASE FILE</span>
+      <span>PYTHON · LINEAR PROGRAMMING · SCIPY</span>
+    </div>
+    <div class="frame">
+      <div class="copy">
+        <h3>Teaching a battery when to buy.</h3>
+        <p class="dek">A greedy heuristic is a local optimum with good PR. I rebuilt intraday energy arbitrage as a
+          linear program over 105,000 variables, then let the solver find the global maximum.</p>
+        <div class="stat-grid">
+          <div class="stat"><span class="n accent">€336,831</span><span class="l">Annual profit (solved)</span>
+          </div>
+          <div class="stat"><span class="n">1.5000</span><span class="l">Avg daily cycles, exact</span></div>
+          <div class="stat"><span class="n">547.5</span><span class="l">Full equivalent cycles / yr</span></div>
+          <div class="stat"><span class="n">0</span><span class="l">Constraint breaches</span></div>
+        </div>
+        <a class="read-link" href="{{ '/projects/intraday-trading.html' | relative_url }}">Read the write-up →</a>
+      </div>
+      <figure class="image-slot">
+        <img src="{{ '/assets/images/rolling-horizon-intraday-trading-energy.png' | relative_url }}"
+          alt="Rolling horizon chart of intraday energy trading cycles">
+        <figcaption><span>FIG. 01 · CYCLE SELECTION, ROLLING HORIZON</span><span>366 DAYS</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED SPREAD 02 ============ -->
+<section class="feature flip">
+  <div class="page" style="padding:0;">
+    <div class="kicker-row">
+      <span><span class="idx">02 —</span> FEATURED CASE FILE</span>
+      <span>R · RAYSHADER · GEOSPATIAL</span>
+    </div>
+    <div class="frame">
+      <figure class="image-slot">
+        <img src="{{ '/assets/images/egyptR.png' | relative_url }}" alt="3D rayshaded population relief map of Egypt">
+        <figcaption><span>FIG. 02 · EGYPT · POPULATION IN RELIEF</span><span>RAYSHADER / R</span></figcaption>
+      </figure>
+      <div class="copy">
+        <h3>The Nile, reigning in <em>relief.</em></h3>
+        <p class="dek">400 m hexagonal population cells rasterised, shaded, and ray-traced. The result looks like a
+          map. It argues like a thesis: in Egypt, geography is still destiny.</p>
+        <div class="stat-grid">
+          <div class="stat"><span class="n">400 m</span><span class="l">Hex resolution (Kontur 2022)</span></div>
+          <div class="stat"><span class="n">6000²</span><span class="l">Render dimensions, px</span></div>
+          <div class="stat"><span class="n">450</span><span class="l">Ray samples per frame</span></div>
+          <div class="stat"><span class="n accent">2</span><span class="l">Light sources, layered</span></div>
+        </div>
+        <a class="read-link" href="{{ '/projects/population-maps.html' | relative_url }}">Read the write-up →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED SPREAD 03 ============ -->
+<section class="feature">
+  <div class="page" style="padding:0;">
+    <div class="kicker-row">
+      <span><span class="idx">03 —</span> FEATURED CASE FILE</span>
+      <span>PYTHON · FIGMA · POWER BI</span>
+    </div>
+    <div class="frame">
+      <div class="copy">
+        <h3>Flow diagrams, four ways.</h3>
+        <p class="dek">A working survey of Sankey diagrams, from a Figma plugin rendering Germany's 2022 trade
+          balance, to Plotly untangling Warner Music's income statement, to online builders in between.</p>
+        <div class="stat-grid">
+          <div class="stat"><span class="n">4</span><span class="l">Tools benchmarked</span></div>
+          <div class="stat"><span class="n accent">€1.4T</span><span class="l">German trade flows traced</span>
+          </div>
+          <div class="stat"><span class="n">FY22</span><span class="l">Warner P&amp;L decomposed</span></div>
+          <div class="stat"><span class="n">Oct &rsquo;23</span><span class="l">Ukraine aid snapshot</span></div>
+        </div>
+        <a class="read-link" href="{{ '/projects/sankey-diagrams.html' | relative_url }}">Read the write-up →</a>
+      </div>
+      <figure class="image-slot">
+        <img src="{{ '/assets/images/Germany-2022-Imports-Exports.png' | relative_url }}"
+          alt="Germany 2022 imports and exports Sankey diagram">
+        <figcaption><span>FIG. 03 · GERMANY · TRADE FLOWS 2022</span><span>DESTATIS</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="kicker">§ 02 &nbsp;/&nbsp; About</div>
+  <p class="prose">
+    I help organisations navigate complexity by <em>building systems</em> and <em>creating strategies</em> that make
+    the right decisions inevitable. My background spans tech, AI, and music, where I focus on
+    stripping away the noise to find the signal. When I&rsquo;m not building digital systems, I&rsquo;m usually
+    deconstructing physical ones, reading books that have nothing to do with each other, or exploring the silence of
+    the Red Sea with a scuba tank.
+  </p>
+  <aside class="aside">
+    <h5>At a glance</h5>
+    <ul>
+      <li><span class="k">Focus</span><span>Strategy, data, AI orchestration, economic modelling</span></li>
+      <li><span class="k">Stack</span><span>Python, R, SQL, Power BI, AI (Antigravity, Claude Code)</span></li>
+      <li><span class="k">Languages</span><span>English · Arabic · German</span></li>
+      <li><span class="k">Based</span><span>Cairo, Egypt · EU</span></li>
+    </ul>
+    <h5>Currently</h5>
+    <ul>
+      <li><span class="k">Open</span><span>Selective consulting engagements</span></li>
+    </ul>
+  </aside>
+</section>

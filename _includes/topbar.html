@@ -1,0 +1,48 @@
+<header class="topbar">
+  <div class="mark">
+    <a href="{{ '/' | relative_url }}" style="display:flex;align-items:center;gap:10px;">
+      <span class="glyph"></span>
+      <span>AHMED SHERIF</span>
+    </a>
+    {% if page.case_file %}
+      <span style="color:var(--ink-faint);">/ CASE FILE {{ page.case_file }}</span>
+    {% else %}
+      <span style="color:var(--ink-faint);">/ PORTFOLIO &rsquo;26</span>
+    {% endif %}
+  </div>
+  <nav>
+    {% assign on_home = false %}
+    {% if page.url == '/' or page.url == '/index.html' %}{% assign on_home = true %}{% endif %}
+    {% if on_home %}
+      <a href="#work" class="active">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    {% else %}
+      <a href="{{ '/#work' | relative_url }}">Work</a>
+      <a href="{{ '/#about' | relative_url }}">About</a>
+      <a href="{{ '/#contact' | relative_url }}">Contact</a>
+    {% endif %}
+  </nav>
+  <div class="meta">
+    {% if page.case_file %}
+      <span>{{ page.year }}</span>
+      <span>{{ page.stack }}</span>
+    {% else %}
+      <span class="live">LIVE ·</span>
+      <span>v2.0</span>
+    {% endif %}
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M13 9.5A5.5 5.5 0 1 1 6.5 3a4.5 4.5 0 0 0 6.5 6.5Z"></path>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="8" cy="8" r="3"></circle>
+        <path
+          d="M8 1.5v1.5M8 13v1.5M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M1.5 8h1.5M13 8h1.5M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06">
+        </path>
+      </svg>
+    </button>
+  </div>
+</header>

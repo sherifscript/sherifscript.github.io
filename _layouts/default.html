@@ -1,25 +1,31 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'en-US' }}">
+<html lang="en">
+
+<head>
   {% include head.html %}
-  <body class="theme-dark">
-    <!-- Ambient glowing backgrounds -->
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
-    
-    <!-- Grain overlay for texture -->
-    <div class="noise-overlay"></div>
+</head>
 
-    <div class="site-wrapper">
-      {% include header.html %}
-      
-      <main class="page-content" aria-label="Content">
-        {{ content }}
-      </main>
+<body>
 
-      {% include footer.html %}
-    </div>
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar"></div>
+  </div>
 
-    <!-- Scripts -->
-    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-  </body>
+  {% if page.ticker %}{% include ticker.html %}{% endif %}
+
+  <div class="page">
+
+    {% include topbar.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+
+  </div>
+
+  {% include scripts.html %}
+
+</body>
+
 </html>

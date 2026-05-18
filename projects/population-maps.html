@@ -1,0 +1,159 @@
+---
+layout: default
+title: "Exploring population landscapes: 3D maps of Egypt and Germany"
+description: "3D rayshaded population maps of Egypt and Germany, built in R."
+case_file: "N°02"
+year: "2023"
+stack: "R · RAYSHADER"
+---
+
+<section class="article-hero">
+    <aside class="meta-col">
+      <div class="block"><div class="label">Case file</div><div class="val">N°02</div></div>
+      <div class="block"><div class="label">Year</div><div class="val">2023</div></div>
+      <div class="block"><div class="label">Methods</div><div class="val">Geospatial rasterisation, ray-traced shading, post-production in Illustrator</div></div>
+      <div class="block"><div class="label">Stack</div><div class="val">R · sf · stars · rayshader · MetBrewer · Adobe Illustrator</div></div>
+      <div class="block"><div class="label">Dataset</div><div class="val">Kontur Population 2022 (GHSL · Meta · MS Buildings · Copernicus · OSM)</div></div>
+      <div class="block"><div class="label">Source</div><div class="val"><a href="https://github.com/sherifscript/RayshaderMaps" target="_blank" rel="noopener">github ↗</a></div></div>
+    </aside>
+    <div>
+      <h1>110 million Egyptians, rendered in relief.</h1>
+      <p class="dek">Where people actually live is one of the few questions a 3D map answers better than a 2D one. Density has <em>shape.</em> I rendered Egypt and Germany as topographies of population, and learned two things about each country on the way.</p>
+    </div>
+  </section>
+
+  <section class="article-body">
+    <aside class="toc">
+      <h5>Contents</h5>
+      <a href="#intro">§ Intro</a>
+      <a href="#nile">§ Nile reigns king</a>
+      <a href="#code">§ Behind the scenes</a>
+      <a href="#palette">§ The palette</a>
+      <a href="#germany">§ A look at Germany</a>
+      <a href="#takeaway">§ Takeaway</a>
+    </aside>
+
+    <div class="prose-body">
+      <p class="drop-cap" id="intro">The initial spark for this project came about from my love of visualisation, especially maps, which led me to discover Rayshader 3D maps. Their ability to distinctly showcase population distribution immediately caught my attention. Determined to delve into this technique, I aimed to create 3D visualisations that would straightforwardly present population densities within Egypt and Germany, both of which are important to me on a personal level.</p>
+
+      <p>The result was a set of high-resolution 3D maps that invite exploration and offer a novel way to visually appreciate population distribution in these two countries. The project was highly rewarding, and I learned a lot using geospatial data and working with raster formats. First, we'll take a detailed look at the Egyptian landscape, revealing the historical interplay of its people with the environment through my 3D rendering. Following that, I'll share an insider's view of the coding journey that transformed raw numbers into the peaks and valleys. Finally, we'll voyage to Germany, applying the same methods to illustrate how population is sparsely spread or densely concentrated across both rural and urban landscapes.</p>
+
+      <div class="kpi-row">
+        <div class="cell"><div class="v">400 m</div><span class="k">Hex resolution</span></div>
+        <div class="cell"><div class="v">6000²</div><span class="k">Render, pixels</span></div>
+        <div class="cell"><div class="v accent">2</div><span class="k">Light sources, layered</span></div>
+      </div>
+
+      <h2 id="nile"><em>Nile</em> reigns king.</h2>
+
+      <figure class="image-slot" style="margin:32px 0;">
+        <img src="../assets/images/egyptR.png" alt="3D rayshaded population density map of Egypt centered on the Nile">
+        <figcaption><span>FIG. 01 · EGYPT · FINAL RENDER</span><span>RAYSHADER · 6000²</span></figcaption>
+      </figure>
+
+      <p>As the capital city and the largest city in Egypt, Cairo's dense population is distinctly represented by a tall and concentrated spike in the map. The Nile Delta region (especially areas around cities like Alexandria and Port Said) shows significant population density. The visualisation distinctly highlights the historic concentration of the Egyptian state along the Nile River, a lifeline for the nation, with most of its population residing along its banks.</p>
+
+      <p>Other notable spikes are observed in coastal areas like Marsa Matruh and Hurghada, popular cities and tourist destinations. Locations such as Siwa Oasis and Kharga Oasis, although smaller, are distinct and historical. A fun fact about Siwa: Alexander the Great was crowned Pharaoh of Egypt there, in the Temple of the Oracle. These oases have historically been vital habitats in the desert landscape.</p>
+
+      <p>The final map uses a muted beige base, reminiscent of Egypt's vast desert landscapes, as well as the Riq'ah script to reflect the most commonly used script in everyday Egyptian life.</p>
+
+      <blockquote>The map doesn't argue that geography is destiny. It lets geography speak.</blockquote>
+
+      <h2 id="code"><em>Behind</em> the scenes.</h2>
+
+      <p>Initiating the project, I began by loading essential R libraries along with the <a href="https://data.humdata.org/dataset/kontur-population-egypt" target="_blank" rel="noopener">Kontur Population 2022</a> dataset. This dataset estimates the worldwide population in 400 m hexagonal geometries using a combination of GHSL, Facebook, Microsoft Buildings, Copernicus Global Land Service Land Cover, Land Information New Zealand, and OpenStreetMap data.</p>
+
+      <p>A significant aspect of this process was the introduction of the <a href="https://r-spatial.github.io/stars/" target="_blank" rel="noopener">stars</a> package. This was my first time using it, and it proved instrumental for its capability to handle both raster and vector datacubes effectively. The package facilitated the transformation of geospatial data, specifically in <code>.gpkg</code> format (imported using the <a href="https://r-spatial.github.io/sf/" target="_blank" rel="noopener">sf</a> package), into a raster format. This conversion was a crucial step, forming the backbone of the subsequent 3D rendering.</p>
+
+      <pre><code><span class="c"># Load Required Libraries</span>
+<span class="k">library</span>(sf)          <span class="c"># handling spatial data</span>
+<span class="k">library</span>(stars)
+<span class="k">library</span>(tidyverse)
+<span class="k">library</span>(rayshader)
+<span class="k">library</span>(MetBrewer)
+<span class="k">library</span>(colorspace)
+
+<span class="c"># Load Kontur Data</span>
+data <- st_read(<span class="s">"kontur_population_EG_20220630.gpkg"</span>)
+
+<span class="c"># Data Conversion: Spatial Data to Matrix</span>
+size = <span class="n">5000</span>
+rast <- st_rasterize(data,
+                     nx = floor(size * w_ratio),
+                     ny = floor(size * h_ratio))
+mat  <- matrix(data = rast$population,
+               nrow = floor(size * w_ratio),
+               ncol = floor(size * h_ratio))</code></pre>
+
+      <p>With the data prepared, <a href="https://www.rayshader.com/" target="_blank" rel="noopener">Rayshader</a> takes the stage, turning our matrix into a 3D plot using the <code>plot_3d()</code> function. The following snippet illustrates how the matrix was transformed into a digital elevation model, which then served as the canvas for our 3D plot. Parameters such as <code>zscale</code>, <code>solid</code>, and <code>shadowdepth</code> determine the visual characteristics: elevation scaling and shadow effects. Camera angles were adjusted by <code>render_camera()</code> to provide the best view.</p>
+
+      <pre><code><span class="c"># Create 3D Plot using Rayshader</span>
+mat |&gt; height_shade(texture = texture) |&gt;
+  plot_3d(heightmap = mat, zscale = <span class="n">200</span>/<span class="n">5</span>,
+          solid = <span class="k">F</span>, shadowdepth = <span class="n">0</span>)
+
+<span class="c"># Adjust Camera Angles</span>
+render_camera(theta = -<span class="n">20</span>, phi = <span class="n">45</span>, zoom = <span class="n">0.8</span>)</code></pre>
+
+      <p>The final image showcases the result of these processes. I used the <code>render_highquality()</code> function from rayshader to output a detailed representation of Egypt's population density. The heart of the aesthetics is the dynamic double-shadow effect achieved by using two distinct light sources. Two <code>lightaltitude()</code> values (30 and 80 degrees) are defined. The first light source at a lower altitude creates sharper and longer shadows, emphasising the population spikes, while the higher altitude light creates softer shadows, adding depth. With <code>lightintensity()</code> parameters of 600 and 100 respectively, the primary light source is much brighter, creating dominant shadows, while the secondary source gives a diffused lighting effect.</p>
+
+      <pre><code><span class="c"># Adjust camera angles and Render plot</span>
+render_camera(theta = -<span class="n">20</span>, phi = <span class="n">45</span>, zoom = <span class="n">0.8</span>)
+render_highquality(
+    filename       = outfile,
+    interactive    = <span class="k">F</span>,
+    lightdirection = <span class="n">280</span>,
+    lightaltitude  = c(<span class="n">30</span>, <span class="n">80</span>),
+    lightcolor     = c(c1[<span class="n">4</span>], <span class="s">'white'</span>),
+    lightintensity = c(<span class="n">600</span>, <span class="n">100</span>),
+    samples        = <span class="n">450</span>,
+    width          = <span class="n">6000</span>,
+    height         = <span class="n">6000</span>
+)</code></pre>
+
+      <h3 id="palette">Final output &amp; palette.</h3>
+
+      <figure class="image-slot" style="margin:32px 0;">
+        <img src="../assets/images/egy_final_plot.png" alt="Egypt population density 3D render before labels were added">
+        <figcaption><span>FIG. 02 · EGYPT · PRE-LABEL RENDER</span><span>MET BREWER · GREEK</span></figcaption>
+      </figure>
+
+      <p>I chose the colour palette provided by <a href="https://github.com/BlakeRMills/MetBrewer" target="_blank" rel="noopener">MetBrewer</a> due to my love of renaissance art and the package's ability to encapsulate all sorts of palettes from different artistic movements. For Egypt, the "Greek" palette presented a beautiful choice to reflect Egypt's vast beige deserts and intense density reds. The colours were further enhanced by <code>colorRampPalette</code> to give it more depth. The colours not only make the visualisation appealing but also help in distinguishing population-density variations.</p>
+
+      <pre><code><span class="c"># Generate Color Palette using MetBrewer</span>
+c1      <- met.brewer(<span class="s">'Greek'</span>)
+texture <- grDevices::colorRampPalette(c1, bias = <span class="n">2</span>)(<span class="n">256</span>)</code></pre>
+
+      <h2 id="germany"><em>A look</em> at Germany.</h2>
+
+      <figure class="image-slot" style="margin:32px 0;">
+        <img src="../assets/images/germanyR.png" alt="3D rayshaded population density map of Germany with prominent urban spikes">
+        <figcaption><span>FIG. 03 · GERMANY · FINAL RENDER</span><span>RAYSHADER · 6000²</span></figcaption>
+      </figure>
+
+      <p>Transitioning from the Nile-focused population of Egypt to Germany's diverse distribution, the same 3D mapping techniques take on a different journey. This map illustrates the contrast between Germany's bustling urban centres and its serene rural areas. The stark spikes of Berlin, Munich, and Hamburg rise prominently, each peak representing the dense hubs of activity and culture these cities are known for. Less densely populated areas, like those surrounding Dresden and Nuremberg, create a textured landscape of valleys amidst the high urban peaks.</p>
+
+      <p>Taking a closer look at the map, you can't help but notice an empty semi-circle region of lands surrounding Berlin. At first glance, it might seem like a whimsical dip in the data or a playful stamp of sorts. In reality, this area is known for its sparse population, a phenomenon that is not rooted in a single cause but rather a tapestry of theories. Some suggest that Berlin's marshy foundations, shaped by its glacial history, have influenced settlement patterns (Berlin's name allegedly derives from the Slavic word <em>berl</em>, meaning 'swamp'). Others point to the transformation of the landscape by human intervention and industrialisation, attracting migration from that area towards Berlin. It is most likely a result of the region's layers of history and geography as a whole, rather than a single definitive reason.</p>
+
+      <div class="callout">The strangest feature of the German map is a <em>negative</em> one: the hollow semicircle of sparsely-populated Brandenburg surrounding Berlin. The map doesn't solve the question. It insists on asking it.</div>
+
+      <h2 id="takeaway"><em>Takeaway.</em></h2>
+
+      <p>In this project, I tried to bring together data analysis, geospatial analysis, and graphic design. One of the standout features is the meticulous care taken in aspect-ratio handling and colour-palette generation, ensuring the final 3D plot is not only accurate but also visually compelling. Another interesting aspect is the seamless integration of spatial functions with 3D rendering capabilities, showcasing the power of R in handling diverse tasks.</p>
+
+      <p class="pull">Choropleths flatten drama. Relief lets density argue for itself.</p>
+
+      <p>The pipeline (vector → raster → height matrix → ray-traced render → typographic finish) transfers to anything with a density to show: traffic, emissions, deposits, deaths. The full project can be found on <a href="https://github.com/sherifscript/RayshaderMaps" target="_blank" rel="noopener">GitHub</a>, along with other graphics and the Adobe Illustrator file.</p>
+    </div>
+  </section>
+
+  <nav class="next-nav">
+    <a href="intraday-trading.html">
+      <span class="label">← Previous — N°01</span>
+      <span class="t">A linear program that trades a battery</span>
+    </a>
+    <a href="sankey-diagrams.html" class="right">
+      <span class="label">Next — N°03</span>
+      <span class="t">Tracing money and matter with Sankey</span>
+    </a>
+  </nav>

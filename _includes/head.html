@@ -1,41 +1,16 @@
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  {%- seo -%}
-
-  {%- if page.description -%}
-  <meta name="description" content="{{ page.description | escape }}">
-  <meta property="og:description" content="{{ page.description | escape }}">
-  {%- else -%}
-  <meta name="description" content="{{ site.description | escape }}">
-  <meta property="og:description" content="{{ site.description | escape }}">
-  {%- endif -%}
-
-  {%- if page.image -%}
-  <meta property="og:image" content="{{ page.image | absolute_url }}">
-  {%- endif -%}
-
-  <meta property="og:site_name" content="{{ site.title }}">
-  <meta name="author" content="{{ site.author.name }}">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Prism.js Syntax Highlighting CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-  
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  
-  <!-- GSAP & ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
-  <!-- Three.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-</head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title | default: site.title }}{% if page.case_file %} — {{ site.title }}{% endif %}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+<meta property="og:title" content="{{ page.title | default: site.title }}">
+<meta property="og:description" content="{{ page.description | default: site.description }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}?v=3">
+<script>
+  (function () { try { var s = localStorage.getItem('asherif-tweaks'); var t = s ? JSON.parse(s).theme : null; if (!t) t = matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();
+</script>

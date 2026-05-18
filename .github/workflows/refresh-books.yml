@@ -1,0 +1,55 @@
+name: Refresh reading feed
+
+# Triggers:
+#   - Every 6 hours (cron in UTC)
+#   - Manually from the Actions tab (workflow_dispatch button)
+#   - On push to master if this workflow file itself changes (dev convenience)
+on:
+  schedule:
+    - cron: '15 */6 * * *'   # :15 past every 6th hour
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/refresh-books.yml'
+      - '.github/scripts/fetch-books.mjs'
+      - 'data/excluded_books.json'
+
+# Minimum scope: write back to the repo, nothing else.
+permissions:
+  contents: write
+
+# Cancel any in-flight run when a new one starts, so we never commit out of order.
+concurrency:
+  group: refresh-books
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch from Hardcover
+        env:
+          HARDCOVER_TOKEN: ${{ secrets.HARDCOVER_TOKEN }}
+        run: node .github/scripts/fetch-books.mjs
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/books.json
+          if git diff --staged --quiet; then
+            echo "No changes. Skipping commit."
+          else
+            git commit -m "books: refresh reading feed [skip ci]"
+            git push
+          fi

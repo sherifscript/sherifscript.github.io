@@ -1,28 +1,23 @@
-# Site Settings
-title: Ahmed Sherif
-tagline: "Economics, Data Strategy & AI Orchestration"
-email: ""
-description: >-
-  Portfolio of Ahmed Sherif — Economist, Data Strategist, and AI practitioner.
-  Writing about algorithmic trading, geospatial data, information design, and more.
-footer_desc: "Economics & Analysis | Insights & Strategy Automation & Analytics | AI Orchestration"
+title: "Ahmed Sherif"
+description: "Portfolio of Ahmed Sherif, strategic consultant with an extreme data bias. Economics, data strategy, AI orchestration."
+url: "https://asherif.me"
 baseurl: ""
-url: "https://asherif.github.io"
-author:
-  name: Ahmed Sherif
 
-socials:
-  GitHub: https://github.com/sherifscript
-  Linkedin: https://www.linkedin.com/in/asheriif
+permalink: /:path/:basename:output_ext
 
-# Build Settings
-markdown: kramdown
-
-plugins:
-  - jekyll-seo-tag
+plugins: []
 
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
   - LICENSE.md
+  - .gitignore
+  - .github
+  - .vscode
+  - .vs
+  - .claude
+  - vendor
+
+keep_files:
+  - data

@@ -1,9 +1,16 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'jekyll', '~> 4.2'
-gem 'logger'
+# Modern Jekyll for local development. GitHub Pages builds the site
+# server-side with its own pinned Jekyll, so this only governs what
+# `bundle exec jekyll serve` runs against your laptop.
+gem "jekyll", "~> 4.4"
 
-group :jekyll_plugins do
-  gem 'jekyll-timeago', '~> 0.13.1'
-  gem 'jekyll-seo-tag'
-end
+# Ruby 3.4+ removed these from the default gem set.
+gem "csv"
+gem "base64"
+gem "bigdecimal"
+gem "logger"
+gem "webrick"
+
+# Windows helpers.
+gem "tzinfo-data", platforms: [:windows, :jruby]
