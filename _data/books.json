@@ -1,21 +1,21 @@
 {
-  "updated_at": "2026-05-18T11:45:27.975Z",
+  "updated_at": "2026-05-18T15:18:26.741Z",
   "username": "sherif",
   "currently_reading": [
+    {
+      "title": "The Wretched of the Earth",
+      "author": "Frantz Fanon",
+      "slug": "the-wretched-of-the-earth",
+      "cover": "https://assets.hardcover.app/edition/28341602/535e98cc25e7b41b62e62d11566483f55e63ca93.jpeg",
+      "started_at": "2025-04-09",
+      "finished_at": null
+    },
     {
       "title": "Zero to One: Notes on Startups, or How to Build the Future",
       "author": "Peter Thiel",
       "slug": "zero-to-one",
       "cover": "https://assets.hardcover.app/book_mappings/7332745/5ba08e61c8dcdf704668cd0da4dc4af860d904dd.jpeg",
       "started_at": "2026-05-18",
-      "finished_at": null
-    },
-    {
-      "title": "The Art of War Landmark Edition: The Classic of Strategy with Historical Notes and Introduction by PEN Award-Winning Author Mitch Horowitz",
-      "author": "Sun Tzu",
-      "slug": "the-art-of-war-landmark-edition",
-      "cover": null,
-      "started_at": "2025-05-12",
       "finished_at": null
     },
     {
@@ -29,44 +29,28 @@
   ],
   "recent": [
     {
-      "title": "حرب أكتوبر: مذكرات الفريق سعد الدين الشاذلى",
-      "author": "سعد الدين الشاذلي",
-      "slug": "1980-de98a6de-f857-44ff-94c5-586705a16d69",
-      "cover": null,
+      "title": "Caravaggio",
+      "author": "Andrew Graham-Dixon",
+      "slug": "caravaggio-a-life-sacred-and-profane",
+      "cover": "https://assets.hardcover.app/edition/30467162/7558367._SX98_.jpg",
       "started_at": "2025-04-09",
-      "finished_at": "2025-04-25"
+      "finished_at": "2025-01-01"
     },
     {
-      "title": "The Night Eternal",
-      "author": "Guillermo del Toro",
-      "slug": "the-night-eternal",
-      "cover": "https://assets.hardcover.app/edition/7280150/4e551c702be81cd4f70f332d8cf41e66133d3d12.jpeg",
-      "started_at": "2014-12-30",
-      "finished_at": null
-    },
-    {
-      "title": "Deception Point",
-      "author": "Dan Brown",
-      "slug": "deception-point",
-      "cover": "https://assets.hardcover.app/editions/194827/9908714625976342.jpg",
-      "started_at": "2014-12-31",
+      "title": "1984",
+      "author": "George Orwell",
+      "slug": "1984",
+      "cover": "https://assets.hardcover.app/edition/29258002/fb69559e-7c34-40cb-8518-3ef4898b830c.jpg",
+      "started_at": "2025-04-09",
       "finished_at": "2025-04-09"
     },
     {
-      "title": "Angels & Demons",
-      "author": "Dan Brown",
-      "slug": "angels-demons",
-      "cover": "https://assets.hardcover.app/editions/28693581/9565539320945004.jpeg",
-      "started_at": "2014-12-30",
-      "finished_at": null
-    },
-    {
-      "title": "The Lost Symbol",
-      "author": "Dan Brown",
-      "slug": "the-lost-symbol",
-      "cover": "https://assets.hardcover.app/editions/12712925/3110651410659800.jpg",
-      "started_at": "2014-12-30",
-      "finished_at": null
+      "title": "The Art of War Landmark Edition: The Classic of Strategy with Historical Notes and Introduction by PEN Award-Winning Author Mitch Horowitz",
+      "author": "Sun Tzu",
+      "slug": "the-art-of-war-landmark-edition",
+      "cover": null,
+      "started_at": "2025-05-12",
+      "finished_at": "2026-05-18"
     },
     {
       "title": "Digital Authoritarianism in the Middle East: Deception, Disinformation and Social Media",
