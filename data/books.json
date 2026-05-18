@@ -1,7 +1,80 @@
 {
-  "updated_at": null,
-  "username": null,
-  "currently_reading": [],
-  "recent": [],
-  "_note": "Placeholder file. The GitHub Action overwrites this on first successful run."
+  "updated_at": "2026-05-18T11:41:06.954Z",
+  "username": "sherif",
+  "currently_reading": [
+    {
+      "title": "The Art of War Landmark Edition: The Classic of Strategy with Historical Notes and Introduction by PEN Award-Winning Author Mitch Horowitz",
+      "author": "Sun Tzu",
+      "slug": "the-art-of-war-landmark-edition",
+      "cover": null,
+      "started_at": "2025-05-12",
+      "finished_at": null
+    },
+    {
+      "title": "The 7 Habits of Highly Effective People",
+      "author": "Stephen R. Covey",
+      "slug": "the-7-habits-of-highly-effective-people",
+      "cover": "https://assets.hardcover.app/edition/30401530/7546032f43cdce8a7219ee6676cc3273e288e879.jpeg",
+      "started_at": "2025-04-20",
+      "finished_at": null
+    },
+    {
+      "title": "A Conspiracy of Faith",
+      "author": "Jussi Adler-Olsen",
+      "slug": "a-conspiracy-of-faith",
+      "cover": "https://assets.hardcover.app/edition/30871491/14f6974f-630c-45fd-9606-3e79c4d5757d.jpg",
+      "started_at": "2025-05-12",
+      "finished_at": null
+    }
+  ],
+  "recent": [
+    {
+      "title": "حرب أكتوبر: مذكرات الفريق سعد الدين الشاذلى",
+      "author": "سعد الدين الشاذلي",
+      "slug": "1980-de98a6de-f857-44ff-94c5-586705a16d69",
+      "cover": null,
+      "started_at": "2025-04-09",
+      "finished_at": "2025-04-25"
+    },
+    {
+      "title": "The Night Eternal",
+      "author": "Guillermo del Toro",
+      "slug": "the-night-eternal",
+      "cover": "https://assets.hardcover.app/edition/7280150/4e551c702be81cd4f70f332d8cf41e66133d3d12.jpeg",
+      "started_at": "2014-12-30",
+      "finished_at": null
+    },
+    {
+      "title": "Deception Point",
+      "author": "Dan Brown",
+      "slug": "deception-point",
+      "cover": "https://assets.hardcover.app/editions/194827/9908714625976342.jpg",
+      "started_at": "2014-12-31",
+      "finished_at": "2025-04-09"
+    },
+    {
+      "title": "Angels & Demons",
+      "author": "Dan Brown",
+      "slug": "angels-demons",
+      "cover": "https://assets.hardcover.app/editions/28693581/9565539320945004.jpeg",
+      "started_at": "2014-12-30",
+      "finished_at": null
+    },
+    {
+      "title": "The Lost Symbol",
+      "author": "Dan Brown",
+      "slug": "the-lost-symbol",
+      "cover": "https://assets.hardcover.app/editions/12712925/3110651410659800.jpg",
+      "started_at": "2014-12-30",
+      "finished_at": null
+    },
+    {
+      "title": "Digital Authoritarianism in the Middle East: Deception, Disinformation and Social Media",
+      "author": "Marc Owen Jones",
+      "slug": "digital-authoritarianism-in-the-middle-east",
+      "cover": "https://assets.hardcover.app/external_data/61369060/0e3dc73640329189c541819377e716a85ee3274c.jpeg",
+      "started_at": "2025-04-25",
+      "finished_at": null
+    }
+  ]
 }
