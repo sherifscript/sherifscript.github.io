@@ -1,15 +1,16 @@
+{% capture ticker_content %}
+  {% for book in site.data.books.currently_reading %}
+    <span>Reading — {{ book.title }}{% if book.author %}, {{ book.author }}{% endif %}</span><span class="dot">●</span>
+  {% endfor %}
+  {% for book in site.data.books.recent limit:2 %}
+    <span>Recently finished — {{ book.title }}{% if book.author %}, {{ book.author }}{% endif %}</span><span class="dot">●</span>
+  {% endfor %}
+{% endcapture %}
+
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track" id="ticker-track">
-    <span>Currently building — LP solvers for intraday energy markets</span><span class="dot">●</span>
-    <span data-book-slot="0">Reading — Seeing Like a State, James C. Scott</span><span class="dot">●</span>
-    <span>Diving — Ras Mohammed, Sinai</span><span class="dot">●</span>
-    <span data-book-slot="1">Recently finished — The Power Broker, Robert Caro</span><span class="dot">●</span>
-    <span>Writing — a primer on rolling horizons</span><span class="dot">●</span>
+    {{ ticker_content }}
     <!-- duplicate for seamless loop -->
-    <span>Currently building — LP solvers for intraday energy markets</span><span class="dot">●</span>
-    <span data-book-slot="0">Reading — Seeing Like a State, James C. Scott</span><span class="dot">●</span>
-    <span>Diving — Ras Mohammed, Sinai</span><span class="dot">●</span>
-    <span data-book-slot="1">Recently finished — The Power Broker, Robert Caro</span><span class="dot">●</span>
-    <span>Writing — AI seo recognition broker</span><span class="dot">●</span>
+    {{ ticker_content }}
   </div>
 </div>

@@ -2,106 +2,187 @@
 layout: default
 title: "Sankey diagrams: trading balances, income statements, national budgets"
 description: "A working survey of Sankey diagrams across Figma, Power BI, Plotly, and Holoviews."
-case_file: "N°03"
+case_file: "N°01"
 year: "2023"
 stack: "4 TOOLS"
 ---
 
 <section class="article-hero">
-    <aside class="meta-col">
-      <div class="block"><div class="label">Case file</div><div class="val">N°03</div></div>
-      <div class="block"><div class="label">Year</div><div class="val">2023</div></div>
-      <div class="block"><div class="label">Tools surveyed</div><div class="val">Figma plugin · Power BI · Plotly · Holoviews · sankeymatic · sankeyart</div></div>
-      <div class="block"><div class="label">Subjects</div><div class="val">Germany trade balance · Ukraine aid · Warner Music FY22</div></div>
-      <div class="block"><div class="label">Sources</div><div class="val">Destatis · Council on Foreign Relations · WMG 10-K</div></div>
-    </aside>
-    <div>
-      <h1>Sankey diagrams: trading balances, income statements, national budgets and more.</h1>
-      <p class="dek">A most versatile yet rare visualisation. This is a working survey across multiple tools and use cases, written while making each one.</p>
+  <aside class="meta-col">
+    <div class="block">
+      <div class="label">Case file</div>
+      <div class="val">N°01</div>
     </div>
-  </section>
+    <div class="block">
+      <div class="label">Year</div>
+      <div class="val">2023</div>
+    </div>
+    <div class="block">
+      <div class="label">Tools surveyed</div>
+      <div class="val">Figma plugin · Power BI · Plotly · Holoviews · sankeymatic · sankeyart</div>
+    </div>
+    <div class="block">
+      <div class="label">Subjects</div>
+      <div class="val">Germany trade balance · Ukraine aid · Warner Music FY22</div>
+    </div>
+    <div class="block">
+      <div class="label">Sources</div>
+      <div class="val">Destatis · Council on Foreign Relations · WMG 10-K</div>
+    </div>
+  </aside>
+  <div>
+    <h1>Sankey diagrams: trading balances, income statements, national budgets and more.</h1>
+    <p class="dek">A most versatile yet rare visualisation. This is a working survey across multiple tools and use
+      cases, written while making each one.</p>
+  </div>
+</section>
 
-  <section class="article-body">
-    <aside class="toc">
-      <h5>Contents</h5>
-      <a href="#intro">§ Why Sankey</a>
-      <a href="#figma">§ GUI · Figma</a>
-      <a href="#powerbi">§ GUI · Power BI</a>
-      <a href="#python">§ Code · Python</a>
-      <a href="#holoviews">— Holoviews</a>
-      <a href="#plotly">— Plotly</a>
-      <a href="#online">§ Online builders</a>
-      <a href="#verdict">§ Verdict</a>
-    </aside>
+<section class="article-body">
+  <aside class="toc">
+    <h5>Contents</h5>
+    <a href="#intro">§ Why Sankey</a>
+    <a href="#figma">§ GUI · Figma</a>
+    <a href="#powerbi">§ GUI · Power BI</a>
+    <a href="#python">§ Code · Python</a>
+    <a href="#holoviews">— Holoviews</a>
+    <a href="#plotly">— Plotly</a>
+    <a href="#online">§ Online builders</a>
+    <a href="#verdict">§ Verdict</a>
+  </aside>
 
-    <div class="prose-body">
-      <p class="drop-cap" id="intro">In an era where data is king, the ability to effectively visualise complex information is a skill of paramount importance. The Sankey diagram, a specific type of flow diagram, has emerged as a vital tool in this realm, offering a unique way to illustrate the flow of resources, finances, or information. In this project I delve into the creation of Sankey diagrams, exploring methods and tools ranging from GUI-based applications like Power BI and Figma to coding-based solutions in Python, and even online Sankey builders.</p>
+  <div class="prose-body">
+    <p class="drop-cap" id="intro">In an era where data is king, the ability to effectively visualise complex
+      information is a skill of paramount importance. The Sankey diagram, a specific type of flow diagram, has emerged
+      as a vital tool in this realm, offering a unique way to illustrate the flow of resources, finances, or
+      information. In this project I delve into the creation of Sankey diagrams, exploring methods and tools ranging
+      from GUI-based applications like Power BI and Figma to coding-based solutions in Python, and even online Sankey
+      builders.</p>
 
-      <p>Sankey diagrams have found their niche in a variety of fields such as trading balances, income statements, and national budgets, to name a few. Their ability to represent both the <em>magnitude</em> and <em>direction</em> of flows in a single, intuitive visualisation makes them an invaluable asset in data analysis and financial reporting. In this post I share insights on the practical aspects of creating these diagrams and reflect on the experiences and challenges encountered using different tools and platforms.</p>
+    <p>Sankey diagrams have found their niche in a variety of fields such as trading balances, income statements, and
+      national budgets, to name a few. Their ability to represent both the <em>magnitude</em> and <em>direction</em> of
+      flows in a single, intuitive visualisation makes them an invaluable asset in data analysis and financial
+      reporting. In this post I share insights on the practical aspects of creating these diagrams and reflect on the
+      experiences and challenges encountered using different tools and platforms.</p>
 
-      <p>Starting with GUI-based solutions, we explore how tools like Power BI and Figma can be leveraged to create visually appealing and informative Sankey diagrams. I'll discuss the nuances of these platforms, including their strengths and limitations, and provide hands-on examples: visualising Germany's 2022 trade balance and aid to Ukraine in 2023.</p>
+    <p>Starting with GUI-based solutions, we explore how tools like Power BI and Figma can be leveraged to create
+      visually appealing and informative Sankey diagrams. I'll discuss the nuances of these platforms, including their
+      strengths and limitations, and provide hands-on examples: visualising Germany's 2022 trade balance and aid to
+      Ukraine in 2023.</p>
 
-      <p>The journey continues with coding-based solutions, particularly Python, a powerhouse in data analysis. I'll explore the use of <code>Plotly</code> and <code>Holoviews</code>, demonstrating their capabilities for interactive and complex Sankey diagrams. This section is particularly insightful for those who prefer a more hands-on, coding approach to data visualisation.</p>
+    <p>The journey continues with coding-based solutions, particularly Python, a powerhouse in data analysis. I'll
+      explore the use of <code>Plotly</code> and <code>Holoviews</code>, demonstrating their capabilities for
+      interactive and complex Sankey diagrams. This section is particularly insightful for those who prefer a more
+      hands-on, coding approach to data visualisation.</p>
 
-      <p>Finally, I'll briefly examine online Sankey builders, highlighting their ease of use and accessibility, and how they're democratising the creation of Sankey diagrams, making them accessible to a wider audience without the need for specialised software or programming knowledge.</p>
+    <p>Finally, I'll briefly examine online Sankey builders, highlighting their ease of use and accessibility, and how
+      they're democratising the creation of Sankey diagrams, making them accessible to a wider audience without the need
+      for specialised software or programming knowledge.</p>
 
-      <h2 id="figma"><em>GUI.</em> Figma.</h2>
+    <h2 id="figma"><em>GUI.</em> Figma.</h2>
 
-      <p>If you have experience with Figma, you'd know it's a web-based design platform, more popular among web and mobile app developers than data analysts, as its primary use is for designing user interfaces. It is renowned for its aesthetic, user-friendly interface, as well as its ability to allow community-contributed plugins, akin to Python libraries, making it a versatile tool for beautiful data visualisations.</p>
+    <p>If you have experience with Figma, you'd know it's a web-based design platform, more popular among web and mobile
+      app developers than data analysts, as its primary use is for designing user interfaces. It is renowned for its
+      aesthetic, user-friendly interface, as well as its ability to allow community-contributed plugins, akin to Python
+      libraries, making it a versatile tool for beautiful data visualisations.</p>
 
-      <p>A notable mention is the <a href="https://www.figma.com/community/plugin/1159893716343028026" target="_blank" rel="noopener">'Sankey' plugin by the Genuine Impact Team</a>, a gem I stumbled upon while searching for an uncomplicated Sankey diagram solution. My project involved visualising Germany's 2022 trade balance, with data sourced from the <a href="https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/order-rank-germany-trading-partners.pdf?__blob=publicationFile" target="_blank" rel="noopener">German Federal Statistical Office</a>. By following the quick tutorial, anyone could start building great Sankey diagrams in Figma with unlimited aesthetical options in under ten minutes.</p>
+    <p>A notable mention is the <a href="https://www.figma.com/community/plugin/1159893716343028026" target="_blank"
+        rel="noopener">'Sankey' plugin by the Genuine Impact Team</a>, a gem I stumbled upon while searching for an
+      uncomplicated Sankey diagram solution. My project involved visualising Germany's 2022 trade balance, with data
+      sourced from the <a
+        href="https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/order-rank-germany-trading-partners.pdf?__blob=publicationFile"
+        target="_blank" rel="noopener">German Federal Statistical Office</a>. By following the quick tutorial, anyone
+      could start building great Sankey diagrams in Figma with unlimited aesthetical options in under ten minutes.</p>
 
-      <figure class="wide">
-        <img src="../assets/images/Germany-2022-Imports-Exports.png" alt="Germany Imports Exports Sankey">
-        <figcaption><span>FIG. 01 · GERMANY · TRADE FLOWS 2022 (EXCEL + FIGMA)</span><span>DESTATIS</span></figcaption>
-      </figure>
+    <figure class="wide">
+      <img src="../assets/images/Germany-2022-Imports-Exports.png" alt="Germany Imports Exports Sankey">
+      <figcaption><span>FIG. 01 · GERMANY · TRADE FLOWS 2022 (EXCEL + FIGMA)</span><span>DESTATIS</span></figcaption>
+    </figure>
 
-      <p>This Sankey, although time-consuming due to the data's volume, was remarkably straightforward thanks to Figma. The platform's UI-centric design allowed for immense customisation, enabling me to enrich the visualisation with graphics and flags, all within the same workspace.</p>
+    <p>This Sankey, although time-consuming due to the data's volume, was remarkably straightforward thanks to Figma.
+      The platform's UI-centric design allowed for immense customisation, enabling me to enrich the visualisation with
+      graphics and flags, all within the same workspace.</p>
 
-      <h2 id="powerbi"><em>GUI.</em> Power BI.</h2>
+    <h2 id="powerbi"><em>GUI.</em> Power BI.</h2>
 
-      <p>Despite my familiarity with Tableau (an elegant data-visualisation tool), I'd been eager to give Microsoft's Power BI a shot. I mean, I've been using Microsoft Office products forever, right? So it was pretty thrilling to choose Power BI as the GUI tool for this project. It didn't help that Tableau removed the ability to create Sankey diagrams completely from their platform. Tableau, as mighty as it is, seems to have never had the option available on their desktop platform; instead, it was offered briefly hidden in their beta visualisations section, only on the web version. Let's see how it goes.</p>
+    <p>Despite my familiarity with Tableau (an elegant data-visualisation tool), I'd been eager to give Microsoft's
+      Power BI a shot. I mean, I've been using Microsoft Office products forever, right? So it was pretty thrilling to
+      choose Power BI as the GUI tool for this project. It didn't help that Tableau removed the ability to create Sankey
+      diagrams completely from their platform. Tableau, as mighty as it is, seems to have never had the option available
+      on their desktop platform; instead, it was offered briefly hidden in their beta visualisations section, only on
+      the web version. Let's see how it goes.</p>
 
-      <p>At first, the UI seemed pretty intuitive to me after years using MS Office products, but then it took me longer to understand where everything was. After a little digging, I finally got a grip on how to approach such a project. I ran into my first obstacle quickly: you need a work or university account that uses Microsoft's professional cloud services to download Microsoft's plugin from the Power BI cloud plugin libraries. Luckily, I still had access from my old university.</p>
+    <p>At first, the UI seemed pretty intuitive to me after years using MS Office products, but then it took me longer
+      to understand where everything was. After a little digging, I finally got a grip on how to approach such a
+      project. I ran into my first obstacle quickly: you need a work or university account that uses Microsoft's
+      professional cloud services to download Microsoft's plugin from the Power BI cloud plugin libraries. Luckily, I
+      still had access from my old university.</p>
 
-      <p>After downloading the plugin, the process was extremely easy: add in the start and end points of each flow and their values, and <em>et voilà</em>, a diagram is ready. I thought it'd be interesting to visualise the aid that Ukraine had received so far since the Russian invasion of 2022. Luckily, this Council on Foreign Relations article provided detailed information on the aid to Ukraine as of October 2023.</p>
+    <p>After downloading the plugin, the process was extremely easy: add in the start and end points of each flow and
+      their values, and <em>et voilà</em>, a diagram is ready. I thought it'd be interesting to visualise the aid that
+      Ukraine had received so far since the Russian invasion of 2022. Luckily, this Council on Foreign Relations article
+      provided detailed information on the aid to Ukraine as of October 2023.</p>
 
-      <figure>
-        <img src="../assets/images/Ukraine Aid 2023.jpg" alt="Ukraine Aid Visualized in Power BI">
-        <figcaption><span>FIG. 02 · UKRAINE AID · OCT 2023 (POWER BI)</span><span><a href="https://www.cfr.org/article/how-much-aid-has-us-sent-ukraine-here-are-six-charts" target="_blank" rel="noopener">CFR ↗</a></span></figcaption>
-      </figure>
+    <figure>
+      <img src="../assets/images/Ukraine Aid 2023.jpg" alt="Ukraine Aid Visualized in Power BI">
+      <figcaption><span>FIG. 02 · UKRAINE AID · OCT 2023 (POWER BI)</span><span><a
+            href="https://www.cfr.org/article/how-much-aid-has-us-sent-ukraine-here-are-six-charts" target="_blank"
+            rel="noopener">CFR ↗</a></span></figcaption>
+    </figure>
 
-      <p>My only issue was that I found Microsoft's Sankey plugin to be lacking in features. The scale settings in particular were not providing the results I wanted. Eventually I used the scaling option to fit all the nodes on the canvas; however, the side effect was that the flow sizes coming out of the nodes were not representative of the actual input values. This does not affect the comprehension a lot since the main insights regarding distribution are still readable, but it is something to take note of. Other Sankey plugins in the Microsoft store seem to feature more customisation. Embedding the diagram interactively in this post was not possible as my university account didn't have the necessary permissions 😔 Alas, I was glad with the final outcome and looking forward to using Power BI more in the future.</p>
+    <p>My only issue was that I found Microsoft's Sankey plugin to be lacking in features. The scale settings in
+      particular were not providing the results I wanted. Eventually I used the scaling option to fit all the nodes on
+      the canvas; however, the side effect was that the flow sizes coming out of the nodes were not representative of
+      the actual input values. This does not affect the comprehension a lot since the main insights regarding
+      distribution are still readable, but it is something to take note of. Other Sankey plugins in the Microsoft store
+      seem to feature more customisation. Embedding the diagram interactively in this post was not possible as my
+      university account didn't have the necessary permissions 😔 Alas, I was glad with the final outcome and looking
+      forward to using Power BI more in the future.</p>
 
-      <div class="callout">The plugin's "fit all nodes" scaling distorts flow widths so they no longer match the underlying values. Readable, but no longer quantitative. A real constraint to be aware of when picking the tool.</div>
+    <div class="callout">The plugin's "fit all nodes" scaling distorts flow widths so they no longer match the
+      underlying values. Readable, but no longer quantitative. A real constraint to be aware of when picking the tool.
+    </div>
 
-      <h2 id="python"><em>Code.</em> Python.</h2>
+    <h2 id="python"><em>Code.</em> Python.</h2>
 
-      <p>Python, a staple in data analysis and science, also supports the creation of Sankey diagrams, though it might not be the primary choice for these types of visualisations. Python's rich ecosystem includes numerous visualisation packages like Seaborn, Altair, Plotly, and Matplotlib, each with its own nifty tricks and features. With just a few lines of code, one can produce stunning and thought-provoking visualisations. However, when it comes to Sankey diagrams (like any coding solution to this visualisation), using Python makes it slightly complicated. There is no universal way of creating Sankey diagrams across libraries, with each library taking in the data in a slightly different format.</p>
+    <p>Python, a staple in data analysis and science, also supports the creation of Sankey diagrams, though it might not
+      be the primary choice for these types of visualisations. Python's rich ecosystem includes numerous visualisation
+      packages like Seaborn, Altair, Plotly, and Matplotlib, each with its own nifty tricks and features. With just a
+      few lines of code, one can produce stunning and thought-provoking visualisations. However, when it comes to Sankey
+      diagrams (like any coding solution to this visualisation), using Python makes it slightly complicated. There is no
+      universal way of creating Sankey diagrams across libraries, with each library taking in the data in a slightly
+      different format.</p>
 
-      <p>For this illustration I've chosen Plotly and Holoviews. The reason is simple: <strong>interactivity</strong>. Sankey diagrams can get crowded very quickly depending on the levels of nodes. Interactivity provides a neat solution by enabling users to navigate the diagram effortlessly. Although slightly different in format, generally to build a Sankey using either Plotly or Holoviews you need three elements: <em>source</em>, <em>target</em>, and <em>flow value</em>.</p>
+    <p>For this illustration I've chosen Plotly and Holoviews. The reason is simple: <strong>interactivity</strong>.
+      Sankey diagrams can get crowded very quickly depending on the levels of nodes. Interactivity provides a neat
+      solution by enabling users to navigate the diagram effortlessly. Although slightly different in format, generally
+      to build a Sankey using either Plotly or Holoviews you need three elements: <em>source</em>, <em>target</em>, and
+      <em>flow value</em>.
+    </p>
 
-      <p>Let's load the libraries:</p>
+    <p>Let's load the libraries:</p>
 
-      <pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+    <pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
 <span class="k">import</span> plotly
 <span class="k">import</span> plotly.graph_objects <span class="k">as</span> go
 <span class="k">import</span> holoviews <span class="k">as</span> hv
 <span class="k">from</span> holoviews <span class="k">import</span> opts
 hv.extension(<span class="s">"bokeh"</span>)</code></pre>
 
-      <h3 id="holoviews">Holoviews.</h3>
+    <h3 id="holoviews">Holoviews.</h3>
 
-      <p>Holoviews' required input format is fairly simple and is identical to how Power BI's required data format was. It takes three columns: <code>source</code>, <code>target</code>, and <code>value</code>.</p>
+    <p>Holoviews' required input format is fairly simple and is identical to how Power BI's required data format was. It
+      takes three columns: <code>source</code>, <code>target</code>, and <code>value</code>.</p>
 
-      <p>The only issue with this method is some kind of error that pops up if you attempt to insert a period (<code>.</code>) in the label of the diagram. For example, using "U.S." instead of "US" will immediately throw an error. Will have to circle back to that.</p>
+    <p>The only issue with this method is some kind of error that pops up if you attempt to insert a period
+      (<code>.</code>) in the label of the diagram. For example, using "U.S." instead of "US" will immediately throw an
+      error. Will have to circle back to that.</p>
 
-      <figure>
-        <img src="../assets/images/warner_holoviews_data.png" alt="Warner Music FY22 dataset">
-        <figcaption><span>FIG. 03 · WARNER FY22 · SOURCE / TARGET / VALUE</span><span>INPUT</span></figcaption>
-      </figure>
+    <figure>
+      <img src="../assets/images/warner_holoviews_data.png" alt="Warner Music FY22 dataset">
+      <figcaption><span>FIG. 03 · WARNER FY22 · SOURCE / TARGET / VALUE</span><span>INPUT</span></figcaption>
+    </figure>
 
-      <pre><code>holo_data = pd.read_excel(<span class="s">r"D:\Portfolio\Projects\UMG vs Warner Music vs Sony Music\Holoviews.xlsx"</span>)
+    <pre><code>holo_data = pd.read_excel(<span class="s">r"D:\Portfolio\Projects\UMG vs Warner Music vs Sony Music\Holoviews.xlsx"</span>)
 sankey = hv.Sankey(holo_data, label=<span class="s">r"Warner Music FY 22 (in million US dollars)"</span>)
 sankey.opts(label_position=<span class="s">'left'</span>,
             edge_color=<span class="s">'target'</span>,
@@ -109,17 +190,29 @@ sankey.opts(label_position=<span class="s">'left'</span>,
             cmap=<span class="s">'tab20'</span>,
             width=<span class="n">750</span>, height=<span class="n">600</span>)</code></pre>
 
-      <p>The result is an interactive bokeh-backed Sankey of Warner Music's FY22 income statement: revenue flowing in from Recorded Music and Music Publishing, splitting into operating expense buckets and finally into net profit.</p>
+    <p>The result is an interactive bokeh-backed Sankey of Warner Music's FY22 income statement: revenue flowing in from
+      Recorded Music and Music Publishing, splitting into operating expense buckets and finally into net profit.</p>
 
-      <h3 id="plotly">Plotly.</h3>
+    <h3 id="plotly">Plotly.</h3>
 
-      <p>The same can be achieved with Plotly (a much more common visualisation library than Holoviews), at the cost of things getting a little bit tricky. Unlike Holoviews' required input, there is no neat way to fit this into an Excel file or DataFrame. The main method in Plotly is to pass node names as indexed numbers and maintain the node list separately.</p>
+    <p>The same can be achieved with Plotly (a much more common visualisation library than Holoviews), at the cost of
+      things getting a little bit tricky. Unlike Holoviews' required input, there is no neat way to fit this into an
+      Excel file or DataFrame. The main method in Plotly is to pass node names as indexed numbers and maintain the node
+      list separately.</p>
 
-      <p>There are a number of <a href="https://medium.com/@twelsh37/understanding-plotly-sankey-charting-3ee263a81549" target="_blank" rel="noopener">different</a> <a href="https://python.plainenglish.io/sankeying-with-plotly-90500b87d8cf" target="_blank" rel="noopener">articles</a> <a href="https://plotly.com/blog/sankey-diagrams/" target="_blank" rel="noopener">online</a> explaining the methods and logic behind building a Sankey, so I won't go into much detail, but I'll explain my input.</p>
+    <p>There are a number of <a href="https://medium.com/@twelsh37/understanding-plotly-sankey-charting-3ee263a81549"
+        target="_blank" rel="noopener">different</a> <a
+        href="https://python.plainenglish.io/sankeying-with-plotly-90500b87d8cf" target="_blank"
+        rel="noopener">articles</a> <a href="https://plotly.com/blog/sankey-diagrams/" target="_blank"
+        rel="noopener">online</a> explaining the methods and logic behind building a Sankey, so I won't go into much
+      detail, but I'll explain my input.</p>
 
-      <p>The initial step is to create a dictionary to store source nodes, target nodes, and the flow, and then convert it to a DataFrame, similar to the main steps in Holoviews. I've written out the source, target, and value lists directly in the code to showcase that in cases where the data is not massive, it could be easier to create a Sankey all within Python without loading the data from somewhere else.</p>
+    <p>The initial step is to create a dictionary to store source nodes, target nodes, and the flow, and then convert it
+      to a DataFrame, similar to the main steps in Holoviews. I've written out the source, target, and value lists
+      directly in the code to showcase that in cases where the data is not massive, it could be easier to create a
+      Sankey all within Python without loading the data from somewhere else.</p>
 
-      <pre><code>data = {
+    <pre><code>data = {
     <span class="s">'source'</span>: [
         <span class="s">"Digital"</span>, <span class="s">"Artist services and expanded-rights"</span>, <span class="s">"Physical"</span>, <span class="s">"Licensing"</span>,
         <span class="s">"Digital Publishing"</span>, <span class="s">"Synchronization"</span>, <span class="s">"Performance"</span>, <span class="s">"Mechanical"</span>, <span class="s">"Other"</span>,
@@ -151,20 +244,32 @@ sankey.opts(label_position=<span class="s">'left'</span>,
 <span class="c"># Convert the data to a DataFrame</span>
 df = pd.DataFrame(data)</code></pre>
 
-      <p>Then we create a list called <code>nodes</code>, which will serve as the backbone of our Sankey diagram, representing all the unique starting and ending points in our financial flows. To construct this list, we merge and deduplicate values from both the 'source' and 'target' columns in our DataFrame. The use of sets ensures each entity is unique, and the union operation combines these distinct elements into one comprehensive list.</p>
+    <p>Then we create a list called <code>nodes</code>, which will serve as the backbone of our Sankey diagram,
+      representing all the unique starting and ending points in our financial flows. To construct this list, we merge
+      and deduplicate values from both the 'source' and 'target' columns in our DataFrame. The use of sets ensures each
+      entity is unique, and the union operation combines these distinct elements into one comprehensive list.</p>
 
-      <pre><code><span class="c"># Create a list of unique nodes</span>
+    <pre><code><span class="c"># Create a list of unique nodes</span>
 nodes = list(set(df[<span class="s">'source'</span>]).union(set(df[<span class="s">'target'</span>])))</code></pre>
 
-      <p>Next, we focus on mapping the relationships. For Plotly to understand how to connect the nodes, we need to convert the textual references in our 'source' and 'target' columns into numerical indices. This is achieved through <code>source_indices</code> and <code>target_indices</code>: two lists that correspond to the index positions of each source and target in our <code>nodes</code> list. This translation from text to indices is a critical step, allowing Plotly to accurately map and visualise the flows between different nodes.</p>
+    <p>Next, we focus on mapping the relationships. For Plotly to understand how to connect the nodes, we need to
+      convert the textual references in our 'source' and 'target' columns into numerical indices. This is achieved
+      through <code>source_indices</code> and <code>target_indices</code>: two lists that correspond to the index
+      positions of each source and target in our <code>nodes</code> list. This translation from text to indices is a
+      critical step, allowing Plotly to accurately map and visualise the flows between different nodes.</p>
 
-      <pre><code><span class="c"># Create mappings to indices for source and target</span>
+    <pre><code><span class="c"># Create mappings to indices for source and target</span>
 source_indices = [nodes.index(src) <span class="k">for</span> src <span class="k">in</span> df[<span class="s">'source'</span>]]
 target_indices = [nodes.index(tgt) <span class="k">for</span> tgt <span class="k">in</span> df[<span class="s">'target'</span>]]</code></pre>
 
-      <p>With the nodes and relationships defined, we then structure the data in a format that Plotly can interpret. We create a dictionary named <code>plotly_data</code>, which is divided into 'node' and 'link' sections. The 'node' part contains our list of unique nodes, while the 'link' part describes the connections between these nodes, inclusive of the source indices, target indices, and the values representing the magnitude of each flow. This structured format is pivotal for Plotly to accurately construct the Sankey diagram, ensuring each flow is correctly represented both in terms of its origin, destination, and scale.</p>
+    <p>With the nodes and relationships defined, we then structure the data in a format that Plotly can interpret. We
+      create a dictionary named <code>plotly_data</code>, which is divided into 'node' and 'link' sections. The 'node'
+      part contains our list of unique nodes, while the 'link' part describes the connections between these nodes,
+      inclusive of the source indices, target indices, and the values representing the magnitude of each flow. This
+      structured format is pivotal for Plotly to accurately construct the Sankey diagram, ensuring each flow is
+      correctly represented both in terms of its origin, destination, and scale.</p>
 
-      <pre><code><span class="c"># Prepare the data for Plotly</span>
+    <pre><code><span class="c"># Prepare the data for Plotly</span>
 plotly_data = {
     <span class="s">'node'</span>: {<span class="s">'label'</span>: nodes},
     <span class="s">'link'</span>: {
@@ -174,9 +279,13 @@ plotly_data = {
     }
 }</code></pre>
 
-      <p>The final act in our visualisation was to pass <code>plotly_data</code> into Plotly's Sankey function, which then intricately plots each node and draws the links between them as per our provided indices and values. The diagram's aesthetic is refined using <code>update_layout</code>, where we add customisations such as title, font, and alignment. Upon calling <code>fig.show()</code>, our meticulously prepared data springs to life in the form of an interactive Sankey diagram.</p>
+    <p>The final act in our visualisation was to pass <code>plotly_data</code> into Plotly's Sankey function, which then
+      intricately plots each node and draws the links between them as per our provided indices and values. The diagram's
+      aesthetic is refined using <code>update_layout</code>, where we add customisations such as title, font, and
+      alignment. Upon calling <code>fig.show()</code>, our meticulously prepared data springs to life in the form of an
+      interactive Sankey diagram.</p>
 
-      <pre><code>fig = go.Figure(data=[go.Sankey(
+    <pre><code>fig = go.Figure(data=[go.Sankey(
     node = plotly_data[<span class="s">'node'</span>],
     link = plotly_data[<span class="s">'link'</span>]
 )])
@@ -187,44 +296,86 @@ fig.update_layout(
     title_font_size=<span class="n">24</span>)
 fig.show()</code></pre>
 
-      <p>Overall, coding a Sankey diagram in Python can be more time-consuming than creating other types of visualisations. Nonetheless, the complexity of the process doesn't detract from the enjoyment of the journey. Similarly, you can use R to create Sankey diagrams. The open-source library <a href="https://github.com/davidsjoberg/ggsankey" target="_blank" rel="noopener">ggsankey</a>, available on GitHub, leverages the "grammar of graphics" concept, which is widely appreciated for its simplicity.</p>
+    <p>Overall, coding a Sankey diagram in Python can be more time-consuming than creating other types of
+      visualisations. Nonetheless, the complexity of the process doesn't detract from the enjoyment of the journey.
+      Similarly, you can use R to create Sankey diagrams. The open-source library <a
+        href="https://github.com/davidsjoberg/ggsankey" target="_blank" rel="noopener">ggsankey</a>, available on
+      GitHub, leverages the "grammar of graphics" concept, which is widely appreciated for its simplicity.</p>
 
-      <h2 id="online"><em>Online builders.</em></h2>
+    <h2 id="online"><em>Online builders.</em></h2>
 
-      <p>I couldn't bring this post properly to its end without discussing online Sankey builders. Most of the Sankey diagrams I've seen online seem to have been made using different online platforms rather than a specific tool, which represents a unique phenomenon in the world of data visualisations.</p>
+    <p>I couldn't bring this post properly to its end without discussing online Sankey builders. Most of the Sankey
+      diagrams I've seen online seem to have been made using different online platforms rather than a specific tool,
+      which represents a unique phenomenon in the world of data visualisations.</p>
 
-      <p>When it comes to online Sankey diagrams, most seem to originate from specific sources, with <a href="https://sankeymatic.com" target="_blank" rel="noopener">sankeymatic.com</a> being the most popular. This site offers a user-friendly and straightforward interface for constructing Sankey diagrams and provides near-real-time rendering. However, this convenience comes at the cost of limited aesthetic customisation unless an external graphic editor is used.</p>
+    <p>When it comes to online Sankey diagrams, most seem to originate from specific sources, with <a
+        href="https://sankeymatic.com" target="_blank" rel="noopener">sankeymatic.com</a> being the most popular. This
+      site offers a user-friendly and straightforward interface for constructing Sankey diagrams and provides
+      near-real-time rendering. However, this convenience comes at the cost of limited aesthetic customisation unless an
+      external graphic editor is used.</p>
 
-      <p>Another tool I've recently discovered online was one with a fascinating story. A Redditor by the name of <a href="https://www.reddit.com/r/SideProject/comments/108omx5/i_created_a_tool_to_visualize_income_statements/" target="_blank" rel="noopener">u/IncomeStatementGuy</a> published a side project about a year ago which was a simple tool for visualising Sankey diagrams with a simple user interface that allows for an easy manipulation of all fields, such as currency suffixes or dates, with seamless transformations. The <a href="https://www.sankeyart.com/" target="_blank" rel="noopener">side project has now taken off and is used by multiple renowned and globally known corporations</a>, highlighting the demand for income-statement Sankey diagrams.</p>
+    <p>Another tool I've recently discovered online was one with a fascinating story. A Redditor by the name of <a
+        href="https://www.reddit.com/r/SideProject/comments/108omx5/i_created_a_tool_to_visualize_income_statements/"
+        target="_blank" rel="noopener">u/IncomeStatementGuy</a> published a side project about a year ago which was a
+      simple tool for visualising Sankey diagrams with a simple user interface that allows for an easy manipulation of
+      all fields, such as currency suffixes or dates, with seamless transformations. The <a
+        href="https://www.sankeyart.com/" target="_blank" rel="noopener">side project has now taken off and is used by
+        multiple renowned and globally known corporations</a>, highlighting the demand for income-statement Sankey
+      diagrams.</p>
 
-      <h2 id="verdict"><em>Verdict.</em></h2>
+    <h2 id="verdict"><em>Verdict.</em></h2>
 
-      <table>
-        <thead>
-          <tr><th>Tool</th><th>Best for</th><th>Breaks at</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Figma plugin</td><td>Beautiful set-piece charts</td><td>~50+ nodes</td></tr>
-          <tr><td>Power BI</td><td>Embedded dashboards</td><td>Quantitative scaling</td></tr>
-          <tr><td>Plotly</td><td>Interactive web embeds</td><td>Author complexity</td></tr>
-          <tr><td>Holoviews</td><td>Quick reproducible charts</td><td>Labels with periods (.)</td></tr>
-          <tr><td>SankeyMatic</td><td>Fast, one-off charts</td><td>Visual differentiation</td></tr>
-        </tbody>
-      </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Best for</th>
+          <th>Breaks at</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Figma plugin</td>
+          <td>Beautiful set-piece charts</td>
+          <td>~50+ nodes</td>
+        </tr>
+        <tr>
+          <td>Power BI</td>
+          <td>Embedded dashboards</td>
+          <td>Quantitative scaling</td>
+        </tr>
+        <tr>
+          <td>Plotly</td>
+          <td>Interactive web embeds</td>
+          <td>Author complexity</td>
+        </tr>
+        <tr>
+          <td>Holoviews</td>
+          <td>Quick reproducible charts</td>
+          <td>Labels with periods (.)</td>
+        </tr>
+        <tr>
+          <td>SankeyMatic</td>
+          <td>Fast, one-off charts</td>
+          <td>Visual differentiation</td>
+        </tr>
+      </tbody>
+    </table>
 
-      <p class="pull">Sankey is a shape-of-argument. Use the tool that lets the argument breathe.</p>
+    <p class="pull">Sankey is a shape-of-argument. Use the tool that lets the argument breathe.</p>
 
-      <p>No single winner. Pick the tool that matches the cost of <em>updating</em> the chart: Figma for frozen set-pieces, Plotly for anything that will move.</p>
-    </div>
-  </section>
+    <p>No single winner. Pick the tool that matches the cost of <em>updating</em> the chart: Figma for frozen
+      set-pieces, Plotly for anything that will move.</p>
+  </div>
+</section>
 
-  <nav class="next-nav">
-    <a href="population-maps.html">
-      <span class="label">← Previous — N°02</span>
-      <span class="t">110 million Egyptians, in relief</span>
-    </a>
-    <a href="../index.html" class="right">
-      <span class="label">Back</span>
-      <span class="t">Index</span>
-    </a>
-  </nav>
+<nav class="next-nav">
+  <a href="population-maps.html">
+    <span class="label">← Previous — N°02</span>
+    <span class="t">110 million Egyptians, in relief</span>
+  </a>
+  <a href="../index.html" class="right">
+    <span class="label">Back</span>
+    <span class="t">Index</span>
+  </a>
+</nav>

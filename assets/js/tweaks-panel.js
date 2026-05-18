@@ -1,4 +1,3 @@
-
 // tweaks-panel.jsx
 // Reusable Tweaks shell + form-control helpers.
 //
@@ -138,11 +137,17 @@ const __TWEAKS_STYLE = `
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   const setTweak = React.useCallback((keyOrObj, val) => {
-    const edits = (typeof keyOrObj === 'object' && keyOrObj !== null)
-      ? keyOrObj
-      : { [keyOrObj]: val };
-    setValues((prev) => ({ ...prev, ...edits }));
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    const edits = typeof keyOrObj === 'object' && keyOrObj !== null ? keyOrObj : {
+      [keyOrObj]: val
+    };
+    setValues(prev => ({
+      ...prev,
+      ...edits
+    }));
+    window.parent.postMessage({
+      type: '__edit_mode_set_keys',
+      edits
+    }, '*');
   }, []);
   return [values, setTweak];
 }
@@ -154,26 +159,31 @@ function useTweaks(defaults) {
 // The close button posts __edit_mode_dismissed so the host's toolbar toggle
 // flips off in lockstep; the host echoes __deactivate_edit_mode back which
 // is what actually hides the panel.
-function TweaksPanel({ title = 'Tweaks', children }) {
+function TweaksPanel({
+  title = 'Tweaks',
+  children
+}) {
   const [open, setOpen] = React.useState(false);
   const dragRef = React.useRef(null);
-  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const offsetRef = React.useRef({
+    x: 16,
+    y: 16
+  });
   const PAD = 16;
-
   const clampToViewport = React.useCallback(() => {
     const panel = dragRef.current;
     if (!panel) return;
-    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const w = panel.offsetWidth,
+      h = panel.offsetHeight;
     const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
     const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
     offsetRef.current = {
       x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
-      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y))
     };
     panel.style.right = offsetRef.current.x + 'px';
     panel.style.bottom = offsetRef.current.y + 'px';
   }, []);
-
   React.useEffect(() => {
     if (!open) return;
     clampToViewport();
@@ -185,34 +195,35 @@ function TweaksPanel({ title = 'Tweaks', children }) {
     ro.observe(document.documentElement);
     return () => ro.disconnect();
   }, [open, clampToViewport]);
-
   React.useEffect(() => {
-    const onMsg = (e) => {
+    const onMsg = e => {
       const t = e?.data?.type;
-      if (t === '__activate_edit_mode') setOpen(true);
-      else if (t === '__deactivate_edit_mode') setOpen(false);
+      if (t === '__activate_edit_mode') setOpen(true);else if (t === '__deactivate_edit_mode') setOpen(false);
     };
     window.addEventListener('message', onMsg);
-    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    window.parent.postMessage({
+      type: '__edit_mode_available'
+    }, '*');
     return () => window.removeEventListener('message', onMsg);
   }, []);
-
   const dismiss = () => {
     setOpen(false);
-    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+    window.parent.postMessage({
+      type: '__edit_mode_dismissed'
+    }, '*');
   };
-
-  const onDragStart = (e) => {
+  const onDragStart = e => {
     const panel = dragRef.current;
     if (!panel) return;
     const r = panel.getBoundingClientRect();
-    const sx = e.clientX, sy = e.clientY;
+    const sx = e.clientX,
+      sy = e.clientY;
     const startRight = window.innerWidth - r.right;
     const startBottom = window.innerHeight - r.bottom;
-    const move = (ev) => {
+    const move = ev => {
       offsetRef.current = {
         x: startRight - (ev.clientX - sx),
-        y: startBottom - (ev.clientY - sy),
+        y: startBottom - (ev.clientY - sy)
       };
       clampToViewport();
     };
@@ -223,94 +234,124 @@ function TweaksPanel({ title = 'Tweaks', children }) {
     window.addEventListener('mousemove', move);
     window.addEventListener('mouseup', up);
   };
-
   if (!open) return null;
-  return (
-    <>
-      <style>{__TWEAKS_STYLE}</style>
-      <div ref={dragRef} className="twk-panel"
-           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
-        <div className="twk-hd" onMouseDown={onDragStart}>
-          <b>{title}</b>
-          <button className="twk-x" aria-label="Close tweaks"
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onClick={dismiss}>✕</button>
-        </div>
-        <div className="twk-body">{children}</div>
-      </div>
-    </>
-  );
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, __TWEAKS_STYLE), /*#__PURE__*/React.createElement("div", {
+    ref: dragRef,
+    className: "twk-panel",
+    style: {
+      right: offsetRef.current.x,
+      bottom: offsetRef.current.y
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-hd",
+    onMouseDown: onDragStart
+  }, /*#__PURE__*/React.createElement("b", null, title), /*#__PURE__*/React.createElement("button", {
+    className: "twk-x",
+    "aria-label": "Close tweaks",
+    onMouseDown: e => e.stopPropagation(),
+    onClick: dismiss
+  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+    className: "twk-body"
+  }, children)));
 }
 
 // ── Layout helpers ──────────────────────────────────────────────────────────
 
-function TweakSection({ label, children }) {
-  return (
-    <>
-      <div className="twk-sect">{label}</div>
-      {children}
-    </>
-  );
+function TweakSection({
+  label,
+  children
+}) {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "twk-sect"
+  }, label), children);
 }
-
-function TweakRow({ label, value, children, inline = false }) {
-  return (
-    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
-      <div className="twk-lbl">
-        <span>{label}</span>
-        {value != null && <span className="twk-val">{value}</span>}
-      </div>
-      {children}
-    </div>
-  );
+function TweakRow({
+  label,
+  value,
+  children,
+  inline = false
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: inline ? 'twk-row twk-row-h' : 'twk-row'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-lbl"
+  }, /*#__PURE__*/React.createElement("span", null, label), value != null && /*#__PURE__*/React.createElement("span", {
+    className: "twk-val"
+  }, value)), children);
 }
 
 // ── Controls ────────────────────────────────────────────────────────────────
 
-function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
-  return (
-    <TweakRow label={label} value={`${value}${unit}`}>
-      <input type="range" className="twk-slider" min={min} max={max} step={step}
-             value={value} onChange={(e) => onChange(Number(e.target.value))} />
-    </TweakRow>
-  );
+function TweakSlider({
+  label,
+  value,
+  min = 0,
+  max = 100,
+  step = 1,
+  unit = '',
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label,
+    value: `${value}${unit}`
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "range",
+    className: "twk-slider",
+    min: min,
+    max: max,
+    step: step,
+    value: value,
+    onChange: e => onChange(Number(e.target.value))
+  }));
 }
-
-function TweakToggle({ label, value, onChange }) {
-  return (
-    <div className="twk-row twk-row-h">
-      <div className="twk-lbl"><span>{label}</span></div>
-      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
-              role="switch" aria-checked={!!value}
-              onClick={() => onChange(!value)}><i /></button>
-    </div>
-  );
+function TweakToggle({
+  label,
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "twk-row twk-row-h"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-lbl"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "twk-toggle",
+    "data-on": value ? '1' : '0',
+    role: "switch",
+    "aria-checked": !!value,
+    onClick: () => onChange(!value)
+  }, /*#__PURE__*/React.createElement("i", null)));
 }
-
-function TweakRadio({ label, value, options, onChange }) {
+function TweakRadio({
+  label,
+  value,
+  options,
+  onChange
+}) {
   const trackRef = React.useRef(null);
   const [dragging, setDragging] = React.useState(false);
-  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
-  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const opts = options.map(o => typeof o === 'object' ? o : {
+    value: o,
+    label: o
+  });
+  const idx = Math.max(0, opts.findIndex(o => o.value === value));
   const n = opts.length;
 
   // The active value is read by pointer-move handlers attached for the lifetime
   // of a drag — ref it so a stale closure doesn't fire onChange for every move.
   const valueRef = React.useRef(value);
   valueRef.current = value;
-
-  const segAt = (clientX) => {
+  const segAt = clientX => {
     const r = trackRef.current.getBoundingClientRect();
     const inner = r.width - 4;
-    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    const i = Math.floor((clientX - r.left - 2) / inner * n);
     return opts[Math.max(0, Math.min(n - 1, i))].value;
   };
-
-  const onPointerDown = (e) => {
+  const onPointerDown = e => {
     setDragging(true);
     const v0 = segAt(e.clientX);
     if (v0 !== valueRef.current) onChange(v0);
-    const move = (ev) => {
+    const move = ev => {
       if (!trackRef.current) return;
       const v = segAt(ev.clientX);
       if (v !== valueRef.current) onChange(v);
@@ -323,59 +364,89 @@ function TweakRadio({ label, value, options, onChange }) {
     window.addEventListener('pointermove', move);
     window.addEventListener('pointerup', up);
   };
-
-  return (
-    <TweakRow label={label}>
-      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
-           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
-        <div className="twk-seg-thumb"
-             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
-                      width: `calc((100% - 4px) / ${n})` }} />
-        {opts.map((o) => (
-          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
-            {o.label}
-          </button>
-        ))}
-      </div>
-    </TweakRow>
-  );
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label
+  }, /*#__PURE__*/React.createElement("div", {
+    ref: trackRef,
+    role: "radiogroup",
+    onPointerDown: onPointerDown,
+    className: dragging ? 'twk-seg dragging' : 'twk-seg'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-seg-thumb",
+    style: {
+      left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+      width: `calc((100% - 4px) / ${n})`
+    }
+  }), opts.map(o => /*#__PURE__*/React.createElement("button", {
+    key: o.value,
+    type: "button",
+    role: "radio",
+    "aria-checked": o.value === value
+  }, o.label))));
 }
-
-function TweakSelect({ label, value, options, onChange }) {
-  return (
-    <TweakRow label={label}>
-      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
-        {options.map((o) => {
-          const v = typeof o === 'object' ? o.value : o;
-          const l = typeof o === 'object' ? o.label : o;
-          return <option key={v} value={v}>{l}</option>;
-        })}
-      </select>
-    </TweakRow>
-  );
+function TweakSelect({
+  label,
+  value,
+  options,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "twk-field",
+    value: value,
+    onChange: e => onChange(e.target.value)
+  }, options.map(o => {
+    const v = typeof o === 'object' ? o.value : o;
+    const l = typeof o === 'object' ? o.label : o;
+    return /*#__PURE__*/React.createElement("option", {
+      key: v,
+      value: v
+    }, l);
+  })));
 }
-
-function TweakText({ label, value, placeholder, onChange }) {
-  return (
-    <TweakRow label={label}>
-      <input className="twk-field" type="text" value={value} placeholder={placeholder}
-             onChange={(e) => onChange(e.target.value)} />
-    </TweakRow>
-  );
+function TweakText({
+  label,
+  value,
+  placeholder,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "twk-field",
+    type: "text",
+    value: value,
+    placeholder: placeholder,
+    onChange: e => onChange(e.target.value)
+  }));
 }
-
-function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
-  const clamp = (n) => {
+function TweakNumber({
+  label,
+  value,
+  min,
+  max,
+  step = 1,
+  unit = '',
+  onChange
+}) {
+  const clamp = n => {
     if (min != null && n < min) return min;
     if (max != null && n > max) return max;
     return n;
   };
-  const startRef = React.useRef({ x: 0, val: 0 });
-  const onScrubStart = (e) => {
+  const startRef = React.useRef({
+    x: 0,
+    val: 0
+  });
+  const onScrubStart = e => {
     e.preventDefault();
-    startRef.current = { x: e.clientX, val: value };
+    startRef.current = {
+      x: e.clientX,
+      val: value
+    };
     const decimals = (String(step).split('.')[1] || '').length;
-    const move = (ev) => {
+    const move = ev => {
       const dx = ev.clientX - startRef.current.x;
       const raw = startRef.current.val + dx * step;
       const snapped = Math.round(raw / step) * step;
@@ -388,35 +459,60 @@ function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) 
     window.addEventListener('pointermove', move);
     window.addEventListener('pointerup', up);
   };
-  return (
-    <div className="twk-num">
-      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
-      <input type="number" value={value} min={min} max={max} step={step}
-             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
-      {unit && <span className="twk-num-unit">{unit}</span>}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "twk-num"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "twk-num-lbl",
+    onPointerDown: onScrubStart
+  }, label), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    value: value,
+    min: min,
+    max: max,
+    step: step,
+    onChange: e => onChange(clamp(Number(e.target.value)))
+  }), unit && /*#__PURE__*/React.createElement("span", {
+    className: "twk-num-unit"
+  }, unit));
 }
-
-function TweakColor({ label, value, onChange }) {
-  return (
-    <div className="twk-row twk-row-h">
-      <div className="twk-lbl"><span>{label}</span></div>
-      <input type="color" className="twk-swatch" value={value}
-             onChange={(e) => onChange(e.target.value)} />
-    </div>
-  );
+function TweakColor({
+  label,
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "twk-row twk-row-h"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-lbl"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement("input", {
+    type: "color",
+    className: "twk-swatch",
+    value: value,
+    onChange: e => onChange(e.target.value)
+  }));
 }
-
-function TweakButton({ label, onClick, secondary = false }) {
-  return (
-    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
-            onClick={onClick}>{label}</button>
-  );
+function TweakButton({
+  label,
+  onClick,
+  secondary = false
+}) {
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: secondary ? 'twk-btn secondary' : 'twk-btn',
+    onClick: onClick
+  }, label);
 }
-
 Object.assign(window, {
-  useTweaks, TweaksPanel, TweakSection, TweakRow,
-  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
-  TweakText, TweakNumber, TweakColor, TweakButton,
+  useTweaks,
+  TweaksPanel,
+  TweakSection,
+  TweakRow,
+  TweakSlider,
+  TweakToggle,
+  TweakRadio,
+  TweakSelect,
+  TweakText,
+  TweakNumber,
+  TweakColor,
+  TweakButton
 });

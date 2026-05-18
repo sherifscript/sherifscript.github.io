@@ -67,7 +67,7 @@ function pickField(obj, ...candidates) {
 
 async function loadExcluded() {
   try {
-    const raw = await fs.readFile('data/excluded_books.json', 'utf8');
+    const raw = await fs.readFile('_data/excluded_books.json', 'utf8');
     const arr = JSON.parse(raw);
     return new Set(arr.map(String));
   } catch {
@@ -201,8 +201,8 @@ async function fetchShelf(status, limit) {
     recent,
   };
 
-  await fs.mkdir('data', { recursive: true });
-  await fs.writeFile('data/books.json', JSON.stringify(out, null, 2) + '\n');
+  await fs.mkdir('_data', { recursive: true });
+  await fs.writeFile('_data/books.json', JSON.stringify(out, null, 2) + '\n');
 
   console.log(`Wrote ${currently_reading.length} currently + ${recent.length} recent.`);
 })().catch(err => {

@@ -785,6 +785,8 @@ html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 }
 .ticker-track {
   display: flex;
+  width: max-content;
+  padding-right: 48px;
   gap: 48px;
   white-space: nowrap;
   animation: ticker 50s linear infinite;
@@ -792,6 +794,9 @@ html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
 }
 .ticker-track span.dot { color: var(--accent); }
 
