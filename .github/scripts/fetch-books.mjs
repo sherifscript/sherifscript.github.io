@@ -76,7 +76,7 @@ async function loadExcluded() {
 }
 
 function isNSFW(book, excluded) {
-  if (!book) return true;
+  if (!book || typeof book !== 'object') return true;
   if (excluded.has(String(book.id))) return true;
 
   // Check genre/tag fields under several plausible names.
@@ -100,7 +100,7 @@ function normaliseBook(ub) {
     ? (contributors[0].author?.name ?? contributors[0].name ?? null)
     : null;
   const cover = pickField(b, 'cached_image', 'image')?.url
-             ?? pickField(b, 'cached_image_url');
+    ?? pickField(b, 'cached_image_url');
   return {
     id: b.id,
     title,
