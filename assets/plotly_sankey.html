@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div id="plotly-div" style="width:100%;height:700px;"></div>
+    <script>
+        var data = [{
+            type: "sankey",
+            node: {"label": ["Synchronization", "Artist services and expanded-rights", "Revenue", "Other income (expense), net", "Digital Publishing", "Amortization expense", "Physical", "Digital", "Income tax expense", "Cost of revenue", "Other", "Operating income (loss)", "Licensing", "Performance", "Recorded Music", "Selling, general and administrative expenses (a)", "Intersegment eliminations", "Mechanical", "Net profit", "Music Publishing", "Income to non-controlling interest", "Interest expense, net", "Pre-tax and interest income (EBIT)", "Operating expenses"]},
+            link: {"source": [7, 1, 6, 12, 4, 0, 13, 17, 10, 14, 19, 2, 2, 2, 11, 3, 23, 23, 23, 22, 22, 22, 22], "target": [14, 14, 14, 14, 19, 19, 19, 19, 19, 2, 2, 11, 23, 16, 22, 22, 9, 15, 5, 18, 8, 21, 20], "value": [3305, 767, 563, 331, 563, 172, 159, 50, 14, 4966, 958, 714, 5205, 5, 865, 151, 3080, 1862, 263, 551, 185, 25, 4]}
+        }];
+
+        var layout = {
+            title: {
+                text: "<b>Warner Music FY22 Income Statement (in million U.S. dollars)</b>",
+                x: 0.5,
+                font: {
+                    family: "Calibri",
+                    size: 24
+                }
+            },
+            margin: {l: 10, r: 10, t: 40, b: 10}
+        };
+
+        Plotly.newPlot('plotly-div', data, layout, {responsive: true});
+    </script>
+</body>
+</html>

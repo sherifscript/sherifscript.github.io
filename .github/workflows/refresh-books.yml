@@ -6,7 +6,7 @@ name: Refresh reading feed
 #   - On push to master if this workflow file itself changes (dev convenience)
 on:
   schedule:
-    - cron: '15 */6 * * *'   # :15 past every 6th hour
+    - cron: '15 0 */2 * *'   # :15 past midnight every 2nd day
   workflow_dispatch:
   push:
     branches: [master]
