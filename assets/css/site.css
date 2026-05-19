@@ -242,7 +242,7 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 20px 0 18px;
+  padding: 14px 0 12px;
   border-bottom: 1px solid var(--rule);
   font-family: var(--ff-mono);
   font-size: 12px;
@@ -780,7 +780,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
   background: var(--ink);
   color: var(--bg);
   overflow: hidden;
-  padding: 14px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--ink);
 }
 .ticker-track {
