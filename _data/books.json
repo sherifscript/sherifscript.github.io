@@ -1,64 +1,6 @@
 {
-  "updated_at": "2026-09-09T04:35:32.668Z",
-  "username": "sherif",
-  "currently_reading": [
-    {
-      "title": "The Wretched of the Earth",
-      "author": "Frantz Fanon",
-      "slug": "the-wretched-of-the-earth",
-      "cover": "https://assets.hardcover.app/external_data/4227126/5e9560624142b5044afe163ac42e60b0a50584d2.jpeg",
-      "started_at": "2025-04-09",
-      "finished_at": null
-    },
-    {
-      "title": "Zero to One: Notes on Startups, or How to Build the Future",
-      "author": "Peter Thiel",
-      "slug": "zero-to-one",
-      "cover": "https://assets.hardcover.app/book_mappings/7332745/5ba08e61c8dcdf704668cd0da4dc4af860d904dd.jpeg",
-      "started_at": "2026-05-18",
-      "finished_at": null
-    },
-    {
-      "title": "The 7 Habits of Highly Effective People",
-      "author": "Stephen R. Covey",
-      "slug": "the-7-habits-of-highly-effective-people",
-      "cover": "https://assets.hardcover.app/edition/30401530/7546032f43cdce8a7219ee6676cc3273e288e879.jpeg",
-      "started_at": "2025-04-20",
-      "finished_at": null
-    }
-  ],
-  "recent": [
-    {
-      "title": "Caravaggio",
-      "author": "Andrew Graham-Dixon",
-      "slug": "caravaggio-a-life-sacred-and-profane",
-      "cover": "https://assets.hardcover.app/edition/30467162/7558367._SX98_.jpg",
-      "started_at": "2025-04-09",
-      "finished_at": "2025-01-01"
-    },
-    {
-      "title": "1984",
-      "author": "George Orwell",
-      "slug": "1984",
-      "cover": "https://assets.hardcover.app/edition/29258002/fb69559e-7c34-40cb-8518-3ef4898b830c.jpg",
-      "started_at": "2025-04-09",
-      "finished_at": "2025-04-09"
-    },
-    {
-      "title": "The Art of War Landmark Edition: The Classic of Strategy with Historical Notes and Introduction by PEN Award-Winning Author Mitch Horowitz",
-      "author": "Sun Tzu",
-      "slug": "the-art-of-war-landmark-edition",
-      "cover": null,
-      "started_at": "2025-05-12",
-      "finished_at": "2026-05-18"
-    },
-    {
-      "title": "Digital Authoritarianism in the Middle East: Deception, Disinformation and Social Media",
-      "author": "Marc Owen Jones",
-      "slug": "digital-authoritarianism-in-the-middle-east",
-      "cover": "https://assets.hardcover.app/external_data/61369060/0e3dc73640329189c541819377e716a85ee3274c.jpeg",
-      "started_at": "2025-04-25",
-      "finished_at": null
-    }
-  ]
+  "updated_at": "2026-09-11T04:32:28.855Z",
+  "username": null,
+  "currently_reading": [],
+  "recent": []
 }
